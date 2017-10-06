@@ -1,0 +1,58 @@
+{
+  "hobbies": {
+    "stamps" : {
+      "hobbyName": "Stamp Collecting",
+      "category": "collecting",
+      "time": "days",
+      "cost": "high"
+    },
+    "coins" : {
+      "hobbyName": "Coin Collecting",
+      "category": "collecting",
+      "time": "days",
+      "cost": "high"
+    },
+    "comics" : {
+      "hobbyName": "Comic Book Collecting",
+      "category": "collecting",
+      "time": "days",
+      "cost": "high"
+    },
+    "bowling" : {
+      "hobbyName": "Bowling",
+      "category": "sports",
+      "time": "hours",
+      "cost": "low"
+    },
+    "paintball" : {
+      "hobbyName": "Paintball",
+      "category": "sports",
+      "time": "hours",
+      "cost": "med"
+    },
+    "surfing" : {
+      "hobbyName": "Surfing",
+      "category": "sports",
+      "time": "hours",
+      "cost": "med"
+    },
+    "calligraphy": {
+      "hobbyName": "calligraphy",
+      "category": "art",
+      "time": "minutes",
+      "cost": "low"
+    },
+    "gardening" : {
+      "hobbyName": "Gardening",
+      "category": "art",
+      "time": "hours",
+      "cost": "low"
+    },
+    "origami" : {
+      "hobbyName": "Origami",
+      "category": "art",
+      "time": "minutes",
+      "cost": "low"
+    }
+  }
+}
