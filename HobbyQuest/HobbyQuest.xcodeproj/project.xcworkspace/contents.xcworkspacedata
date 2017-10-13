@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HobbyQuestTeam7.xcodeproj">
+      location = "self:HobbyQuest.xcodeproj">
    </FileRef>
 </Workspace>

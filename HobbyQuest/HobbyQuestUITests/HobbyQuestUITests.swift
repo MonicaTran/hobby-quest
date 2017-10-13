@@ -1,14 +1,14 @@
 //
-//  HobbyQuestTeam7UITests.swift
-//  HobbyQuestTeam7UITests
+//  HobbyQuestUITests.swift
+//  HobbyQuestUITests
 //
-//  Created by Ubicomp7 on 10/6/17.
-//  Copyright © 2017 Ubicomp7. All rights reserved.
+//  Created by Monica Tran on 10/12/17.
+//  Copyright © 2017 Monica Tran. All rights reserved.
 //
 
 import XCTest
 
-class HobbyQuestTeam7UITests: XCTestCase {
+class HobbyQuestUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

@@ -1,21 +1,23 @@
+project 'HobbyQuest/HobbyQuest.xcodeproj'
+
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'HobbyQuestTeam7' do
+target 'HobbyQuest' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for HobbyQuestTeam7
-pod ‘Firebase/Core’
+  # Pods for HobbyQuest
+pod 'Firebase/Core'
 pod 'Firebase/Database'
-pod 'SwiftyJSON’, :git =>'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'SwiftyJSON'
 
-  target 'HobbyQuestTeam7Tests' do
+  target 'HobbyQuestTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'HobbyQuestTeam7UITests' do
+  target 'HobbyQuestUITests' do
     inherit! :search_paths
     # Pods for testing
   end
