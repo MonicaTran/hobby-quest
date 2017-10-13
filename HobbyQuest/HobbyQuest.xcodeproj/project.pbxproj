@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033F0C931F908E100071CAED /* FirebaseHelper.swift */; };
+		033F0C961F908F1C0071CAED /* Hobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033F0C951F908F1C0071CAED /* Hobby.swift */; };
 		036E1DC91F90786300681044 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DC81F90786300681044 /* AppDelegate.swift */; };
 		036E1DCB1F90786300681044 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DCA1F90786300681044 /* ViewController.swift */; };
 		036E1DCE1F90786300681044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036E1DCC1F90786300681044 /* Main.storyboard */; };
@@ -16,7 +18,6 @@
 		036E1DE91F90786400681044 /* HobbyQuestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DE81F90786400681044 /* HobbyQuestUITests.swift */; };
 		036E1DF91F90792200681044 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 036E1DF81F90792200681044 /* GoogleService-Info.plist */; };
 		036E1DFB1F907BD000681044 /* DatabaseTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */; };
-		036E1DFD1F9081A200681044 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DFC1F9081A200681044 /* TableViewController.swift */; };
 		AE4CC9587C8AAF0E4A0A7F1D /* Pods_HobbyQuestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */; };
 		D9CB5C416BE16519FF20426B /* Pods_HobbyQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B932CD5446BA4C49FE2E81 /* Pods_HobbyQuest.framework */; };
 		E14607E341F778425A544A55 /* Pods_HobbyQuestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E3A77CE8AB1872EF8E64B8 /* Pods_HobbyQuestTests.framework */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		033F0C931F908E100071CAED /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		033F0C951F908F1C0071CAED /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
 		036E1DC51F90786300681044 /* HobbyQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HobbyQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036E1DC81F90786300681044 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		036E1DCA1F90786300681044 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +58,6 @@
 		036E1DEA1F90786400681044 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036E1DF81F90792200681044 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTestViewController.swift; sourceTree = "<group>"; };
-		036E1DFC1F9081A200681044 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HobbyQuestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		621ECD049DD7C10B6B12BE12 /* Pods-HobbyQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.release.xcconfig"; sourceTree = "<group>"; };
 		8186131706F1BFCA875D65BE /* Pods-HobbyQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,8 +129,9 @@
 				036E1DCF1F90786300681044 /* Assets.xcassets */,
 				036E1DD11F90786300681044 /* LaunchScreen.storyboard */,
 				036E1DD41F90786300681044 /* Info.plist */,
+				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
+				033F0C951F908F1C0071CAED /* Hobby.swift */,
 				036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */,
-				036E1DFC1F9081A200681044 /* TableViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -474,10 +477,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
 				036E1DCB1F90786300681044 /* ViewController.swift in Sources */,
 				036E1DC91F90786300681044 /* AppDelegate.swift in Sources */,
 				036E1DFB1F907BD000681044 /* DatabaseTestViewController.swift in Sources */,
-				036E1DFD1F9081A200681044 /* TableViewController.swift in Sources */,
+				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

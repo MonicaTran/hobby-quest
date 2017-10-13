@@ -9,68 +9,27 @@
 import UIKit
 import FirebaseDatabase
 
-struct Hobby {
-    let key:Any
-    let category:String
-    let cost:String
-    let hobbyName:String
-    let time:String
-    
-    init(snap: DataSnapshot) {
-        key = snap.key
-        
-        let value = snap.value as? NSDictionary
-        category = value?["category"] as? String ?? ""
-        cost = value?["cost"] as? String ?? ""
-        hobbyName = value?["hobbyName"] as? String ?? ""
-        time = value?["time"] as? String ?? ""
-    }
-}
-
 class DatabaseTestViewController: UITableViewController {
     
-    var ref: DatabaseReference!
+    let fbHelper = FirebaseHelper()
+    let hobbiesRef = Database.database().reference().child("hobbies")
     var hobbies = [Hobby]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-
-        ref = Database.database().reference()
-        getHobbyData()
-        tableView.reloadData()
-        
-        ref.child("hobbies").observe(.value) { snapshot in
-            self.hobbies = [Hobby]()
-            for child in snapshot.children {
-                self.addHobby(child: child as! DataSnapshot)
-            }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        fbHelper.getDataAsArray(ref: hobbiesRef, typeOf: hobbies, completion: { array in
+            self.hobbies = array
             self.tableView.reloadData()
-        }
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    /*
-     // MARK: - Firebase functions
-     */
-    
-    func getHobbyData() {
-        ref.child("hobbies").observeSingleEvent(of: .value) { (snapshot) in
-            for child in snapshot.children {
-                self.addHobby(child: child as! DataSnapshot)
-            }
-        }
-    }
-    
-    func addHobby(child: DataSnapshot) {
-        let hobby = Hobby(snap: child)
-        self.hobbies.append(hobby)
     }
     
     /*
