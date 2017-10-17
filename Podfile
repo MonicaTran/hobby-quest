@@ -11,6 +11,7 @@ target 'HobbyQuest' do
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'SwiftyJSON'
+pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
   target 'HobbyQuestTests' do
     inherit! :search_paths

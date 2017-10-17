@@ -18,6 +18,7 @@ class DatabaseTestViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -25,6 +26,7 @@ class DatabaseTestViewController: UITableViewController {
             self.hobbies = array
             self.tableView.reloadData()
         })
+
     }
 
     override func didReceiveMemoryWarning() {
