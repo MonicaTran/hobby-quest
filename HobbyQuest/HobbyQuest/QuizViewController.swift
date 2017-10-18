@@ -7,7 +7,6 @@
 //
 
 import Firebase
-import GeoFire
 import UIKit
 struct storedUserchoice{
     var user_choice_Cost:String
@@ -86,12 +85,25 @@ class QuizViewController: UIViewController {
         populatedLabel()
         setupNextQuestionButton()
     }
-    
+    func alertForSubmit(){
+        let alert = UIAlertController(title: "Error", message: "You haven't answered all of the questions", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     //display result
     @IBAction func submitAnswer(_ sender: Any) {
          getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
-         getData()
+        print(user.user_answer_set)
+        if(user.user_answer_set.count < 3){
+            self.alertForSubmit()
+        }
+            else{
+            getKeyvalue()
+            getData()
+        }
+ 
     }
+
     func setupPreviousButton(){
         if totalQuestion == 0{
             self.previousButton.isHidden = true
@@ -103,12 +115,19 @@ class QuizViewController: UIViewController {
             self.submitDisabled.isHidden = false
         }
     }
-//Firebase doesn't support multiple queries
+
     func getInput(input1:String,input2:String,input3:String){
-            user.user_answer_set.append(input1)
-            user.user_answer_set.append(input2)
-            user.user_answer_set.append(input3)
-            key_value = user.user_answer_set[0] + "_" + user.user_answer_set[1] + "_" + user.user_answer_set[2]
+        if(user.user_answer_set.count <= 3){
+        user.user_answer_set.removeAll()
+        if(input1 != ""){user.user_answer_set.append(input1)}
+        if(input2 != ""){user.user_answer_set.append(input2)}
+        if(input3 != ""){user.user_answer_set.append(input3)}}
+        
+        
+       
+    }
+    func getKeyvalue(){
+         key_value = user.user_answer_set[0] + "_" + user.user_answer_set[1] + "_" + user.user_answer_set[2]
     }
 
 //Firebase doesn't support multiple queries
