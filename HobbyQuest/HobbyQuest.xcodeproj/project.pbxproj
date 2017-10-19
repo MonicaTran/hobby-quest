@@ -18,6 +18,11 @@
 		036E1DE91F90786400681044 /* HobbyQuestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DE81F90786400681044 /* HobbyQuestUITests.swift */; };
 		036E1DF91F90792200681044 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 036E1DF81F90792200681044 /* GoogleService-Info.plist */; };
 		036E1DFB1F907BD000681044 /* DatabaseTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */; };
+		03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */; };
+		03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E41F984CB30095EE0F /* JournalViewController.swift */; };
+		03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E61F9852080095EE0F /* JournalEntry.swift */; };
+		03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E81F9875E90095EE0F /* EntryViewController.swift */; };
+		03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */; };
 		AE4CC9587C8AAF0E4A0A7F1D /* Pods_HobbyQuestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */; };
 		D9CB5C416BE16519FF20426B /* Pods_HobbyQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B932CD5446BA4C49FE2E81 /* Pods_HobbyQuest.framework */; };
 		E14607E341F778425A544A55 /* Pods_HobbyQuestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E3A77CE8AB1872EF8E64B8 /* Pods_HobbyQuestTests.framework */; };
@@ -58,6 +63,11 @@
 		036E1DEA1F90786400681044 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036E1DF81F90792200681044 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTestViewController.swift; sourceTree = "<group>"; };
+		03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewController.swift; sourceTree = "<group>"; };
+		03A667E41F984CB30095EE0F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
+		03A667E61F9852080095EE0F /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
+		03A667E81F9875E90095EE0F /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HobbyQuestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		621ECD049DD7C10B6B12BE12 /* Pods-HobbyQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.release.xcconfig"; sourceTree = "<group>"; };
 		8186131706F1BFCA875D65BE /* Pods-HobbyQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,14 +134,19 @@
 			children = (
 				036E1DF81F90792200681044 /* GoogleService-Info.plist */,
 				036E1DC81F90786300681044 /* AppDelegate.swift */,
-				036E1DCA1F90786300681044 /* QuizViewController.swift */,
 				036E1DCC1F90786300681044 /* Main.storyboard */,
 				036E1DCF1F90786300681044 /* Assets.xcassets */,
 				036E1DD11F90786300681044 /* LaunchScreen.storyboard */,
 				036E1DD41F90786300681044 /* Info.plist */,
 				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
 				033F0C951F908F1C0071CAED /* Hobby.swift */,
+				03A667E61F9852080095EE0F /* JournalEntry.swift */,
 				036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */,
+				036E1DCA1F90786300681044 /* QuizViewController.swift */,
+				03A667E41F984CB30095EE0F /* JournalViewController.swift */,
+				03A667E81F9875E90095EE0F /* EntryViewController.swift */,
+				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
+				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -479,9 +494,14 @@
 			files = (
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
+				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
+				03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */,
 				036E1DC91F90786300681044 /* AppDelegate.swift in Sources */,
 				036E1DFB1F907BD000681044 /* DatabaseTestViewController.swift in Sources */,
+				03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */,
+				03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */,
 				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
+				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
