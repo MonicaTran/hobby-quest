@@ -24,6 +24,9 @@
 		03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E81F9875E90095EE0F /* EntryViewController.swift */; };
 		03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */; };
 		AE4CC9587C8AAF0E4A0A7F1D /* Pods_HobbyQuestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */; };
+		CE499BB01FA0F93500A939D6 /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BAE1FA0F93500A939D6 /* ExploreTableViewCell.swift */; };
+		CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */; };
+		CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA769B1FA13147007171D1 /* LoginViewController.swift */; };
 		D9CB5C416BE16519FF20426B /* Pods_HobbyQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B932CD5446BA4C49FE2E81 /* Pods_HobbyQuest.framework */; };
 		E14607E341F778425A544A55 /* Pods_HobbyQuestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E3A77CE8AB1872EF8E64B8 /* Pods_HobbyQuestTests.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +80,9 @@
 		98E3A77CE8AB1872EF8E64B8 /* Pods_HobbyQuestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HobbyQuestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE6AC3B6880C72B08FC2284 /* Pods-HobbyQuestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuestTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuestTests/Pods-HobbyQuestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B15184E7B925C586B083F760 /* Pods-HobbyQuestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuestTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuestTests/Pods-HobbyQuestTests.release.xcconfig"; sourceTree = "<group>"; };
+		CE499BAE1FA0F93500A939D6 /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreTableViewCell.swift; path = "../../../hobby-quest-master-2/HobbyQuest/HobbyQuest/ExploreTableViewCell.swift"; sourceTree = "<group>"; };
+		CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		CECA769B1FA13147007171D1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +153,9 @@
 				03A667E81F9875E90095EE0F /* EntryViewController.swift */,
 				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
 				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
+				CE499BAE1FA0F93500A939D6 /* ExploreTableViewCell.swift */,
+				CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */,
+				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -453,6 +462,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -460,6 +470,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -492,15 +503,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE499BB01FA0F93500A939D6 /* ExploreTableViewCell.swift in Sources */,
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
 				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
+				CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */,
 				03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */,
 				036E1DC91F90786300681044 /* AppDelegate.swift in Sources */,
 				036E1DFB1F907BD000681044 /* DatabaseTestViewController.swift in Sources */,
 				03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */,
 				03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */,
 				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
+				CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */,
 				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

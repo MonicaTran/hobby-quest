@@ -10,7 +10,6 @@ import UIKit
 import FirebaseDatabase
 
 class DatabaseTestViewController: UITableViewController {
-    
     let fbHelper = FirebaseHelper()
     let hobbiesRef = Database.database().reference().child("hobbies")
     var hobbies = [Hobby]()
@@ -34,9 +33,7 @@ class DatabaseTestViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-     // MARK: - Table view functions
-     */
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

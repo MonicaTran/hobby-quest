@@ -92,14 +92,12 @@ class QuizViewController: UIViewController {
     }
     //display result
     @IBAction func submitAnswer(_ sender: Any) {
-         getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
-        print(user.user_answer_set)
         if(user.user_answer_set.count < 3){
             self.alertForSubmit()
         }
             else{
-            getKeyvalue()
-            getData()
+            //getKeyvalue()
+            //getData()
         }
  
     }
@@ -126,22 +124,22 @@ class QuizViewController: UIViewController {
         
        
     }
-    func getKeyvalue(){
-         key_value = user.user_answer_set[0] + "_" + user.user_answer_set[1] + "_" + user.user_answer_set[2]
-    }
-
-//Firebase doesn't support multiple queries
-    func getData(){
-        let ref = Database.database().reference().child("hobbies")
-        let query = ref.queryOrdered(byChild: "cost_category_time").queryEqual(toValue: key_value)
-        query.observe(.value, with: {(snapshot1) in
-            for child in snapshot1.children.allObjects as! [DataSnapshot] {
-                let value: String = (child.childSnapshot(forPath: "hobbyName").value as? String)!;
-                self.user_choice_Recommendation.append(value)}
-            print(self.user_choice_Recommendation)
-            
-        })
-    }
+//    func getKeyvalue(){
+//         key_value = user.user_answer_set[0] + "_" + user.user_answer_set[1] + "_" + user.user_answer_set[2]
+//    }
+//
+////Firebase doesn't support multiple queries
+//    func getData(){
+//        let ref = Database.database().reference().child("hobbies")
+//        let query = ref.queryOrdered(byChild: "cost_category_time").queryEqual(toValue: key_value)
+//        query.observe(.value, with: {(snapshot1) in
+//            for child in snapshot1.children.allObjects as! [DataSnapshot] {
+//                let value: String = (child.childSnapshot(forPath: "hobbyName").value as? String)!;
+//                self.user_choice_Recommendation.append(value)}
+//            print(self.user_choice_Recommendation)
+//
+//        })
+//    }
 
     func populatedLabel(){
             switch(totalQuestion){
@@ -183,7 +181,13 @@ class QuizViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //had to move code from submitAnswer.
+        getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
+        let dvc = segue.destination as! ExploreViewController
+        dvc.answers = user.user_answer_set
+    }
 
 }
 
