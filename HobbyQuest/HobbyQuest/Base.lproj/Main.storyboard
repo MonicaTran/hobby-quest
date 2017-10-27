@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gYC-fH-z2c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n1v-qn-tFe">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -61,12 +61,13 @@
                         <outlet property="emailText" destination="bn5-g1-TAN" id="9Wh-5g-bJa"/>
                         <outlet property="passwordText" destination="5y3-1b-kZ6" id="eVu-Et-eUu"/>
                         <outlet property="segmentControl" destination="ZCq-Fx-pFz" id="Lmg-zz-bT0"/>
+                        <segue destination="n1v-qn-tFe" kind="show" identifier="loginToQuiz" id="ccm-Kb-fGk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f2k-y3-rkI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yfi-Hj-3MQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="294.375" y="15"/>
+            <point key="canvasLocation" x="364" y="-16"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="5cq-dG-PVV">
@@ -521,12 +522,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="n1v-qn-tFe" kind="relationship" relationship="rootViewController" id="8Eh-ka-ihA"/>
+                        <segue destination="CGr-Rh-JbR" kind="relationship" relationship="rootViewController" id="38N-pv-3Wm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="99K-1Z-rCE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-531" y="1"/>
+            <point key="canvasLocation" x="-394" y="0.0"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4m3-XQ-2Gi">
@@ -554,6 +555,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XRh-Kl-XfU"/>
-        <segue reference="n1h-2S-SCZ"/>
+        <segue reference="qcZ-eC-pPs"/>
     </inferredMetricsTieBreakers>
 </document>

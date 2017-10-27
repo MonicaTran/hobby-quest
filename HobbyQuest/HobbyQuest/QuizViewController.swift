@@ -25,6 +25,7 @@ class QuizViewController: UIViewController {
     var user = storedUserchoice()
 
     
+    
     @IBOutlet weak var questionNumber: UILabel!
     
     @IBAction func previousQuestion(_ sender: Any) {
@@ -112,13 +113,16 @@ class QuizViewController: UIViewController {
     }
 
     func getInput(input1:String,input2:String,input3:String){
-        if(user.user_answer_set.count <= 3){
+        if(user.user_answer_set.count < 3){
         user.user_answer_set.removeAll()
         if(input1 != ""){user.user_answer_set.append(input1)}
         if(input2 != ""){user.user_answer_set.append(input2)}
-        if(input3 != ""){user.user_answer_set.append(input3)}
-        }
+        if(input3 != ""){user.user_answer_set.append(input3)}}
+        
+        
+       
     }
+
 
     func populatedLabel(){
             switch(totalQuestion){
@@ -147,6 +151,7 @@ class QuizViewController: UIViewController {
                 break}
 
         }
+
     func uploadData(){
         let userChoice = [
             "cost": user.user_answer_set[0],
@@ -162,7 +167,6 @@ class QuizViewController: UIViewController {
             let path = "Users/"+uniqueId!+"/userChoice"
             ref.child(path).childByAutoId().setValue(userChoice)        }
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         populatedLabel()
@@ -170,6 +174,7 @@ class QuizViewController: UIViewController {
         self.submitDisabled.isHidden = true
 
     }
+    
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

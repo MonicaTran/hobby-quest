@@ -6,6 +6,7 @@
 //  Copyright © 2017 Monica Tran. All rights reserved.
 //
 import FirebaseDatabase
+import FirebaseAuth
 import UIKit
 
 class ExploreViewController

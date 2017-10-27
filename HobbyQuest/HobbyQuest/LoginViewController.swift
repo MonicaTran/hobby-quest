@@ -8,9 +8,11 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
 
+    var ref: DatabaseReference?
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var passwordText: UITextField!
@@ -18,12 +20,16 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func action(_ sender: UIButton) {
-        if emailText.text != "" && passwordText.text == ""{
+        
+        
+        
+        if emailText.text! != "" && passwordText.text! != ""{
             if segmentControl.selectedSegmentIndex==0{
                 //Login selected
                 Auth.auth().signIn(withEmail: emailText.text!, password: passwordText.text!, completion: { (user, err) in
                     if user != nil{
                         print("Successful Login!")
+                        self.performSegue(withIdentifier: "loginToQuiz", sender: self)
                     }
                     else{
                         if let error = err?.localizedDescription{
@@ -40,6 +46,13 @@ class LoginViewController: UIViewController {
                 Auth.auth().createUser(withEmail: emailText.text!, password: passwordText.text!, completion: { (user, err) in
                     if user != nil{
                         print("Successfully created a user!")
+                        guard let userID = Auth.auth().currentUser?.uid else{return}
+                        self.ref = Database.database().reference()
+                        self.ref?.child("Users").childByAutoId().setValue(["email" : self.emailText.text!, "UserID" : userID, "First time" : true])
+                        
+                        //let usersRef = Database.database().reference().child("Users")
+                        
+                        self.performSegue(withIdentifier: "loginToQuiz", sender: self)
                     }
                     else{
                         if let error = err?.localizedDescription{
