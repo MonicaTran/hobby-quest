@@ -17,19 +17,23 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var emailText: UITextField!
+    var email = ""
     
-    
+
     @IBAction func action(_ sender: UIButton) {
         
         
         
         if emailText.text! != "" && passwordText.text! != ""{
+            
             if segmentControl.selectedSegmentIndex==0{
                 //Login selected
                 Auth.auth().signIn(withEmail: emailText.text!, password: passwordText.text!, completion: { (user, err) in
                     if user != nil{
                         print("Successful Login!")
                         self.performSegue(withIdentifier: "loginToQuiz", sender: self)
+               
+                        
                     }
                     else{
                         if let error = err?.localizedDescription{
@@ -66,7 +70,11 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let qvc = segue.destination as! QuizViewController
+        qvc.userEmail = emailText.text!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

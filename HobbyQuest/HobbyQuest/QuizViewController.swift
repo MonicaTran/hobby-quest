@@ -23,6 +23,7 @@ struct storedUserchoice{
 class QuizViewController: UIViewController {
     var totalQuestion = 0 ;
     var user = storedUserchoice()
+    var userEmail = ""
 
     
     
@@ -91,7 +92,8 @@ class QuizViewController: UIViewController {
     }
     //display result
     @IBAction func submitAnswer(_ sender: Any) {
-        if(user.user_answer_set.count < 3){
+    getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
+        if(user.user_answer_set.count  < 3){
             self.alertForSubmit()
         }
             else{
@@ -119,9 +121,6 @@ class QuizViewController: UIViewController {
         if(input1 != ""){user.user_answer_set.append(input1)}
         if(input2 != ""){user.user_answer_set.append(input2)}
         if(input3 != ""){user.user_answer_set.append(input3)}}
-        
-        
-       
     }
 
 
@@ -161,7 +160,7 @@ class QuizViewController: UIViewController {
         ]
         let ref = Database.database().reference()
         let ref1 = Database.database().reference().child("Users")
-        let query = ref1.queryOrdered(byChild: "email").queryEqual(toValue: "hello@gmail.com")
+        let query = ref1.queryOrdered(byChild: "email").queryEqual(toValue: self.userEmail)
         query.observeSingleEvent(of: .value) { (snapshot) in
             let object = ((snapshot.value as AnyObject).allKeys)!
             let uniqueId = object[0] as? String
@@ -170,6 +169,7 @@ class QuizViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(userEmail)
         populatedLabel()
         self.previousButton.isHidden = true
         self.submitDisabled.isHidden = true
@@ -182,12 +182,7 @@ class QuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        //had to move code from submitAnswer.
-//        getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
-//        //let dvc = segue.destination as! ExploreViewController
-//        //dvc.answers = user.user_answer_set
-//    }
+
 
 }
 
