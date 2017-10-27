@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n1v-qn-tFe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hVH-yq-ofg">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -98,7 +98,6 @@
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitAnswer:" destination="n1v-qn-tFe" eventType="touchUpInside" id="fks-4m-MbJ"/>
-                                    <segue destination="hVH-yq-ofg" kind="show" id="qcZ-eC-pPs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COj-50-k4I">
@@ -154,6 +153,7 @@
                         <outlet property="title_button1" destination="5iO-ga-RyK" id="qO5-f5-VMK"/>
                         <outlet property="title_button2" destination="Xcr-3a-Ktf" id="Icd-6w-eRt"/>
                         <outlet property="title_button3" destination="qNs-KC-ZnY" id="759-4F-jVC"/>
+                        <segue destination="hVH-yq-ofg" kind="show" identifier="QuizToExplore" id="RjG-8P-1ce"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urv-WE-M9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -555,6 +555,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XRh-Kl-XfU"/>
-        <segue reference="qcZ-eC-pPs"/>
+        <segue reference="RjG-8P-1ce"/>
     </inferredMetricsTieBreakers>
 </document>

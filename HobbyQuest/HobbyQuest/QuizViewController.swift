@@ -96,6 +96,7 @@ class QuizViewController: UIViewController {
         }
             else{
             uploadData()
+            performSegue(withIdentifier: "quizToExplore", sender: self)
         }
  
     }
@@ -181,12 +182,12 @@ class QuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //had to move code from submitAnswer.
-        getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
-        let dvc = segue.destination as! ExploreViewController
-        dvc.answers = user.user_answer_set
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        //had to move code from submitAnswer.
+//        getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
+//        //let dvc = segue.destination as! ExploreViewController
+//        //dvc.answers = user.user_answer_set
+//    }
 
 }
 

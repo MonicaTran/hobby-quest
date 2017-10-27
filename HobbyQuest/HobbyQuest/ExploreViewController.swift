@@ -11,11 +11,27 @@ import UIKit
 
 class ExploreViewController
 : UITableViewController {
-
-    var answers = [String]()
+    //TODO: Retrieve answers from firebase.
+//    var answers = [String]
+    var answers = ["med","sports","hours"]
     let fbHelper = FirebaseHelper()
     let hobbiesRef = Database.database().reference().child("hobbies")
     var hobbies = [Hobby]()
+    func removeDuplicates(array: [String]) -> [String] {
+        var encountered = Set<String>()
+        var result: [String] = []
+        for value in array {
+            if encountered.contains(value) {
+                
+            }
+            else {
+                encountered.insert(value)
+                result.append(value)
+            }
+        }
+        return result
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,24 +41,32 @@ class ExploreViewController
     override func viewDidAppear(_ animated: Bool) {
         fbHelper.getDataAsArray(ref: hobbiesRef, typeOf: hobbies, completion: { array in
             self.hobbies = array
+        
+            
             //filtering array for 3 categories. cost, category, time:
-            var hobbyThree = self.hobbies.filter{$0.cost == self.answers[0] && $0.category == self.answers[1] && $0.time == self.answers[2]}
+            var hobbyWithAll = self.hobbies.filter{$0.cost == self.answers[0] && $0.category == self.answers[1] && $0.time == self.answers[2]}
             //filtering array for 2 categories: cost, category:
-            let hobbyTwo = self.hobbies.filter{$0.cost == self.answers[0] && $0.category == self.answers[1]}
+            let hobbyWithCostAndCat = self.hobbies.filter{$0.cost == self.answers[0] && $0.category == self.answers[1]}
             //filtering array for 2 categories: category, time:
-            let secondHobbyTwo = self.hobbies.filter{$0.category == self.answers[1] && $0.time == self.answers[2]}
-
-            for item in hobbyTwo
-            {
-                hobbyThree.append(item)
+            let hobbyWithCatAndTime = self.hobbies.filter{$0.category == self.answers[1] && $0.time == self.answers[2]}
+            
+            var newHobbies = [Hobby]()
+            for item in hobbyWithAll {
+                newHobbies.append(item)
             }
-            for item in secondHobbyTwo
-            {
-                hobbyThree.append(item)
+            for item in hobbyWithCostAndCat {
+                newHobbies.append(item)
             }
-            //Set(hobbyThree) //gives a segmentation fault. I'll just keep duplicates for now.
-            self.hobbies = hobbyThree
-            self.tableView.reloadData()
+            for item in hobbyWithCatAndTime {
+                newHobbies.append(item)
+            }
+            var hobbyName = [String]()
+            let num = newHobbies.count
+            for i in 0 ..< num {
+                hobbyName.append(newHobbies[i].hobbyName)
+            }
+            print(hobbyName)
+            print(self.removeDuplicates(array: hobbyName))
         })
     }
 
