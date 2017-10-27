@@ -23,9 +23,7 @@ struct storedUserchoice{
 class QuizViewController: UIViewController {
     var totalQuestion = 0 ;
     var user = storedUserchoice()
-    var user_choice_Recommendation = [String]()
-    var key_value:String = ""
-    
+
     
     @IBOutlet weak var questionNumber: UILabel!
     
@@ -96,8 +94,7 @@ class QuizViewController: UIViewController {
             self.alertForSubmit()
         }
             else{
-            //getKeyvalue()
-            //getData()
+            uploadData()
         }
  
     }
@@ -119,27 +116,9 @@ class QuizViewController: UIViewController {
         user.user_answer_set.removeAll()
         if(input1 != ""){user.user_answer_set.append(input1)}
         if(input2 != ""){user.user_answer_set.append(input2)}
-        if(input3 != ""){user.user_answer_set.append(input3)}}
-        
-        
-       
+        if(input3 != ""){user.user_answer_set.append(input3)}
+        }
     }
-//    func getKeyvalue(){
-//         key_value = user.user_answer_set[0] + "_" + user.user_answer_set[1] + "_" + user.user_answer_set[2]
-//    }
-//
-////Firebase doesn't support multiple queries
-//    func getData(){
-//        let ref = Database.database().reference().child("hobbies")
-//        let query = ref.queryOrdered(byChild: "cost_category_time").queryEqual(toValue: key_value)
-//        query.observe(.value, with: {(snapshot1) in
-//            for child in snapshot1.children.allObjects as! [DataSnapshot] {
-//                let value: String = (child.childSnapshot(forPath: "hobbyName").value as? String)!;
-//                self.user_choice_Recommendation.append(value)}
-//            print(self.user_choice_Recommendation)
-//
-//        })
-//    }
 
     func populatedLabel(){
             switch(totalQuestion){
@@ -168,6 +147,21 @@ class QuizViewController: UIViewController {
                 break}
 
         }
+    func uploadData(){
+        let userChoice = [
+            "cost": user.user_answer_set[0],
+            "category": user.user_answer_set[1],
+            "time": user.user_answer_set[2]
+        ]
+        let ref = Database.database().reference()
+        let ref1 = Database.database().reference().child("Users")
+        let query = ref1.queryOrdered(byChild: "email").queryEqual(toValue: "hello@gmail.com")
+        query.observeSingleEvent(of: .value) { (snapshot) in
+            let object = ((snapshot.value as AnyObject).allKeys)!
+            let uniqueId = object[0] as? String
+            let path = "Users/"+uniqueId!+"/userChoice"
+            ref.child(path).childByAutoId().setValue(userChoice)        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
