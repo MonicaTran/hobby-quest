@@ -24,6 +24,7 @@ class QuizViewController: UIViewController {
     var totalQuestion = 0 ;
     var user = storedUserchoice()
     var userEmail = ""
+    
 
     
     
@@ -39,37 +40,70 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var previousButton: UIButton!
     
     @IBAction func input1(_ sender: Any) {
+
+       
         if title_button1.titleLabel?.text! == "high" {
+            title_button2.isSelected = false
+            title_button3.isSelected = false
+             title_button1.isSelected = true
+            
             user.user_choice_Cost = "high"
         }
         else if title_button1.titleLabel?.text! == "sports"{
+            title_button2.isSelected = false
+            title_button3.isSelected = false
+            title_button1.isSelected = true
             user.user_choice_Category = "sports"
         }
         else if title_button1.titleLabel?.text! == "days"{
+            title_button2.isSelected = false
+            title_button3.isSelected = false
+            title_button1.isSelected = true
             user.user_choice_Time = "days"
         }
     }
     
     @IBAction func input2(_ sender: Any) {
+
         if title_button2.titleLabel?.text! == "med" {
+            title_button3.isSelected = false
+            title_button1.isSelected = false
+            title_button2.isSelected = true
+            
             user.user_choice_Cost = "med"
         }
         else if title_button2.titleLabel?.text! == "art"{
+            title_button3.isSelected = false
+            title_button1.isSelected = false
+            title_button2.isSelected = true
             user.user_choice_Category = "art"
         }
         else if title_button2.titleLabel?.text! == "hours"{
+            title_button3.isSelected = false
+            title_button1.isSelected = false
+            title_button2.isSelected = true
             user.user_choice_Time = "hours"
         }
     }
     
     @IBAction func input3(_ sender: Any) {
+
         if title_button3.titleLabel?.text! == "low" {
+            title_button2.isSelected = false
+            title_button1.isSelected = false
+            title_button3.isSelected = true
             user.user_choice_Cost = "low"
         }
         else if title_button3.titleLabel?.text! == "collecting"{
+            title_button2.isSelected = false
+            title_button1.isSelected = false
+            title_button3.isSelected = true
             user.user_choice_Category = "collecting"
         }
         else if title_button3.titleLabel?.text! == "minutes"{
+            title_button2.isSelected = false
+            title_button1.isSelected = false
+            title_button3.isSelected = true
             user.user_choice_Time = "minutes"
         }
     }
@@ -92,9 +126,12 @@ class QuizViewController: UIViewController {
     }
     //display result
     @IBAction func submitAnswer(_ sender: Any) {
-    getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
-        if(user.user_answer_set.count  < 3){
+        getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
+        if(user.user_answer_set.count < 3){
             self.alertForSubmit()
+            title_button3.isSelected = false
+            title_button2.isSelected = false
+            title_button1.isSelected = false
         }
             else{
             uploadData()
@@ -104,23 +141,21 @@ class QuizViewController: UIViewController {
     }
 
     func setupPreviousButton(){
+   
         if totalQuestion == 0{
             self.previousButton.isHidden = true
         }
     }
     func setupNextQuestionButton(){
+        title_button3.isSelected = false
+        title_button2.isSelected = false
+        title_button1.isSelected = false
+
+  
         if totalQuestion == 2{
             self.nextDisabled.isHidden = true
             self.submitDisabled.isHidden = false
         }
-    }
-
-    func getInput(input1:String,input2:String,input3:String){
-        if(user.user_answer_set.count < 3){
-        user.user_answer_set.removeAll()
-        if(input1 != ""){user.user_answer_set.append(input1)}
-        if(input2 != ""){user.user_answer_set.append(input2)}
-        if(input3 != ""){user.user_answer_set.append(input3)}}
     }
 
 
@@ -151,6 +186,13 @@ class QuizViewController: UIViewController {
                 break}
 
         }
+    func getInput(input1:String,input2:String,input3:String){
+        if(user.user_answer_set.count < 3){
+            user.user_answer_set.removeAll()
+            if(input1 != ""){user.user_answer_set.append(input1)}
+            if(input2 != ""){user.user_answer_set.append(input2)}
+            if(input3 != ""){user.user_answer_set.append(input3)}}
+    }
 
     func uploadData(){
         let userChoice = [
@@ -169,8 +211,9 @@ class QuizViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(userEmail)
         populatedLabel()
+
+        
         self.previousButton.isHidden = true
         self.submitDisabled.isHidden = true
 
