@@ -9,29 +9,59 @@
 import UIKit
 import FirebaseDatabase
 
-class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate {
+class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return hobbyPickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return hobbyPickerData[row] as String
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selected = hobbyPickerData[row]
+        journalEntries = allJournalEntries
+        if selected != "All Hobbies" {
+            journalEntries = journalEntries.filter { $0.hobby == selected }
+        }
+        tableView.reloadData()
+    }
+    
     
     
     let fbHelper = FirebaseHelper()
     let journalsRef = Database.database().reference().child("journals")
     var userJournalRef: DatabaseReference!
     var journalEntries = [JournalEntry]()
+    var allJournalEntries = [JournalEntry]()
+    var hobbyPickerData = [String]()
     var selectedHobby = ""
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var totalEntriesLabel: UILabel!
+    @IBOutlet var hobbyFilterPicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let uid = "1"
         //temp uid for testing
         userJournalRef = journalsRef.child(uid)
+        hobbyFilterPicker.delegate = self
+        hobbyFilterPicker.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
             self.journalEntries = array
+            self.allJournalEntries = array
+            self.totalEntriesLabel.text = String(self.journalEntries.count)
             self.tableView.reloadData()
+            self.getAvailableHobbies(arr: self.journalEntries)
         })
         totalEntriesLabel.text = String(journalEntries.count)
     }
@@ -90,6 +120,14 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         journalEntries.append(newEntry)
     }
     
+    func getAvailableHobbies(arr: [JournalEntry]) {
+        var result = ["All Hobbies"]
+        let temp = arr.map { $0.hobby }
+        result.append(contentsOf: temp)
+        hobbyPickerData = Array(Set(result))
+        hobbyFilterPicker.reloadAllComponents()
+    }
+    
 /*
  // MARK: - Table view
  */
@@ -101,7 +139,13 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let entry = journalEntries[indexPath.row]
-        cell.textLabel?.text = entry.hobby + " : " + entry.description + " : " + entry.duration
+        //cell.textLabel?.text = entry.hobby + " : " + entry.description + " : " + entry.duration
+        //cell.textLabel?.numberOfLines = 0
+        //cell.textLabel?.lineBreakMode = .byWordWrapping
+        let detailsLabel = cell.viewWithTag(1) as? UILabel
+        detailsLabel?.text = entry.hobby + " | " + entry.duration
+        let descLabel = cell.viewWithTag(2) as? UILabel
+        descLabel?.text = entry.description
         
         return cell
     }
