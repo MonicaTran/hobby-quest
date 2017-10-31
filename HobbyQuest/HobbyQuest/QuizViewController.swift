@@ -209,7 +209,7 @@ class QuizViewController: UIViewController {
         query.observeSingleEvent(of: .value) { (snapshot) in
             let object = ((snapshot.value as AnyObject).allKeys)!
             let uniqueId = object[0] as? String
-            let path = "Users/"+uniqueId!+"/userChoice"
+            let path = "Users/"+uniqueId!
             ref.child(path).childByAutoId().setValue(userChoice)        }
     }
     override func viewDidLoad() {
