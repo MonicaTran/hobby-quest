@@ -144,15 +144,15 @@
 				036E1DD41F90786300681044 /* Info.plist */,
 				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
 				033F0C951F908F1C0071CAED /* Hobby.swift */,
-				03A667E61F9852080095EE0F /* JournalEntry.swift */,
-				036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */,
+				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 				036E1DCA1F90786300681044 /* QuizViewController.swift */,
+				CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */,
+				03A667E61F9852080095EE0F /* JournalEntry.swift */,
 				03A667E41F984CB30095EE0F /* JournalViewController.swift */,
 				03A667E81F9875E90095EE0F /* EntryViewController.swift */,
+				036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */,
 				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
 				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
-				CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */,
-				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";

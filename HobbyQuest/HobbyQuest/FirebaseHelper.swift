@@ -23,7 +23,7 @@ import FirebaseDatabase
 //}
 
 class FirebaseHelper: NSObject {
-    
+
     func getDataAsArray<T> (ref: DatabaseReference, typeOf: [T], completion: @escaping ([T]) -> Void) {
         var array = [T]()
         ref.observeSingleEvent(of: .value) { (snapshot) in

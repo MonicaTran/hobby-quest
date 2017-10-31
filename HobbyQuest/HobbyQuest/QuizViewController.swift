@@ -191,7 +191,10 @@ class QuizViewController: UIViewController {
             user.user_answer_set.removeAll()
             if(input1 != ""){user.user_answer_set.append(input1)}
             if(input2 != ""){user.user_answer_set.append(input2)}
-            if(input3 != ""){user.user_answer_set.append(input3)}}
+            if(input3 != ""){user.user_answer_set.append(input3)}
+            print(user.user_answer_set.count)
+        }
+        
     }
 
     func uploadData(){
@@ -224,7 +227,10 @@ class QuizViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let evc = segue.destination as! ExploreViewController
+        evc.email = userEmail
+  }
 
 
 }

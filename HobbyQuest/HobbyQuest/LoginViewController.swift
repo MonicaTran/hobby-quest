@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var emailText: UITextField!
     var email = ""
-    
+    var firstTimeArray: [Bool] = []
 
     @IBAction func action(_ sender: UIButton) {
         
@@ -31,9 +31,22 @@ class LoginViewController: UIViewController {
                 Auth.auth().signIn(withEmail: emailText.text!, password: passwordText.text!, completion: { (user, err) in
                     if user != nil{
                         print("Successful Login!")
-                        self.performSegue(withIdentifier: "loginToQuiz", sender: self)
-               
-                        
+                        let ref = Database.database().reference().child("Users")
+                        let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: self.emailText.text!)
+                        query.observeSingleEvent(of: .value) { (snapshot) in
+                            let object = ((snapshot.value as AnyObject).allKeys)!
+                            let uniqueId = object[0] as? String
+                            //let userChoiceID = object4[0] as? String
+                            let path = uniqueId!+"/First time"
+                            print(snapshot.childSnapshot(forPath: path).value as! Bool)
+                            if (snapshot.childSnapshot(forPath: path).value! as? Bool) == true{
+                                self.performSegue(withIdentifier: "loginToQuiz", sender: self)
+                            }
+                            else{
+                                self.performSegue(withIdentifier: "loginToExplorer", sender: self)
+                            }
+                        }
+                       
                     }
                     else{
                         if let error = err?.localizedDescription{
@@ -72,8 +85,15 @@ class LoginViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let qvc = segue.destination as! QuizViewController
-        qvc.userEmail = emailText.text!
+        if segue.identifier == "loginToQuiz"{
+            let qvc = segue.destination as! QuizViewController
+            qvc.userEmail = emailText.text!
+        }
+        else if segue.identifier == "loginToExplorer"{
+            let evc = segue.destination as! ExploreViewController
+            evc.email = emailText.text!
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -81,7 +101,6 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

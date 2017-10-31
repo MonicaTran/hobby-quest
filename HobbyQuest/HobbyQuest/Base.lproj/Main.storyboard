@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n1v-qn-tFe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gYC-fH-z2c">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -62,6 +62,7 @@
                         <outlet property="passwordText" destination="5y3-1b-kZ6" id="eVu-Et-eUu"/>
                         <outlet property="segmentControl" destination="ZCq-Fx-pFz" id="Lmg-zz-bT0"/>
                         <segue destination="n1v-qn-tFe" kind="show" identifier="loginToQuiz" id="ccm-Kb-fGk"/>
+                        <segue destination="hVH-yq-ofg" kind="show" identifier="loginToExplorer" id="Klg-pA-byk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f2k-y3-rkI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,15 +146,15 @@
                             <constraint firstItem="cV7-97-eQO" firstAttribute="top" secondItem="FwH-4z-agW" secondAttribute="top" constant="36.5" id="KsE-Dj-p0X"/>
                             <constraint firstItem="M21-u6-uxu" firstAttribute="centerX" secondItem="9QF-09-scm" secondAttribute="centerX" id="OPG-N1-og0"/>
                             <constraint firstItem="Xcr-3a-Ktf" firstAttribute="leading" secondItem="FwH-4z-agW" secondAttribute="leading" constant="130" id="SHb-Wb-vm9"/>
+                            <constraint firstItem="FwH-4z-agW" firstAttribute="bottom" secondItem="COj-50-k4I" secondAttribute="bottom" constant="130" id="TNV-jo-KB1"/>
                             <constraint firstItem="FwH-4z-agW" firstAttribute="trailing" secondItem="Xcr-3a-Ktf" secondAttribute="trailing" constant="129" id="U5g-U8-Ucu"/>
                             <constraint firstItem="qLQ-35-PgN" firstAttribute="top" secondItem="FwH-4z-agW" secondAttribute="top" constant="36.5" id="cu3-gH-U84"/>
-                            <constraint firstItem="FwH-4z-agW" firstAttribute="bottom" secondItem="COj-50-k4I" secondAttribute="bottom" constant="130" id="gcc-61-lyV"/>
                             <constraint firstItem="FwH-4z-agW" firstAttribute="trailing" secondItem="5iO-ga-RyK" secondAttribute="trailing" constant="129" id="ihw-NW-5dP"/>
+                            <constraint firstItem="FwH-4z-agW" firstAttribute="trailing" secondItem="COj-50-k4I" secondAttribute="trailing" constant="50" id="iuC-pl-qsm"/>
                             <constraint firstItem="FwH-4z-agW" firstAttribute="bottom" secondItem="qNs-KC-ZnY" secondAttribute="bottom" constant="172" id="jNO-Ac-cVn"/>
                             <constraint firstItem="qNs-KC-ZnY" firstAttribute="top" secondItem="Xcr-3a-Ktf" secondAttribute="bottom" constant="23" id="ktA-SG-zTU"/>
                             <constraint firstItem="5iO-ga-RyK" firstAttribute="leading" secondItem="FwH-4z-agW" secondAttribute="leading" constant="130" id="n8S-rn-Zem"/>
                             <constraint firstItem="FwH-4z-agW" firstAttribute="bottom" secondItem="jyo-rl-fWv" secondAttribute="bottom" constant="130" id="rmC-Sc-mkt"/>
-                            <constraint firstItem="FwH-4z-agW" firstAttribute="trailing" secondItem="COj-50-k4I" secondAttribute="trailing" constant="50" id="tjx-JW-2K9"/>
                             <constraint firstItem="Xcr-3a-Ktf" firstAttribute="top" secondItem="5iO-ga-RyK" secondAttribute="bottom" constant="24" id="uFG-FB-0Gs"/>
                             <constraint firstItem="jyo-rl-fWv" firstAttribute="leading" secondItem="FwH-4z-agW" secondAttribute="leading" constant="50" id="usv-e8-yZ1"/>
                         </constraints>
@@ -571,6 +572,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XRh-Kl-XfU"/>
-        <segue reference="RjG-8P-1ce"/>
+        <segue reference="Klg-pA-byk"/>
     </inferredMetricsTieBreakers>
 </document>
