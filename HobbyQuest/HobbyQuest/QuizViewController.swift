@@ -24,6 +24,7 @@ class QuizViewController: UIViewController {
     var totalQuestion = 0 ;
     var user = storedUserchoice()
     var userEmail = ""
+    var retakeQuiz = false
     
 
     
@@ -209,9 +210,27 @@ class QuizViewController: UIViewController {
         query.observeSingleEvent(of: .value) { (snapshot) in
             let object = ((snapshot.value as AnyObject).allKeys)!
             let uniqueId = object[0] as? String
-            let path = "Users/"+uniqueId!
-            ref.child(path).childByAutoId().setValue(userChoice)        }
+            let path = "Users/"+uniqueId!+"/userChoice"
+            ref.child(path).setValue(userChoice)       }
     }
+    //update userChoice in case user want to take the quiz again
+    func updateData(){
+        let userChoice = [
+            "cost": user.user_answer_set[0],
+            "category": user.user_answer_set[1],
+            "time": user.user_answer_set[2]
+        ]
+        let ref = Database.database().reference()
+        let ref1 = Database.database().reference().child("Users")
+        let query = ref1.queryOrdered(byChild: "email").queryEqual(toValue: self.userEmail)
+        query.observeSingleEvent(of: .value) { (snapshot) in
+            let object = ((snapshot.value as AnyObject).allKeys)!
+            let uniqueId = object[0] as? String
+            let path = "Users/"+uniqueId!+"/userChoice"
+            ref.child(path).updateChildValues(userChoice)     }
+        
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         populatedLabel()
