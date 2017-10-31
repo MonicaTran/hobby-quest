@@ -101,7 +101,7 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let entry = journalEntries[indexPath.row]
-        cell.textLabel?.text = entry.description
+        cell.textLabel?.text = entry.hobby + " : " + entry.description + " : " + entry.duration
         
         return cell
     }

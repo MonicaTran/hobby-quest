@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033F0C931F908E100071CAED /* FirebaseHelper.swift */; };
 		033F0C961F908F1C0071CAED /* Hobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033F0C951F908F1C0071CAED /* Hobby.swift */; };
+		035CCC031FA850CE0022A9F0 /* HappyTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035CCC021FA850CE0022A9F0 /* HappyTestViewController.swift */; };
 		036E1DC91F90786300681044 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DC81F90786300681044 /* AppDelegate.swift */; };
 		036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DCA1F90786300681044 /* QuizViewController.swift */; };
 		036E1DCE1F90786300681044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036E1DCC1F90786300681044 /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		033F0C931F908E100071CAED /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		033F0C951F908F1C0071CAED /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
+		035CCC021FA850CE0022A9F0 /* HappyTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyTestViewController.swift; sourceTree = "<group>"; };
 		036E1DC51F90786300681044 /* HobbyQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HobbyQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036E1DC81F90786300681044 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		036E1DCA1F90786300681044 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +144,6 @@
 				036E1DCF1F90786300681044 /* Assets.xcassets */,
 				036E1DD11F90786300681044 /* LaunchScreen.storyboard */,
 				036E1DD41F90786300681044 /* Info.plist */,
-				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
 				033F0C951F908F1C0071CAED /* Hobby.swift */,
 				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 				036E1DCA1F90786300681044 /* QuizViewController.swift */,
@@ -150,9 +151,11 @@
 				03A667E61F9852080095EE0F /* JournalEntry.swift */,
 				03A667E41F984CB30095EE0F /* JournalViewController.swift */,
 				03A667E81F9875E90095EE0F /* EntryViewController.swift */,
-				036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */,
+				035CCC021FA850CE0022A9F0 /* HappyTestViewController.swift */,
 				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
+				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
 				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
+				036E1DFA1F907BD000681044 /* DatabaseTestViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */,
 				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
 				CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */,
+				035CCC031FA850CE0022A9F0 /* HappyTestViewController.swift in Sources */,
 				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

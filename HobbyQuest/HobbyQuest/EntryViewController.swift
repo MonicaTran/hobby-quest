@@ -65,7 +65,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.durationLabel.isHidden = false
-            self.durationLabel.text = "Sounds fun! How long did you spend on " + self.hobby + "?"
+            self.durationLabel.text = "Sounds fun! How long did you spend on this activity?"
         }
         DispatchQueue.main.asyncAfter(deadline: when+1) {
             self.durationField.isHidden = false
