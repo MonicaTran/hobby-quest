@@ -12,19 +12,19 @@ struct storedUserchoice{
     var user_choice_Cost:String
     var user_choice_Category:String
     var user_choice_Time:String
-    var user_answer_set = [String]()
     init(){
-        user_choice_Cost = ""
+        user_choice_Cost =  ""
         user_choice_Category = ""
         user_choice_Time = ""
     }
+
 }
 
 class QuizViewController: UIViewController {
     var totalQuestion = 0 ;
-    var user = storedUserchoice()
     var userEmail = ""
     var retakeQuiz = false
+    var user = storedUserchoice()
     
 
     
@@ -125,19 +125,32 @@ class QuizViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    //display result
+    
     @IBAction func submitAnswer(_ sender: Any) {
-        getInput(input1: user.user_choice_Cost, input2: user.user_choice_Category, input3: user.user_choice_Time)
-        if(user.user_answer_set.count < 3){
+        if(user.user_choice_Cost == "" || user.user_choice_Category == "" || user.user_choice_Time == ""){
             self.alertForSubmit()
             title_button3.isSelected = false
             title_button2.isSelected = false
             title_button1.isSelected = false
         }
+            
             else{
-            uploadData()
+            updateData()
             performSegue(withIdentifier: "quizToExplore", sender: self)
         }
+        if(user.user_choice_Cost == ""){
+            totalQuestion = 0
+            populatedLabel()
+        }
+        if(user.user_choice_Category == ""){
+            totalQuestion = 1
+            populatedLabel()
+        }
+        if(user.user_choice_Time == ""){
+            totalQuestion = 2
+            populatedLabel()
+        }
+
  
     }
 
@@ -187,38 +200,12 @@ class QuizViewController: UIViewController {
                 break}
 
         }
-    func getInput(input1:String,input2:String,input3:String){
-        if(user.user_answer_set.count < 3){
-            user.user_answer_set.removeAll()
-            if(input1 != ""){user.user_answer_set.append(input1)}
-            if(input2 != ""){user.user_answer_set.append(input2)}
-            if(input3 != ""){user.user_answer_set.append(input3)}
-            print(user.user_answer_set.count)
-        }
-        
-    }
 
-    func uploadData(){
-        let userChoice = [
-            "cost": user.user_answer_set[0],
-            "category": user.user_answer_set[1],
-            "time": user.user_answer_set[2]
-        ]
-        let ref = Database.database().reference()
-        let ref1 = Database.database().reference().child("Users")
-        let query = ref1.queryOrdered(byChild: "email").queryEqual(toValue: self.userEmail)
-        query.observeSingleEvent(of: .value) { (snapshot) in
-            let object = ((snapshot.value as AnyObject).allKeys)!
-            let uniqueId = object[0] as? String
-            let path = "Users/"+uniqueId!+"/userChoice"
-            ref.child(path).setValue(userChoice)       }
-    }
-    //update userChoice in case user want to take the quiz again
     func updateData(){
         let userChoice = [
-            "cost": user.user_answer_set[0],
-            "category": user.user_answer_set[1],
-            "time": user.user_answer_set[2]
+            "cost": user.user_choice_Cost,
+            "category": user.user_choice_Category,
+            "time": user.user_choice_Time
         ]
         let ref = Database.database().reference()
         let ref1 = Database.database().reference().child("Users")
