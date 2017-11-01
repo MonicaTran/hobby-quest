@@ -9,11 +9,20 @@ import FirebaseDatabase
 import FirebaseAuth
 import UIKit
 
-class ExploreViewController
-: UITableViewController {
-    //TODO: Retrieve answers from firebase.
-//    var answers = [String]
-    var email = ""
+extension String{
+    func capitalizeFirstLetter()-> String{
+        return prefix(1).uppercased() + dropFirst()
+    }
+    mutating func capitalizeFirstLetter(){
+        self = self.capitalizeFirstLetter()
+    }
+}
+
+
+class ExploreViewController: UITableViewController {
+    
+    var answers = [String]()
+    var email:String = ""
     let fbHelper = FirebaseHelper()
     let hobbiesRef = Database.database().reference().child("hobbies")
     var hobbies = [Hobby]()
@@ -21,6 +30,7 @@ class ExploreViewController
     var cost:String = ""
     var time:String = ""
     var dupFreeHobbies = [String]()
+    
     func removeDuplicates(array: [String]) -> [String] {
         var encountered = Set<String>()
         var result: [String] = []
@@ -36,37 +46,8 @@ class ExploreViewController
         return result
         
     }
-    func retrieveUserData()
-    {
-//        let ref = Database.database().reference().child("Users")
-//        let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: self.email)
-//        query.observeSingleEvent(of: .value) { (snapshot) in
-//            let object = ((snapshot.value as AnyObject).allKeys)!
-//            let uniqueId = object[0] as? String
-//            //let userChoiceID = object4[0] as? String
-//            let path = uniqueId!+"/userChoice"
-//            let userChoiceIDs = ((snapshot.childSnapshot(forPath: path).value as AnyObject).allKeys)!
-//            let firstUserChoiceID = userChoiceIDs[0] as? String
-//            let categoryPath = path+"/"+firstUserChoiceID!+"/category"
-//            let costPath = path+"/"+firstUserChoiceID!+"/cost"
-//            let timePath = path+"/"+firstUserChoiceID!+"/time"
-//            print(snapshot.childSnapshot(forPath: categoryPath).value!)
-//            print(snapshot.childSnapshot(forPath: costPath).value!)
-//            print(snapshot.childSnapshot(forPath: timePath).value!)
-//            self.category = (snapshot.childSnapshot(forPath: categoryPath).value! as? String)!
-//            print(self.category)
-//            self.cost = (snapshot.childSnapshot(forPath: costPath).value! as? String)!
-//            self.time = (snapshot.childSnapshot(forPath: timePath).value! as? String)!
+    func retrieveUserAnswers() {
         
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        //retrieveUserData()
         let ref = Database.database().reference().child("Users")
         let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: self.email)
         query.observeSingleEvent(of: .value) { (snapshot) in
@@ -79,21 +60,33 @@ class ExploreViewController
             let categoryPath = path+"/"+firstUserChoiceID!+"/category"
             let costPath = path+"/"+firstUserChoiceID!+"/cost"
             let timePath = path+"/"+firstUserChoiceID!+"/time"
-            print(snapshot.childSnapshot(forPath: categoryPath).value!)
-            print(snapshot.childSnapshot(forPath: costPath).value!)
-            print(snapshot.childSnapshot(forPath: timePath).value!)
             self.category = (snapshot.childSnapshot(forPath: categoryPath).value! as? String)!
-            print(self.category)
             self.cost = (snapshot.childSnapshot(forPath: costPath).value! as? String)!
             self.time = (snapshot.childSnapshot(forPath: timePath).value! as? String)!
+            
+            self.answers.append(self.category)
+            self.answers.append(self.cost)
+            self.answers.append(self.time)
+            //print(self.answers)
         }
+        
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
+        self.retrieveUserAnswers()
+        //figuring out how to get self.cost
         
         
         fbHelper.getDataAsArray(ref: hobbiesRef, typeOf: hobbies, completion: { array in
             self.hobbies = array
-        
             
             //filtering array for 3 categories. cost, category, time:
+            //print(self.cost)
             let hobbyWithAll = self.hobbies.filter{$0.cost == self.cost && $0.category == self.category && $0.time == self.time}
             //filtering array for 2 categories: cost, category:
             let hobbyWithCostAndCat = self.hobbies.filter{$0.cost == self.cost && $0.category == self.category}
@@ -115,48 +108,53 @@ class ExploreViewController
             for i in 0 ..< num {
                 hobbyName.append(newHobbies[i].hobbyName)
             }
-            print(hobbyName)
+            //print(hobbyName)
             self.dupFreeHobbies = self.removeDuplicates(array: hobbyName)
             //TODO make table print cells based on removeDuplicates array.
+            DispatchQueue.main.async { self.tableView.reloadData() } //Just learned that I needed this after I retreive the data in firebase.
         })
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return dupFreeHobbies.count
     }
-
- 
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hobbyCell", for: indexPath)
         let hobby = dupFreeHobbies[indexPath.row]
-        print(hobby)
-        cell.textLabel?.text = hobby
+        //print(hobby)
+        //cell.textLabel?.text = hobby
+        let hobbyLabel = cell.viewWithTag(1) as! UILabel
+        hobbyLabel.text = hobby.capitalizeFirstLetter()
         for item in hobbies
         {
             if dupFreeHobbies[indexPath.row] == item.hobbyName
             {
                 let catAndTime = "\(item.category) | Time: \(item.time) | Cost: \(item.cost)"
-                cell.detailTextLabel?.text = catAndTime
+                //cell.detailTextLabel?.text = catAndTime
+                let catAndTimeLabel = cell.viewWithTag(2) as! UILabel
+                catAndTimeLabel.text = catAndTime
             }
         }
         
         return cell
     }
-
-
     
-
+    
+    
+    
 }
+

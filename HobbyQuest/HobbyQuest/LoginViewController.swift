@@ -10,16 +10,17 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+
 class LoginViewController: UIViewController {
-
+    
     var ref: DatabaseReference?
-
+    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var emailText: UITextField!
     var email = ""
     var firstTimeArray: [Bool] = []
-
+    
     @IBAction func action(_ sender: UIButton) {
         
         
@@ -43,10 +44,10 @@ class LoginViewController: UIViewController {
                                 self.performSegue(withIdentifier: "loginToQuiz", sender: self)
                             }
                             else{
-                                self.performSegue(withIdentifier: "loginToExplorer", sender: self)
+                                self.performSegue(withIdentifier: "loginToExplore", sender: self)
                             }
                         }
-                       
+                        
                     }
                     else{
                         if let error = err?.localizedDescription{
@@ -83,14 +84,15 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "loginToQuiz"{
             let qvc = segue.destination as! QuizViewController
             qvc.userEmail = emailText.text!
         }
-        else if segue.identifier == "loginToExplorer"{
-            let evc = segue.destination as! ExploreViewController
+        else if segue.identifier == "loginToExplore"{
+            let tbc: UITabBarController = segue.destination as! UITabBarController
+            let evc: ExploreViewController = tbc.viewControllers?.first?.childViewControllers.first as! ExploreViewController
             evc.email = emailText.text!
         }
         
@@ -98,7 +100,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     override func didReceiveMemoryWarning() {
@@ -106,15 +108,15 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

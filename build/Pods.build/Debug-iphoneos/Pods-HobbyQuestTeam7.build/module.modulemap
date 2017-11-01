@@ -1,0 +1,6 @@
+framework module Pods_HobbyQuestTeam7 {
+  umbrella header "Pods-HobbyQuestTeam7-umbrella.h"
+
+  export *
+  module * { export * }
+}
