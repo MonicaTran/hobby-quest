@@ -20,10 +20,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailText: UITextField!
     var email = ""
     var firstTimeArray: [Bool] = []
+    @IBOutlet var authButton: UIButton!
     
+    @IBAction func authStateChanged(_ sender: Any) {
+//        switch segmentControl.selectedSegmentIndex
+//        {
+//            case 0:
+//                authButton.setTitle("Login", for: .normal)
+//            case 1:
+//                authButton.setTitle("Register", for: .normal)
+//            default:
+//                break;
+//        }
+    }
     @IBAction func action(_ sender: UIButton) {
-        
-        
         
         if emailText.text! != "" && passwordText.text! != ""{
             

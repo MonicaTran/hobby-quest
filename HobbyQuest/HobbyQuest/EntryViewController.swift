@@ -26,7 +26,15 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var durationField: UIDatePicker!
     
     @IBAction func submitDuration(_ sender: Any) {
-        performSegue(withIdentifier: "entryToJournal", sender: self)
+        let d = String(self.durationField.countDownDuration)
+        self.delegate.saveNewEntry(desc: self.desc, hobby: self.hobby, duration: d)
+        //self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+        //performSegue(withIdentifier: "entryToJournal", sender: self)
+    }
+    @IBAction func cancelEntry(_ sender: Any) {
+        //self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -48,14 +49,19 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let uid = "1"
+        //let uid = "1"
         //temp uid for testing
-        userJournalRef = journalsRef.child(uid)
         hobbyFilterPicker.delegate = self
         hobbyFilterPicker.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        totalEntriesLabel.text = String(journalEntries.count)
+        guard let userID = Auth.auth().currentUser?.uid else{
+            hobbyFilterPicker.isHidden = true
+            return
+        }
+        userJournalRef = journalsRef.child(userID)
         fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
             self.journalEntries = array
             self.allJournalEntries = array
@@ -63,7 +69,6 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.tableView.reloadData()
             self.getAvailableHobbies(arr: self.journalEntries)
         })
-        totalEntriesLabel.text = String(journalEntries.count)
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,22 +81,40 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
      */
     
     @IBAction func addEntry(_ sender: Any) {
-        fbHelper.getAllHobbies(completion: { array in
-            self.showAlertSelectHobby(from:array)
-        })
+        guard let userID = Auth.auth().currentUser?.uid else{
+            return
+        }
+        let savedHobbiesRef = Database.database().reference().child("savedHobbies").child(userID)
+        savedHobbiesRef.observeSingleEvent(of: .value) { (snapshot) in
+            var userHobbies = [String]()
+            for child in snapshot.children {
+                let item = child as! DataSnapshot
+                let value = item.value as! String
+                userHobbies.append(value)
+            }
+            self.showAlertSelectHobby(from: userHobbies)
+            //self.fbHelper.getAllHobbies(completion: { array in
+            //    self.showAlertSelectHobby(from:array)
+            //})
+        }
     }
     
-    func showAlertSelectHobby(from: [Hobby]) {
+    func showAlertSelectHobby(from: [String]) {
         let alertController = UIAlertController(title: "Select Hobby", message: "Select the hobby you would like to write about.", preferredStyle: .actionSheet)
-        
-        for hobby in from {
-            let okAction = UIAlertAction(title: hobby.hobbyName, style: UIAlertActionStyle.default) {
-                UIAlertAction in
-                self.selectedHobby = hobby.hobbyName
-                self.performSegue(withIdentifier: "journalToEntry", sender: self)
-            }
-            alertController.addAction(okAction)
+        if from.count <= 0 {
+            alertController.message = "You have no hobbies saved to your journal. Visit the Explore tab to browse and add hobbies."
         }
+        else {
+            for hobby in from {
+                let okAction = UIAlertAction(title: hobby, style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    self.selectedHobby = hobby
+                    self.performSegue(withIdentifier: "journalToEntry", sender: self)
+                }
+                alertController.addAction(okAction)
+            }
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
             UIAlertAction in
             NSLog("Cancelled")
@@ -120,11 +143,13 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         journalEntries.append(newEntry)
     }
     
+    let ALL_HOBBIES = ["All Hobbies"]
     func getAvailableHobbies(arr: [JournalEntry]) {
-        var result = ["All Hobbies"]
-        let temp = arr.map { $0.hobby }
+        var result = ALL_HOBBIES
+        var temp = arr.map { $0.hobby }
+        temp = Array(Set(temp))
         result.append(contentsOf: temp)
-        hobbyPickerData = Array(Set(result))
+        hobbyPickerData = result
         hobbyFilterPicker.reloadAllComponents()
     }
     

@@ -41,7 +41,9 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var previousButton: UIButton!
     
     @IBAction func input1(_ sender: Any) {
-
+        title_button1.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
+        title_button2.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button3.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
        
         if title_button1.titleLabel?.text! == "high" {
             title_button2.isSelected = false
@@ -65,6 +67,10 @@ class QuizViewController: UIViewController {
     }
     
     @IBAction func input2(_ sender: Any) {
+        
+        title_button2.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
+        title_button1.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button3.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
 
         if title_button2.titleLabel?.text! == "med" {
             title_button3.isSelected = false
@@ -88,6 +94,10 @@ class QuizViewController: UIViewController {
     }
     
     @IBAction func input3(_ sender: Any) {
+        
+        title_button3.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
+        title_button1.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button2.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
 
         if title_button3.titleLabel?.text! == "low" {
             title_button2.isSelected = false
@@ -155,7 +165,9 @@ class QuizViewController: UIViewController {
     }
 
     func setupPreviousButton(){
-   
+        title_button1.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button2.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button3.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
         if totalQuestion == 0{
             self.previousButton.isHidden = true
         }
@@ -164,6 +176,10 @@ class QuizViewController: UIViewController {
         title_button3.isSelected = false
         title_button2.isSelected = false
         title_button1.isSelected = false
+        
+        title_button1.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button2.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button3.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
 
   
         if totalQuestion == 2{
@@ -225,6 +241,11 @@ class QuizViewController: UIViewController {
         
         self.previousButton.isHidden = true
         self.submitDisabled.isHidden = true
+        
+        
+        title_button1.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button2.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        title_button3.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
 
     }
     

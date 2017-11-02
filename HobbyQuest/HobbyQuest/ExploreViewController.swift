@@ -38,6 +38,7 @@ class ExploreViewController: UITableViewController{
         let button = sender
         button.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
         button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitle("REMOVE", for: .normal)
         
         let index = sender.tag
         guard let userID = Auth.auth().currentUser?.uid else{return}
