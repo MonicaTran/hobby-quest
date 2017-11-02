@@ -8,6 +8,7 @@
 
 import Firebase
 import UIKit
+import FirebaseAuth
 struct storedUserchoice{
     var user_choice_Cost:String
     var user_choice_Category:String
@@ -29,6 +30,15 @@ class QuizViewController: UIViewController {
 
     
     
+    @IBAction func logout(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+        }catch let err{
+            print(err.localizedDescription)
+        }
+        navigationController?.popViewController(animated: true)
+    }
     @IBOutlet weak var questionNumber: UILabel!
     
     @IBAction func previousQuestion(_ sender: Any) {
@@ -230,7 +240,9 @@ class QuizViewController: UIViewController {
             let object = ((snapshot.value as AnyObject).allKeys)!
             let uniqueId = object[0] as? String
             let path = "Users/"+uniqueId!+"/userChoice"
-            ref.child(path).updateChildValues(userChoice)     }
+            ref.child(path).updateChildValues(userChoice)
+            ref.child("Users/"+uniqueId!+"/First time").setValue(false)
+        }
         
     }
         

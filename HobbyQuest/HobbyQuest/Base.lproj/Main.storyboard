@@ -25,7 +25,7 @@
                                     <segment title="Login"/>
                                     <segment title="Sign up"/>
                                 </segments>
-                                <color key="tintColor" red="0.0" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.65274506809999999" blue="0.258700192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="authStateChanged:" destination="CGr-Rh-JbR" eventType="valueChanged" id="MWa-7J-BHf"/>
                                 </connections>
@@ -52,7 +52,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -192,7 +192,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M21-u6-uxu">
                                 <rect key="frame" x="60.5" y="420" width="200" height="30"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.65274506809999999" blue="0.258700192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="hyc-fc-OIV"/>
                                 </constraints>
@@ -223,6 +223,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="dDW-Ow-jnd">
                         <barButtonItem key="backBarButtonItem" title="Exit" id="Jtr-51-Inm"/>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="O4U-pa-eCl">
+                            <connections>
+                                <action selector="logout:" destination="n1v-qn-tFe" id="nhv-xC-vwS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="nextDisabled" destination="COj-50-k4I" id="cQA-ei-xt5"/>
@@ -306,12 +311,20 @@
                             <outlet property="delegate" destination="hVH-yq-ofg" id="Ebx-g7-7bH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Explore" id="enJ-xb-mt9"/>
+                    <navigationItem key="navigationItem" title="Explore" id="enJ-xb-mt9">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="hDW-pE-lxW">
+                            <connections>
+                                <action selector="logout:" destination="hVH-yq-ofg" id="Pce-Xf-xkA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="fmi-Fk-ZUv" kind="show" identifier="exploreToDetail" id="Yo9-aI-uFt"/>
+                        <segue destination="vnD-2a-eZ9" kind="unwind" identifier="unwindToViewController1" unwindAction="prepareForUnwindWithSegue:" id="psc-it-xUH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Dk-3b-C07" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vnD-2a-eZ9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1777" y="788"/>
         </scene>

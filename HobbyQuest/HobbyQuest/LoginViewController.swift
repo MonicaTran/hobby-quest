@@ -33,6 +33,11 @@ class LoginViewController: UIViewController {
 //                break;
 //        }
     }
+    
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){
+        
+    }
+    
     @IBAction func action(_ sender: UIButton) {
         
         if emailText.text! != "" && passwordText.text! != ""{

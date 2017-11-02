@@ -33,6 +33,7 @@ class ExploreViewController: UITableViewController{
     var time:String = ""
     var dupFreeHobbies = [String]()
     
+
     
     @objc func addHobby(sender: UIButton) {
         let button = sender
@@ -208,18 +209,31 @@ class ExploreViewController: UITableViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let dvc = segue.destination as! DetailsViewController
-        dvc.hobbyIn = selectedHobby
-        for item in hobbies
-        {
-            if selectedHobby == item.hobbyName
+        if segue.identifier == "exploreToDetail"{
+            let dvc = segue.destination as! DetailsViewController
+            dvc.hobbyIn = selectedHobby
+            for item in hobbies
             {
-                dvc.costIn = item.cost
-                dvc.categoryIn = item.category
-                dvc.timeIn = item.time
+                if selectedHobby == item.hobbyName
+                {
+                    dvc.costIn = item.cost
+                    dvc.categoryIn = item.category
+                    dvc.timeIn = item.time
+                }
             }
         }
     }
+    
+    @IBAction func logout(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        }catch let err{
+            print(err.localizedDescription)
+        }
+    }
+    
     
     
     
