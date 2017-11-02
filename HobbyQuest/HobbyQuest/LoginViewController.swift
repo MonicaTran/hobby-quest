@@ -62,6 +62,11 @@ class LoginViewController: UIViewController {
                     else{
                         if let error = err?.localizedDescription{
                             print(error)
+                            if error == "There is no user record corresponding to this identifier. The user may have been deleted."{
+                                self.alertForSubmit(message: "Username or password is incorrect.")
+                            }else{
+                                self.alertForSubmit(message: error)
+                            }
                         }
                         else{
                             print("Unsuccessful Login :(")
@@ -84,6 +89,7 @@ class LoginViewController: UIViewController {
                     }
                     else{
                         if let error = err?.localizedDescription{
+                            self.alertForSubmit(message: error)
                             print(error)
                         }
                         else{
@@ -118,7 +124,11 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func alertForSubmit(message:String){
+        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     /*
      // MARK: - Navigation
      

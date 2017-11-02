@@ -27,10 +27,10 @@ class DetailsViewController: UIViewController {
         //self.tabBarController?.tabBar.isHidden = true
 //        self.navigationController?.popViewController(animated: true)
         self.title = hobbyIn
-        hobby.text = ""
-        category.text = categoryIn
-        cost.text = costIn
-        time.text = timeIn
+        hobby.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, congue vitae vestibulum a, mollis vel urna. Vivamus sodales nisl sem, nec pulvinar purus aliquet eu. In venenatis efficitur nisi, nec blandit sapien hendrerit et. Vestibulum rhoncus pulvinar metus, in dapibus enim tincidunt id. Sed sit amet leo bibendum, pulvinar purus vel, semper purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec turpis purus."
+        category.text = "Time: " + categoryIn
+        cost.text = "Cost: " + costIn
+        time.text = "Time: " + timeIn
         // Do any additional setup after loading the view.
     }
 
