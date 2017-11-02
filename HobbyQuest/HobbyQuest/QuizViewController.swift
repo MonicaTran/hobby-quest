@@ -247,7 +247,10 @@ class QuizViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let evc = segue.destination as! ExploreViewController
+        let tabVC = segue.destination as! UITabBarController
+        let navVC = tabVC.viewControllers?.first as! UINavigationController
+        let evc = navVC.viewControllers.first as! ExploreViewController
+
         evc.email = userEmail
   }
 
