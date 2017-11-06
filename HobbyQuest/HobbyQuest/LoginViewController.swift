@@ -116,6 +116,8 @@ class LoginViewController: UIViewController {
             let evc: ExploreViewController = tbc.viewControllers?.first?.childViewControllers.first as! ExploreViewController
             evc.email = emailText.text!
         }
+        emailText.text = ""
+        passwordText.text = ""
         
     }
     
@@ -123,6 +125,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
