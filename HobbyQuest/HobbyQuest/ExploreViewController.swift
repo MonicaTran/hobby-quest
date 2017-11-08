@@ -32,7 +32,7 @@ class ExploreViewController: UITableViewController{
     var cost:String = ""
     var time:String = ""
     var dupFreeHobbies = [String]()
-    
+    var finalHobbies = [Hobby]()
 
     
     @objc func addHobby(sender: UIButton) {
@@ -109,7 +109,7 @@ class ExploreViewController: UITableViewController{
             self.answers.append(self.category)
             self.answers.append(self.cost)
             self.answers.append(self.time)
-            //print(self.answers)
+            
         }
         
         
@@ -151,9 +151,23 @@ class ExploreViewController: UITableViewController{
             for i in 0 ..< num {
                 hobbyName.append(newHobbies[i].hobbyName)
             }
-            //print(hobbyName)
+            
             self.dupFreeHobbies = self.removeDuplicates(array: hobbyName)
-            //TODO make table print cells based on removeDuplicates array.
+            //creates a sorted duplicate-free array from dupFreeHobbies' names.
+            var i = 0
+            for item in self.dupFreeHobbies {
+                var flag = true
+                i = 0;
+                while flag {
+                
+                    if newHobbies[i].hobbyName == item {
+                        self.finalHobbies.append(newHobbies[i])
+                        flag = false
+                    }
+                    i+=1
+                }
+            }
+            
             DispatchQueue.main.async { self.tableView.reloadData() } //Just learned that I needed this after I retreive the data in firebase.
         })
     }
@@ -177,21 +191,25 @@ class ExploreViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hobbyCell", for: indexPath) as! ExploreCell
-        let hobby = dupFreeHobbies[indexPath.row]
+        let hobby = finalHobbies[indexPath.row]
         //print(hobby)
         //cell.textLabel?.text = hobby
-        let hobbyLabel = cell.viewWithTag(1) as! UILabel
-        hobbyLabel.text = hobby.capitalizeFirstLetter()
-        for item in hobbies
-        {
-            if dupFreeHobbies[indexPath.row] == item.hobbyName
-            {
-                let catAndTime = "\(item.category) | Time: \(item.time) | Cost: \(item.cost)"
-                //cell.detailTextLabel?.text = catAndTime
-                let catAndTimeLabel = cell.viewWithTag(2) as! UILabel
-                catAndTimeLabel.text = catAndTime
-            }
-        }
+//        let hobbyLabel = cell.viewWithTag(1) as! UILabel
+//        hobbyLabel.text = hobby.capitalizeFirstLetter()
+        cell.hobbyLabel.text = hobby.hobbyName.capitalizeFirstLetter()
+        let catAndTime = "\(hobby.category) | Time: \(hobby.time) | Cost: \(hobby.cost)"
+        cell.catAndTimeLabel.text = catAndTime
+//        for item in hobbies
+//        {
+//            if dupFreeHobbies[indexPath.row] == item.hobbyName
+//            {
+//                let catAndTime = "\(item.category) | Time: \(item.time) | Cost: \(item.cost)"
+//                //cell.detailTextLabel?.text = catAndTime
+////                let catAndTimeLabel = cell.viewWithTag(2) as! UILabel
+////                catAndTimeLabel.text = catAndTime
+//                cell.catAndTimeLabel.text = catAndTime
+//            }
+//        }
         
         cell.button.layer.cornerRadius = 5
         cell.button.layer.borderWidth = 1

@@ -12,7 +12,8 @@ class ExploreCell: UITableViewCell {
     
     
     @IBOutlet weak var button: UIButton!
-    
+    @IBOutlet weak var hobbyLabel: UILabel!
+    @IBOutlet weak var catAndTimeLabel: UILabel!
     
     
     
