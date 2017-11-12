@@ -37,10 +37,12 @@ class FirebaseHelper: NSObject {
                     array.append(JournalEntry(snap: child as! DataSnapshot) as! T)
                 }
             }
+     
+            
             completion(array)
         }
     }
-    
+
     func getAllHobbies(completion: @escaping ([Hobby]) -> Void) {
         let hobbiesRef = Database.database().reference().child("hobbies")
         getDataAsArray(ref: hobbiesRef, typeOf: [Hobby](), completion: { array in
