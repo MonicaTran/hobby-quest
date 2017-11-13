@@ -112,13 +112,12 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         let subThreadRef = Database.database().reference()
         let value = ["post_name": post_name.text!,"hobby":self.hobbyName]
         let path = "Subthread/" + self.hobbyName
-        subThreadRef.child(path).childByAutoId().setValue(value)
+        subThreadRef.child(path).childByAutoId().updateChildValues(value)
     }
     
     private func registerPostToUser(value:[String:Any]){
-
         let ref = Database.database().reference().child("PostInfo")
-        ref.childByAutoId().setValue(value)
+        ref.childByAutoId().updateChildValues(value)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)

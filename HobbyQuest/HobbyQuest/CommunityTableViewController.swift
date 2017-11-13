@@ -30,7 +30,8 @@ class CommunityTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         fbHelper.getAllHobbies { (array) in
             self.hobbies = array
-             self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()}
         }
      
     }

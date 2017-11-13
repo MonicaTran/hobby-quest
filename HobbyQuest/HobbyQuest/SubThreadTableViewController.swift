@@ -37,7 +37,9 @@ class SubThreadTableViewController: UITableViewController {
                 self.post.append(value)
                 
             }
-        self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         })
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

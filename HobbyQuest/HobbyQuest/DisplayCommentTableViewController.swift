@@ -1,17 +1,20 @@
 //
-//  CommentSectionTableViewController.swift
+//  DisplayCommentTableViewController.swift
 //  HobbyQuest
 //
-//  Created by Huy  Tran  on 11/10/17.
+//  Created by Huy  Tran  on 11/13/17.
 //  Copyright © 2017 Monica Tran. All rights reserved.
 //
 
 import UIKit
-
-class CommentSectionTableViewController: UITableViewController {
-
+import Firebase
+class DisplayCommentTableViewController: UITableViewController {
+    var userName = [String]()
+    var comment = [String]()
+    var post = String()
     override func viewDidLoad() {
         super.viewDidLoad()
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -26,15 +29,42 @@ class CommentSectionTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    override func viewDidAppear(_ animated: Bool) {
+      retrieveComment()
+    
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
+    func retrieveComment(){
+        var arrayUserId = [String]()
+        var commentFromUser = [String]()
+        let ref = Database.database().reference().child("Comment")
+        let query = ref.queryOrdered(byChild: "post_title").queryEqual(toValue: self.post)
+        query.observe(.value) { (snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                arrayUserId.append((child.childSnapshot(forPath: "userId").value as? String)!)
+                
+                commentFromUser.append((child.childSnapshot(forPath: "comment").value as? String)!)
+            }
+        self.comment = commentFromUser
+        commentFromUser.removeAll()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "displayComment",for:indexPath)
+        cell.textLabel?.text = self.comment[indexPath.item]
+        return cell
 
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.comment.count
     }
 
     /*

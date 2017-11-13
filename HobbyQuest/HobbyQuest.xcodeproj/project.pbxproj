@@ -23,7 +23,8 @@
 		03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E61F9852080095EE0F /* JournalEntry.swift */; };
 		03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E81F9875E90095EE0F /* EntryViewController.swift */; };
 		03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */; };
-		47D71F691FB63BDF00B0B2D1 /* CommentSectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D71F681FB63BDF00B0B2D1 /* CommentSectionTableViewController.swift */; };
+		47B1C9B01FB977D600C8EAD3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */; };
+		47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */; };
 		47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */; };
 		47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */; };
 		47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F686711FB5906100F96000 /* SubThreadTableViewController.swift */; };
@@ -78,7 +79,8 @@
 		03A667E81F9875E90095EE0F /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HobbyQuestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		47D71F681FB63BDF00B0B2D1 /* CommentSectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionTableViewController.swift; sourceTree = "<group>"; };
+		47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCommentTableViewController.swift; sourceTree = "<group>"; };
 		47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupDetailViewController.swift; sourceTree = "<group>"; };
 		47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		47F686711FB5906100F96000 /* SubThreadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubThreadTableViewController.swift; sourceTree = "<group>"; };
@@ -173,7 +175,8 @@
 				47F686711FB5906100F96000 /* SubThreadTableViewController.swift */,
 				47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */,
 				47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */,
-				47D71F681FB63BDF00B0B2D1 /* CommentSectionTableViewController.swift */,
+				47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */,
+				47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -527,7 +530,6 @@
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
 				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
 				CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */,
-				47D71F691FB63BDF00B0B2D1 /* CommentSectionTableViewController.swift in Sources */,
 				03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */,
 				036E1DC91F90786300681044 /* AppDelegate.swift in Sources */,
 				03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */,
@@ -540,6 +542,8 @@
 				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
 				47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */,
 				CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */,
+				47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */,
+				47B1C9B01FB977D600C8EAD3 /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,7 +713,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HobbyQuest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Team7.HobbyQuest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -726,7 +730,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HobbyQuest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Team7.HobbyQuest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
