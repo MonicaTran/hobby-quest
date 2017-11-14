@@ -15,7 +15,8 @@ class DetailSubThreadViewController: UIViewController {
     let imageCache = NSCache<AnyObject, AnyObject>()
     var imageURL = String()
     var count = Int()
-    @IBOutlet weak var retrieveStatus: UILabel!
+
+    @IBOutlet weak var textView: UITextView!
     
     @IBAction func likeButton(_ sender: Any) {
     }
@@ -30,8 +31,10 @@ class DetailSubThreadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrievePostInfo()
-        
+
+        textViewFitContent()
         self.commentButton.setTitle("Comment", for: .normal)
+
         self.likeButton.setTitle("Like", for: .normal)
         
  
@@ -39,16 +42,24 @@ class DetailSubThreadViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    func textViewFitContent(){
+     
+        textView.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+//        let fixedWidth = textView.frame.size.width
+//
+//        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: self.textView.contentSize.height))
+//        var newFrame = textView.frame
+//        newFrame.size = CGSize(width: newSize.width, height: newSize.height)
+//        textView.frame = newFrame
+    }
     func retrievePostInfo(){
      let ref = Database.database().reference().child("PostInfo")
      let query = ref.queryOrdered(byChild: "post_title").queryEqual(toValue: self.retrieve_title)
-        query.observeSingleEvent(of: .value) { (snapshot) in
+        query.observe(.value) { (snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
-            self.retrieveStatus.text = (child.childSnapshot(forPath: "status").value as? String)!
-            self.imageURL = (child.childSnapshot(forPath: "postImage").value as? String)!
-            self.downLoadImageFromFirebase(url: self.imageURL)
-          
-            }
+                self.textView.text = (child.childSnapshot(forPath: "status").value as? String)!
+                self.imageURL = (child.childSnapshot(forPath: "postImage").value as? String)!
+                self.downLoadImageFromFirebase(url: self.imageURL)}
         }
     }
     func downLoadImageFromFirebase(url:String){

@@ -29,14 +29,17 @@ class SubThreadTableViewController: UITableViewController {
     performSegue(withIdentifier: "subThreadToSetup", sender: self)
     }
     func loadSubThreadForEachHobby(){
-        let subThreadRef = Database.database().reference().child("Subthread/"+subThreadsHobby)
+        var array = [String]()
+        let subThreadRef = Database.database().reference().child("Subthread")
         let query = subThreadRef.queryOrdered(byChild: "hobby").queryEqual(toValue: subThreadsHobby)
         query.observe(.value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot] {
                 let value: String = (child.childSnapshot(forPath: "post_name").value as? String)!;
-                self.post.append(value)
+                array.append(value)
                 
             }
+            self.post = array
+            array.removeAll()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -54,8 +57,7 @@ class SubThreadTableViewController: UITableViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         loadSubThreadForEachHobby()
-        self.post.removeAll()
-        //let subThreadRef = Database.database().reference().child("Subthread")
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

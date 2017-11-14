@@ -13,19 +13,24 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
     var picker = UIImagePickerController()
     var image = UIImage()
     var useImage = false
+    @IBOutlet weak var textVIew: UITextView!
+    
     @IBOutlet weak var label_title: UILabel!
 
     @IBOutlet weak var setupImage: UIImageView!
     
-    @IBOutlet weak var get_status: UITextField!
+
     @IBOutlet weak var label_caption: UILabel!
     @IBOutlet weak var finishSetupOutlet: UIButton!
     
     @IBAction func finishSetup(_ sender: Any) {
+        if textVIew.text == ""{
+            alertForSubmit()
+        }
+        else{
         uploadImageToFirebase()
         createPostThreadFirebase()
-        performSegue(withIdentifier: "setupToDetail", sender: self)
-        
+        performSegue(withIdentifier: "setupToDetail", sender: self)}
     }
     var hobbyName = String()
     @IBOutlet weak var post_name: UITextField!
@@ -35,13 +40,14 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         label_title.text = "Title"
         label_caption.text = "Status"
         post_name.placeholder = "Enter title of your post"
-        get_status.placeholder = "Share your thoughts"
-        
+        finishSetupOutlet.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        post_name.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
+        textVIew.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
         finishSetupOutlet.setTitle("Finish", for:.normal)
        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gallery"), style: .done, target: self, action: #selector(openGallery))
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -79,12 +85,19 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
 
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func alertForSubmit(){
+        let alert = UIAlertController(title: "Invalid Input", message: "Please enter a post title", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func uploadImageToFirebase(){
     guard let userID = Auth.auth().currentUser?.uid else{
             return
     }
         if self.useImage == false {
-            let value = ["postImage": "","status":self.get_status.text!,"threadForHobby":self.hobbyName,"post_title": self.post_name.text!,"userID":userID]
+            let value = ["postImage": "","status":self.textVIew.text!,"threadForHobby":self.hobbyName,"post_title": self.post_name.text!,"userID":userID]
             self.registerPostToUser(value: value)
             
         }
@@ -98,7 +111,7 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
                     return
                 }
                 if let postImage = metadata?.downloadURL()?.absoluteString{
-                    let value = ["postImage": postImage,"status": self.get_status.text!,"threadForHobby": self.hobbyName,"post_title": self.post_name.text!,"userID":userID]
+                    let value = ["postImage": postImage,"status": self.textVIew.text!,"threadForHobby": self.hobbyName,"post_title": self.post_name.text!,"userID":userID]
                     self.registerPostToUser(value: value)
                         }
                     }
@@ -111,7 +124,7 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
     func createPostThreadFirebase(){
         let subThreadRef = Database.database().reference()
         let value = ["post_name": post_name.text!,"hobby":self.hobbyName]
-        let path = "Subthread/" + self.hobbyName
+        let path = "Subthread"
         subThreadRef.child(path).childByAutoId().updateChildValues(value)
     }
     
