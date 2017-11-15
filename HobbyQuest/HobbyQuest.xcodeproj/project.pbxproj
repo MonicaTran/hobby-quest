@@ -25,6 +25,7 @@
 		03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */; };
 		47B1C9B01FB977D600C8EAD3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */; };
 		47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */; };
+		47C4DD851FBC3DAD004B47E7 /* SuggestedPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47464BEF1FBAF21900680B0D /* SuggestedPlacesViewController.swift */; };
 		47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */; };
 		47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */; };
 		47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F686711FB5906100F96000 /* SubThreadTableViewController.swift */; };
@@ -79,6 +80,7 @@
 		03A667E81F9875E90095EE0F /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutConstraint.swift; sourceTree = "<group>"; };
 		45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HobbyQuestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		47464BEF1FBAF21900680B0D /* SuggestedPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedPlacesViewController.swift; sourceTree = "<group>"; };
 		47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCommentTableViewController.swift; sourceTree = "<group>"; };
 		47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupDetailViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */,
 				47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */,
 				47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */,
+				47464BEF1FBAF21900680B0D /* SuggestedPlacesViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -483,16 +486,24 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/CDYelpFusionKit/CDYelpFusionKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CDYelpFusionKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -536,6 +547,7 @@
 				03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */,
 				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
 				CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */,
+				47C4DD851FBC3DAD004B47E7 /* SuggestedPlacesViewController.swift in Sources */,
 				035CCC031FA850CE0022A9F0 /* HappyTestViewController.swift in Sources */,
 				47F686741FB59CF200F96000 /* DetailSubThreadViewController.swift in Sources */,
 				CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */,
