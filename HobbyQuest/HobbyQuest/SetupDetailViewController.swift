@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var picker = UIImagePickerController()
