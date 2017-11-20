@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -366,18 +365,106 @@
                                 <rect key="frame" x="100" y="114" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ksW-j8-pZ2">
+                                <rect key="frame" x="0.0" y="262" width="320" height="212"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="AEB-9d-02u" kind="embed" id="Xah-Pn-xap"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8r-vS-Lrz">
+                                <rect key="frame" x="145" y="482" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="zOb-Rd-55Y"/>
                     </view>
                     <navigationItem key="navigationItem" id="IBC-kj-P1y"/>
                     <connections>
-                        <outlet property="profileImage" destination="ByJ-5m-IeK" id="vXL-6b-ZUy"/>
+                        <outlet property="profileImage" destination="ByJ-5m-IeK" id="O8p-6U-UfH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdl-9l-j28" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2600.625" y="38.028169014084504"/>
+            <point key="canvasLocation" x="2598.75" y="36.971830985915496"/>
+        </scene>
+        <!--Profile Table View Controller-->
+        <scene sceneID="HFR-wf-hoO">
+            <objects>
+                <tableViewController id="AEB-9d-02u" customClass="ProfileTableViewController" customModule="HobbyQuest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="71" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="UzC-kx-4Zq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="212"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="z5T-jx-43a">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2L1-mW-8Ws" customClass="TableViewCell1" customModule="HobbyQuest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2L1-mW-8Ws" id="DTZ-tO-Pih">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2A6-JB-iGa">
+                                                    <rect key="frame" x="8" y="12" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" tag="2" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="5kJ-5S-Kyg" customClass="TableViewCell1" customModule="HobbyQuest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="71" width="320" height="71"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5kJ-5S-Kyg" id="1tl-Qr-han">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yjg-Ue-AEC">
+                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" tag="3" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6C5-4b-mmW" customClass="TableViewCell1" customModule="HobbyQuest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="142" width="320" height="71"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6C5-4b-mmW" id="FsI-Pz-TDV">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eo4-ur-0kF">
+                                                    <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                    </tableView>
+                    <connections>
+                        <outlet property="displayName" destination="2A6-JB-iGa" id="haS-55-Nsb"/>
+                        <outlet property="mantraLabel" destination="Eo4-ur-0kF" id="K66-pA-Mle"/>
+                        <outlet property="userEmailLabel" destination="Yjg-Ue-AEC" id="qJN-ic-ScQ"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f0P-3Q-6XZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3748.125" y="-460.56338028169017"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="O3A-iL-R4L">
@@ -1429,7 +1516,7 @@
         <image name="gallery" width="33" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ukB-1a-xqN"/>
+        <segue reference="ywd-BI-Y24"/>
         <segue reference="Iq7-o1-wX2"/>
         <segue reference="RDX-jJ-YWF"/>
     </inferredMetricsTieBreakers>

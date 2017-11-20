@@ -34,6 +34,7 @@
 		CE349E6A1FBE308D0048160C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE349E691FBE308D0048160C /* ProfileViewController.swift */; };
 		CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */; };
 		CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */; };
+		CEBFB6141FC37A6800DC6039 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBFB6131FC37A6800DC6039 /* ProfileTableViewController.swift */; };
 		CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA769B1FA13147007171D1 /* LoginViewController.swift */; };
 		CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECACE641FAA3DC400FB061F /* ExploreCell.swift */; };
 		D9CB5C416BE16519FF20426B /* Pods_HobbyQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B932CD5446BA4C49FE2E81 /* Pods_HobbyQuest.framework */; };
@@ -99,6 +100,7 @@
 		CE349E691FBE308D0048160C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		CEBFB6131FC37A6800DC6039 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		CECA769B1FA13147007171D1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CECACE641FAA3DC400FB061F /* ExploreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 				47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */,
 				47464BEF1FBAF21900680B0D /* SuggestedPlacesViewController.swift */,
 				CE349E691FBE308D0048160C /* ProfileViewController.swift */,
+				CEBFB6131FC37A6800DC6039 /* ProfileTableViewController.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */,
 				47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */,
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
+				CEBFB6141FC37A6800DC6039 /* ProfileTableViewController.swift in Sources */,
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
 				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
 				CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */,
@@ -727,11 +731,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3863HY8XMS;
+				DEVELOPMENT_TEAM = 4NVWM8T74F;
 				INFOPLIST_FILE = HobbyQuest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Team7.HobbyQuest;
+				PRODUCT_BUNDLE_IDENTIFIER = "Team7.Hobby-Quest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -744,11 +748,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3863HY8XMS;
+				DEVELOPMENT_TEAM = 4NVWM8T74F;
 				INFOPLIST_FILE = HobbyQuest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Team7.HobbyQuest;
+				PRODUCT_BUNDLE_IDENTIFIER = "Team7.Hobby-Quest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
