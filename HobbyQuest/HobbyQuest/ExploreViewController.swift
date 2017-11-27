@@ -19,6 +19,7 @@ extension String{
 }
 
 
+
 class ExploreViewController: UITableViewController{
     
     
@@ -33,15 +34,25 @@ class ExploreViewController: UITableViewController{
     var time:String = ""
     var dupFreeHobbies = [String]()
     var finalHobbies = [Hobby]()
+    
+    func addAlert(message:String){
+        let alert = UIAlertController(title: "Hobby Added!", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     
     @objc func addHobby(sender: UIButton) {
         let button = sender
-        button.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitle("REMOVE", for: .normal)
+        button.isHidden = true
+        
+        
+//        button.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
+//        button.setTitleColor(UIColor.white, for: .normal)
+//        button.setTitle("REMOVE", for: .normal)
         
         let index = sender.tag
+        addAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
         guard let userID = Auth.auth().currentUser?.uid else{return}
         let ref = Database.database().reference().child("savedHobbies")
         ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -122,14 +133,12 @@ class ExploreViewController: UITableViewController{
     override func viewDidAppear(_ animated: Bool) {
         
         self.retrieveUserAnswers()
-        //figuring out how to get self.cost
         
         
         fbHelper.getDataAsArray(ref: hobbiesRef, typeOf: hobbies, completion: { array in
             self.hobbies = array
             
             //filtering array for 3 categories. cost, category, time:
-            //print(self.cost)
             let hobbyWithAll = self.hobbies.filter{$0.cost == self.cost && $0.category == self.category && $0.time == self.time}
             //filtering array for 2 categories: cost, category:
             let hobbyWithCostAndCat = self.hobbies.filter{$0.cost == self.cost && $0.category == self.category}
@@ -168,16 +177,16 @@ class ExploreViewController: UITableViewController{
                 }
             }
             
-            DispatchQueue.main.async { self.tableView.reloadData() } //Just learned that I needed this after I retreive the data in firebase.
+            DispatchQueue.main.async { self.tableView.reloadData() }
         })
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
-    // MARK: - Table view data source
+
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -185,35 +194,21 @@ class ExploreViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dupFreeHobbies.count
+        return finalHobbies.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hobbyCell", for: indexPath) as! ExploreCell
         let hobby = finalHobbies[indexPath.row]
-        //print(hobby)
-        //cell.textLabel?.text = hobby
-//        let hobbyLabel = cell.viewWithTag(1) as! UILabel
-//        hobbyLabel.text = hobby.capitalizeFirstLetter()
         cell.hobbyLabel.text = hobby.hobbyName.capitalizeFirstLetter()
         let catAndTime = "\(hobby.category) | Time: \(hobby.time) | Cost: \(hobby.cost)"
         cell.catAndTimeLabel.text = catAndTime
-//        for item in hobbies
-//        {
-//            if dupFreeHobbies[indexPath.row] == item.hobbyName
-//            {
-//                let catAndTime = "\(item.category) | Time: \(item.time) | Cost: \(item.cost)"
-//                //cell.detailTextLabel?.text = catAndTime
-////                let catAndTimeLabel = cell.viewWithTag(2) as! UILabel
-////                catAndTimeLabel.text = catAndTime
-//                cell.catAndTimeLabel.text = catAndTime
-//            }
-//        }
+
         
-        cell.button.layer.cornerRadius = 5
-        cell.button.layer.borderWidth = 1
-        cell.button.layer.borderColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1).cgColor
+        //cell.button.layer.cornerRadius = 5
+        //cell.button.layer.borderWidth = 1
+        //cell.button.layer.borderColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1).cgColor
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: #selector(self.addHobby), for: UIControlEvents.touchUpInside)
         
@@ -224,6 +219,20 @@ class ExploreViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedHobby = dupFreeHobbies[indexPath.row]
         performSegue(withIdentifier: "exploreToDetail", sender: self)
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true;
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            finalHobbies.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            //TODO: actually delete the rows when you begin the updates.
+            //tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

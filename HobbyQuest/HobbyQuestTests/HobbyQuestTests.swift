@@ -8,7 +8,8 @@
 
 import XCTest
 @testable import HobbyQuest
-
+import FirebaseDatabase
+import firebase
 class HobbyQuestTests: XCTestCase {
     
     override func setUp() {
