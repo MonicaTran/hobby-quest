@@ -225,13 +225,14 @@ class ExploreViewController: UITableViewController{
         return true;
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
-            finalHobbies.remove(at: indexPath.row)
-            tableView.beginUpdates()
-            //TODO: actually delete the rows when you begin the updates.
-            //tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
             
+            finalHobbies.remove(at: indexPath.row)
+            
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
         }
     }
     
