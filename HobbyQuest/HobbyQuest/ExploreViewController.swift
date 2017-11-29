@@ -23,7 +23,7 @@ extension String{
 class ExploreViewController: UITableViewController{
     
     
-    var selectedHobby = ""
+    var selectedHobby = Hobby()
     var answers = [String]()
     var email:String = ""
     let fbHelper = FirebaseHelper()
@@ -40,11 +40,20 @@ class ExploreViewController: UITableViewController{
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func deleteAlert(message:String){
+        let alert = UIAlertController(title: "Hobby deleted!", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     
     @objc func addHobby(sender: UIButton) {
         let button = sender
-        button.isHidden = true
+        addAlert(message: "The hobby has been added to your hobbies list.")
+        //TODO: Add delete function here when button is switched to delete1 image
+        //Toggle between these two buttons when clicking them.
+        
         
         
 //        button.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
@@ -217,38 +226,24 @@ class ExploreViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedHobby = dupFreeHobbies[indexPath.row]
+        
+        selectedHobby = finalHobbies[indexPath.row]
         performSegue(withIdentifier: "exploreToDetail", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
     }
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            
-            finalHobbies.remove(at: indexPath.row)
-            
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
-        }
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "exploreToDetail"{
             let dvc = segue.destination as! DetailsViewController
-            dvc.hobbyIn = selectedHobby
-            for item in hobbies
-            {
-                if selectedHobby == item.hobbyName
-                {
-                    dvc.costIn = item.cost
-                    dvc.categoryIn = item.category
-                    dvc.timeIn = item.time
-                }
-            }
+            dvc.hobbyIn = selectedHobby.hobbyName
+            dvc.costIn = selectedHobby.cost
+            dvc.categoryIn = selectedHobby.category
+            dvc.descriptionIn = selectedHobby.description
+            dvc.timeIn = selectedHobby.time
         }
     }
     

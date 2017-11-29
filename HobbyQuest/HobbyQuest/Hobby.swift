@@ -26,17 +26,20 @@ class Hobby {
     let cost:String
     let hobbyName:String
     let time:String
+    let description:String
 
     init(snap: DataSnapshot) {
         key = snap.key
         
         let value = snap.value as? NSDictionary
+        description = value?["details"] as? String ?? ""
         category = value?["category"] as? String ?? ""
         cost = value?["cost"] as? String ?? ""
         hobbyName = value?["hobbyName"] as? String ?? ""
         time = value?["time"] as? String ?? ""
     }
     init() {
+        description = ""
         key = ""
         category = ""
         cost = ""
