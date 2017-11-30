@@ -28,7 +28,7 @@ class DetailsViewController: UIViewController {
 //        self.navigationController?.popViewController(animated: true)
         self.title = hobbyIn
         descriptions.text = descriptionIn
-        print(descriptionIn)
+        
         category.text = "Category: " + categoryIn
         cost.text = "Cost: " + costIn
         time.text = "Time: " + timeIn

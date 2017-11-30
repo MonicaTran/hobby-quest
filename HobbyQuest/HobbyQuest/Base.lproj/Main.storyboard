@@ -270,11 +270,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbI-Dn-WQR">
-                                            <rect key="frame" x="268" y="21.5" width="22" height="22"/>
-                                            <color key="tintColor" red="0.0" green="0.65274506809999999" blue="0.258700192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <inset key="titleEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEz-i8-wI2">
                                             <rect key="frame" x="8" y="8" width="34" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -282,27 +277,34 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIm-2z-fRT">
-                                            <rect key="frame" x="8" y="37" width="44" height="14.5"/>
+                                            <rect key="frame" x="8" y="37" width="44" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxI-RI-ef2">
+                                            <rect key="frame" x="282" y="24" width="22" height="16"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="YXz-oQ-zDY"/>
+                                                <constraint firstAttribute="height" constant="16" id="heg-Yu-b7y"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="add1"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="hbI-Dn-WQR" firstAttribute="leading" secondItem="bIm-2z-fRT" secondAttribute="trailing" constant="216" id="6wQ-EG-v0t"/>
-                                        <constraint firstAttribute="bottom" secondItem="hbI-Dn-WQR" secondAttribute="bottom" constant="21" id="MxD-94-gvr"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="jxI-RI-ef2" secondAttribute="bottom" constant="16.5" id="9lK-rA-Tjv"/>
+                                        <constraint firstItem="jxI-RI-ef2" firstAttribute="top" secondItem="Jgi-cX-Txk" secondAttribute="topMargin" constant="16" id="Ac4-4f-Nx8"/>
                                         <constraint firstAttribute="trailing" secondItem="IEz-i8-wI2" secondAttribute="trailing" constant="278" id="P4W-aZ-HGX"/>
                                         <constraint firstItem="IEz-i8-wI2" firstAttribute="leading" secondItem="Jgi-cX-Txk" secondAttribute="leadingMargin" id="Xxg-AR-lNW"/>
                                         <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="bIm-2z-fRT" secondAttribute="trailing" constant="260" id="jmW-cM-j5o"/>
                                         <constraint firstItem="bIm-2z-fRT" firstAttribute="leading" secondItem="IEz-i8-wI2" secondAttribute="leading" id="kYP-Od-Wm4"/>
                                         <constraint firstItem="IEz-i8-wI2" firstAttribute="top" secondItem="Jgi-cX-Txk" secondAttribute="top" constant="8" id="nER-cW-N4U"/>
-                                        <constraint firstAttribute="trailing" secondItem="hbI-Dn-WQR" secondAttribute="trailing" constant="30" id="pHr-EF-GGd"/>
                                         <constraint firstAttribute="bottom" secondItem="bIm-2z-fRT" secondAttribute="bottom" constant="13" id="rro-GB-a6Q"/>
-                                        <constraint firstItem="hbI-Dn-WQR" firstAttribute="top" secondItem="Jgi-cX-Txk" secondAttribute="top" constant="21.5" id="ySm-4E-PDh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jxI-RI-ef2" secondAttribute="trailing" constant="8" id="zuB-9r-Xrj"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="button" destination="hbI-Dn-WQR" id="hax-S1-Sq3"/>
+                                    <outlet property="button" destination="jxI-RI-ef2" id="CCV-Xj-2l1"/>
                                     <outlet property="catAndTimeLabel" destination="bIm-2z-fRT" id="fjV-1n-JbF"/>
                                     <outlet property="hobbyLabel" destination="IEz-i8-wI2" id="VKo-dE-vud"/>
                                 </connections>
@@ -1540,6 +1542,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add1" width="128" height="128"/>
         <image name="compass" width="30" height="30"/>
         <image name="create_new" width="30" height="30"/>
         <image name="gallery" width="33" height="33"/>

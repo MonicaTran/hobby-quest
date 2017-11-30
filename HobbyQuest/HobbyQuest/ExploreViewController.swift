@@ -46,53 +46,62 @@ class ExploreViewController: UITableViewController{
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     
     @objc func addHobby(sender: UIButton) {
         let button = sender
-        addAlert(message: "The hobby has been added to your hobbies list.")
+        let index = sender.tag
+        if (button.imageView?.image == #imageLiteral(resourceName: "add1")) {
+            print("did it work?")
+            deleteAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been deleted from your class.")
+            guard let userID = Auth.auth().currentUser?.uid else{return}
+            let ref = Database.database().reference().child("savedHobbies")
+            ref.observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.hasChild(userID) {
+                    let timeStamp = self.fbHelper.getTimestamp()
+                    let key = String(timeStamp)
+                    let hobby = self.dupFreeHobbies[index]
+                    let entry = [key:hobby]
+                    
+                    ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                        var hobbyExists = false
+                        for child in snapshot.children {
+                            let item = child as! DataSnapshot
+                            let value = item.value as! String
+                            if value == hobby {
+                                hobbyExists = true
+                            }
+                        }
+                        if !hobbyExists {
+                            ref.child(userID).updateChildValues(entry)
+                        }
+                    }
+                }
+                else {
+                    let timeStamp = self.fbHelper.getTimestamp()
+                    let key = String(timeStamp)
+                    let hobby = self.dupFreeHobbies[index]
+                    let entry = [key:hobby]
+                    ref.child(userID).setValue(entry)
+                }
+            }
+            button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+        }
+        else {
+            addAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
+            button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+        }
+        
         //TODO: Add delete function here when button is switched to delete1 image
         //Toggle between these two buttons when clicking them.
         
         
         
-//        button.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
-//        button.setTitleColor(UIColor.white, for: .normal)
-//        button.setTitle("REMOVE", for: .normal)
+        //        button.backgroundColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1)
+        //        button.setTitleColor(UIColor.white, for: .normal)
+        //        button.setTitle("REMOVE", for: .normal)
         
-        let index = sender.tag
-        addAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
-        guard let userID = Auth.auth().currentUser?.uid else{return}
-        let ref = Database.database().reference().child("savedHobbies")
-        ref.observeSingleEvent(of: .value) { (snapshot) in
-            if snapshot.hasChild(userID) {
-                let timeStamp = self.fbHelper.getTimestamp()
-                let key = String(timeStamp)
-                let hobby = self.dupFreeHobbies[index]
-                let entry = [key:hobby]
-                
-                ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
-                    var hobbyExists = false
-                    for child in snapshot.children {
-                        let item = child as! DataSnapshot
-                        let value = item.value as! String
-                        if value == hobby {
-                            hobbyExists = true
-                        }
-                    }
-                    if !hobbyExists {
-                        ref.child(userID).updateChildValues(entry)
-                    }
-                }
-            }
-            else {
-                let timeStamp = self.fbHelper.getTimestamp()
-                let key = String(timeStamp)
-                let hobby = self.dupFreeHobbies[index]
-                let entry = [key:hobby]
-                ref.child(userID).setValue(entry)
-            }
-        }
+        
         
     }
     func removeDuplicates(array: [String]) -> [String] {
@@ -121,7 +130,7 @@ class ExploreViewController: UITableViewController{
             let categoryPath = uniqueId!+"/userChoice/category"
             let costPath = uniqueId!+"/userChoice/cost"
             let timePath = uniqueId!+"/userChoice/time"
-
+            
             self.category = (snapshot.childSnapshot(forPath: categoryPath).value! as? String)!
             self.cost = (snapshot.childSnapshot(forPath: costPath).value! as? String)!
             self.time = (snapshot.childSnapshot(forPath: timePath).value! as? String)!
@@ -137,10 +146,6 @@ class ExploreViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        
         self.retrieveUserAnswers()
         
         
@@ -177,7 +182,7 @@ class ExploreViewController: UITableViewController{
                 var flag = true
                 i = 0;
                 while flag {
-                
+                    
                     if newHobbies[i].hobbyName == item {
                         self.finalHobbies.append(newHobbies[i])
                         flag = false
@@ -188,14 +193,19 @@ class ExploreViewController: UITableViewController{
             
             DispatchQueue.main.async { self.tableView.reloadData() }
         })
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
     
-
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -213,7 +223,7 @@ class ExploreViewController: UITableViewController{
         cell.hobbyLabel.text = hobby.hobbyName.capitalizeFirstLetter()
         let catAndTime = "\(hobby.category) | Time: \(hobby.time) | Cost: \(hobby.cost)"
         cell.catAndTimeLabel.text = catAndTime
-
+        
         
         //cell.button.layer.cornerRadius = 5
         //cell.button.layer.borderWidth = 1
@@ -234,7 +244,7 @@ class ExploreViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
     }
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "exploreToDetail"{
