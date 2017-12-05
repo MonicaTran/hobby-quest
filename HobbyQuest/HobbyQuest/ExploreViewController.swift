@@ -22,7 +22,7 @@ extension String{
 
 class ExploreViewController: UITableViewController{
     
-    
+    var savedHobbies = [String:String]() //used to update buttons based on previously saved hobbies.
     var selectedHobby = Hobby()
     var answers = [String]()
     var email:String = ""
@@ -52,8 +52,7 @@ class ExploreViewController: UITableViewController{
         let button = sender
         let index = sender.tag
         if (button.imageView?.image == #imageLiteral(resourceName: "add1")) {
-            print("did it work?")
-            deleteAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been deleted from your class.")
+            addAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
             guard let userID = Auth.auth().currentUser?.uid else{return}
             let ref = Database.database().reference().child("savedHobbies")
             ref.observeSingleEvent(of: .value) { (snapshot) in
@@ -74,6 +73,7 @@ class ExploreViewController: UITableViewController{
                         }
                         if !hobbyExists {
                             ref.child(userID).updateChildValues(entry)
+                            
                         }
                     }
                 }
@@ -88,12 +88,40 @@ class ExploreViewController: UITableViewController{
             button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
         }
         else {
-            addAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
+            
+            deleteAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been deleted from your class.")
+            guard let userID = Auth.auth().currentUser?.uid else{return}
+            let ref = Database.database().reference().child("savedHobbies")
+            ref.observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.hasChild(userID) {
+                    let hobby = self.finalHobbies[index].hobbyName
+                    var dictionary = [String:String]()
+                    var hobbyKey:String?
+                    ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                        var hobbyExists = false
+                        for child in snapshot.children {
+                            
+                            let item = child as! DataSnapshot
+                            let value = item.value as! String
+                            dictionary[item.key] = value
+                            if value == hobby {
+                                hobbyKey = item.key
+                                hobbyExists = true
+                            }
+                        }
+                        if hobbyExists {
+                            ref.child(userID).child(hobbyKey!).removeValue()
+                        }
+                    }
+                }
+                
+            }
+            
             button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
         }
         
         //TODO: Add delete function here when button is switched to delete1 image
-        //Toggle between these two buttons when clicking them.
+        //Make delete button appear at start if the hobby has already been added.
         
         
         
@@ -193,12 +221,26 @@ class ExploreViewController: UITableViewController{
             
             DispatchQueue.main.async { self.tableView.reloadData() }
         })
+        //fills up savedHobbies dictionary.
+        //Okay I'm stuck here. Because it is asynchronous, the code doesn't work the way I expected it to. It should fill up the savedHobbies dictionary, then update the table to have buttons depending on which ones alraedy have been saved.
+        guard let userID = Auth.auth().currentUser?.uid else{return}
+        let ref = Database.database().reference().child("savedHobbies")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            if snapshot.hasChild(userID) {
+                ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                    
+                    for child in snapshot.children {
+                        let item = child as! DataSnapshot
+                        let value = item.value as! String
+                        self.savedHobbies[item.key] = value
+                    }
+                }
+            }
+            DispatchQueue.main.async { self.tableView.reloadData() }
+        }
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -230,6 +272,14 @@ class ExploreViewController: UITableViewController{
         //cell.button.layer.borderColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1).cgColor
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: #selector(self.addHobby), for: UIControlEvents.touchUpInside)
+        
+        for item in savedHobbies {
+            print("Hobby: " + item.value)
+            if hobby.hobbyName == item.value {
+                cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+                
+            }
+        }
         
         
         return cell
