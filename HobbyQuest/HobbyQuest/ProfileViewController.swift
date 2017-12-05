@@ -11,67 +11,132 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 
+
+
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-
+    
+    @IBOutlet weak var cameraIconButton: UIButton!
+    
+    @IBOutlet weak var displayLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var mantraLabel: UILabel!
+    
+    @IBOutlet weak var displayNameView: UIView!
+    @IBOutlet weak var emailView: UIView!
+    @IBOutlet weak var mantraView: UIView!
+    
+    @IBOutlet weak var editButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var displayButtonOutlet: UIButton!
+    @IBOutlet weak var emailButtonOutlet: UIButton!
+    @IBOutlet weak var mantraButtonOutlet: UIButton!
+    
+    
     var ref: DatabaseReference?
     var userID = ""
     var userEmail = ""
+    var userDisplayName = ""
     var image = UIImage()
     var picker = UIImagePickerController()
     var imageURL = ""
+    var editToggle = 0
     
     @IBOutlet weak var profileImage: UIImageView!
+    @IBAction func editButton(_ sender: Any) {
+        if editToggle==0{
+            editToggle = 1
+            displayButtonOutlet.isHidden = false
+            emailButtonOutlet.isHidden = false
+            mantraButtonOutlet.isHidden = false
+            editButtonOutlet.title = "Done"
+        }
+        else{
+            editToggle=0
+            displayButtonOutlet.isHidden = true
+            emailButtonOutlet.isHidden = true
+            mantraButtonOutlet.isHidden = true
+            editButtonOutlet.title = "Edit"
+        }
+    }
     
-
+    @IBAction func editDisplayButton(_ sender: UIButton) {
+    }
+    @IBAction func editEmailButton(_ sender: Any) {
+    }
+    @IBAction func editMantraButton(_ sender: Any) {
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
+        //self.view.addSubview(profileImage)
+        makeImageCircular(image: profileImage)
         userID = (Auth.auth().currentUser?.uid)!
         getProfileImageURL()
 
-        
-        picker.delegate = self
-        profileImage.isUserInteractionEnabled = true
-        let oneTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(singleTapping(recognizer:)))
-        oneTap.numberOfTapsRequired = 1;
-        profileImage.addGestureRecognizer(oneTap)
-        
-        self.view.addSubview(profileImage)
-        
         userEmail = (Auth.auth().currentUser?.email)!
-        print (userID, userEmail)
-        guard let userDisplayName = Auth.auth().currentUser?.displayName else {
-            print("You must set a display name!")
-            return
+        
+        if Auth.auth().currentUser?.displayName == nil{
+            displayNameAlert()
         }
-        
-        print (userID, userEmail, userDisplayName)
-        
-        
-        
-        profileImage.layer.borderWidth = 1
-        profileImage.layer.masksToBounds = false
-        profileImage.layer.borderColor = UIColor.black.cgColor
-        profileImage.layer.cornerRadius = profileImage.frame.height/2
-        profileImage.clipsToBounds = true
-        // Do any additional setup after loading the view.
-        
-        
-        
+        let userDisplayName = Auth.auth().currentUser?.displayName
 
+        displayLabel.text = userDisplayName
+        emailLabel.text = userEmail
+    }
+    
+    @IBAction func selectPictureButton(_ sender: Any) {
+        self.selectPicture()
+    }
+    
 
+    
+    func makeImageCircular(image: UIImageView){
+        image.layer.borderWidth = 3
+        image.layer.borderColor = UIColor(rgb: 0x20A355).cgColor
+        image.layer.masksToBounds = false
+        image.layer.cornerRadius = image.frame.height/2
+        image.clipsToBounds = true
+    }
+    
+    func displayNameAlert(){
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "Display Name", message: "Create a new display name using at least 5 characters", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = "Enter Display Name"
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                
+                guard let textFieldSize = textField.text?.count else {self.displayNameAlert()
+                    return}
+                if textFieldSize < 5{
+                    self.displayNameAlert()
+                }
+                else{
+                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                    changeRequest?.displayName = textField.text
+                    changeRequest?.commitChanges(completion: { (err) in
+                        if err != nil{
+                            print("Unsuccessful change.")
+                        }
+                        else{
+                            self.displayLabel.text = self.userDisplayName
+                            print("Profile Name has been updated.")
+                        }
+                    })
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func getProfileImageURL(){
-        print ("Something")
         let ref = Database.database().reference().child("Users")
         let query = ref.queryOrdered(byChild: "UserID").queryEqual(toValue: self.userID)
         query.observe(.value) { (snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
-                self.imageURL = (child.childSnapshot(forPath: "postImage").value as? String)!
+                guard let imgURL = child.childSnapshot(forPath: "postImage").value as? String? else{return}
+                self.imageURL = imgURL!
                 print(self.imageURL)
-                print("something")
                 self.downLoadImageFromFirebase(url: self.imageURL)}
         }
     }
@@ -88,43 +153,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 DispatchQueue.main.async {
                     self.profileImage.image = UIImage(data:data!)
                 }
-                
             }).resume()
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-//    func getUserInfo() {
-//
-//        let ref = Database.database().reference().child("Users")
-//        let query = ref.queryOrdered(byChild: "UserID").queryEqual(toValue: self.userID)
-//        query.observeSingleEvent(of: .value) { (snapshot) in
-//            let object = ((snapshot.value as AnyObject).allKeys)!
-//            let uniqueId = object[0] as? String
-//            //let userChoiceID = object4[0] as? String
-//            let categoryPath = uniqueId!+"/userChoice/category"
-//
-//
-//            let email = (snapshot.childSnapshot(forPath: categoryPath).value! as? String)!
-//        }
-//    }
-    
-
     func uploadImage(){
         let uniqueImageName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child("\(uniqueImageName).jpg")
@@ -153,7 +190,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @objc func selectPicture() {
-        let alert = UIAlertController(title: "Action", message: "Select source", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Change Profile Image", message: "Select source", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: {_ in
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 self.picker.sourceType = .photoLibrary
@@ -177,10 +214,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         uploadImage()
         dismiss(animated: true, completion: nil)
     }
-    
-    @objc func singleTapping(recognizer: UIGestureRecognizer) {
-        print("image clicked")
-        self.selectPicture()
-    }
+}
 
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
 }
