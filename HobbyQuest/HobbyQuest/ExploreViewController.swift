@@ -173,9 +173,10 @@ class ExploreViewController: UITableViewController{
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.retrieveUserAnswers()
-        
+        fillSavedHobbies()
         
         fbHelper.getDataAsArray(ref: hobbiesRef, typeOf: hobbies, completion: { array in
             self.hobbies = array
@@ -223,10 +224,18 @@ class ExploreViewController: UITableViewController{
         })
         //fills up savedHobbies dictionary.
         //Okay I'm stuck here. Because it is asynchronous, the code doesn't work the way I expected it to. It should fill up the savedHobbies dictionary, then update the table to have buttons depending on which ones alraedy have been saved.
+        
+        
+    }
+    
+    
+    
+    func fillSavedHobbies(){
         guard let userID = Auth.auth().currentUser?.uid else{return}
         let ref = Database.database().reference().child("savedHobbies")
         ref.observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.hasChild(userID) {
+                print("Filling up saved hobbies")
                 ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
                     
                     for child in snapshot.children {
@@ -234,20 +243,21 @@ class ExploreViewController: UITableViewController{
                         let value = item.value as! String
                         self.savedHobbies[item.key] = value
                     }
+                    print(self.self.savedHobbies)
                 }
             }
-            DispatchQueue.main.async { self.tableView.reloadData() }
+            _ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.dispatchingQueue), userInfo: nil, repeats: false)
         }
         
     }
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
     
-    
+    @objc func dispatchingQueue(){
+        DispatchQueue.main.async { self.tableView.reloadData() }
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -276,6 +286,7 @@ class ExploreViewController: UITableViewController{
         for item in savedHobbies {
             print("Hobby: " + item.value)
             if hobby.hobbyName == item.value {
+                print("Adding delete button")
                 cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
                 
             }
@@ -304,6 +315,7 @@ class ExploreViewController: UITableViewController{
             dvc.categoryIn = selectedHobby.category
             dvc.descriptionIn = selectedHobby.description
             dvc.timeIn = selectedHobby.time
+            dvc.url = selectedHobby.postImage
         }
     }
     

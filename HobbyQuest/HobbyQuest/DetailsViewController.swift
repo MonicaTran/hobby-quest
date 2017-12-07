@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseDatabase
 
 class DetailsViewController: UIViewController {
     
+    @IBOutlet weak var hobbyImage: UIImageView!
     @IBOutlet weak var descriptions: UILabel!
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var cost: UILabel!
@@ -20,6 +23,7 @@ class DetailsViewController: UIViewController {
     var costIn = ""
     var timeIn = ""
     var descriptionIn = ""
+    var url = ""
   
     override func viewDidLoad() {
         
@@ -34,6 +38,27 @@ class DetailsViewController: UIViewController {
         time.text = "Time: " + timeIn
         // Do any additional setup after loading the view.
     }
+    
+    
+    
+    func downLoadImageFromFirebase(url:String){
+        if url == "" {
+            //Could Not find
+            print("Couldn't Find the image!!!")
+        }
+        else{
+            let downloadUrl = URL(string:url)
+            URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
+                if error != nil{
+                    print(error)
+                }
+                DispatchQueue.main.async {
+                    self.hobbyImage.image = UIImage(data:data!)
+                }
+            }).resume()
+        }
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

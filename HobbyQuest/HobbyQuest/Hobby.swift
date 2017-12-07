@@ -27,6 +27,7 @@ class Hobby {
     let hobbyName:String
     let time:String
     let description:String
+    let postImage:String
 
     init(snap: DataSnapshot) {
         key = snap.key
@@ -37,6 +38,7 @@ class Hobby {
         cost = value?["cost"] as? String ?? ""
         hobbyName = value?["hobbyName"] as? String ?? ""
         time = value?["time"] as? String ?? ""
+        postImage = value?["postImage"] as? String ?? ""
     }
     init() {
         description = ""
@@ -45,5 +47,6 @@ class Hobby {
         cost = ""
         hobbyName = ""
         time = ""
+        postImage = ""
     }
 }

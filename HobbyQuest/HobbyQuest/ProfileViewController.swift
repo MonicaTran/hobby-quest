@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var mantraLabel: UILabel!
+    @IBOutlet weak var welcomeLabel: UILabel!
     
     @IBOutlet weak var displayNameView: UIView!
     @IBOutlet weak var emailView: UIView!
@@ -68,6 +69,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         picker.delegate = self
         //self.view.addSubview(profileImage)
         makeImageCircular(image: profileImage)
@@ -83,6 +86,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         displayLabel.text = userDisplayName
         emailLabel.text = userEmail
+        welcomeLabel.text = "Hi " + userDisplayName! + "!"
     }
     
     @IBAction func selectPictureButton(_ sender: Any) {
@@ -93,7 +97,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func makeImageCircular(image: UIImageView){
         image.layer.borderWidth = 3
-        image.layer.borderColor = UIColor(rgb: 0x20A355).cgColor
+        image.layer.borderColor = UIColor(rgb: 0xDCEEDE).cgColor
         image.layer.masksToBounds = false
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
@@ -213,6 +217,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImage.image = image
         uploadImage()
         dismiss(animated: true, completion: nil)
+    }
+    @IBAction func toChangePassword(_ sender: Any) {
+        performSegue(withIdentifier: "profileToChange", sender: self)
     }
 }
 
