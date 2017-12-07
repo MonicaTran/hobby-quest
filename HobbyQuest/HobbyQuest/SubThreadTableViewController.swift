@@ -13,6 +13,16 @@ class SubThreadTableViewController: UITableViewController {
     var post = [String]()
     var subThreadsHobby = String()
     var post_title = String()
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        }catch let err{
+            print(err.localizedDescription)
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))

@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-
+import FirebaseAuth
 class SuggestedPlacesViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
@@ -16,6 +16,18 @@ class SuggestedPlacesViewController: UIViewController {
     @IBOutlet weak var search: UIButton!
     
     @IBOutlet weak var mapDisplay: MKMapView!
+    
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        }catch let err{
+            print(err.localizedDescription)
+            
+        }
+    }
+    
     private let clientID = "Je-rUdnsd2ua-YVW6mBF5g"
     private let clientSecret = "vvYIKgsvUoZiVikgQusHmPFOMwHRBBQcQA0wUwOrdRscllKiqeHkUD0pfGHe8jQB"
   

@@ -41,6 +41,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var imageURL = ""
     var editToggle = 0
     
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        }catch let err{
+            print(err.localizedDescription)
+            
+        }
+    }
     @IBOutlet weak var profileImage: UIImageView!
     @IBAction func editButton(_ sender: Any) {
         if editToggle==0{
@@ -231,6 +242,7 @@ extension UIColor {
         
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
+    
     
     convenience init(rgb: Int) {
         self.init(

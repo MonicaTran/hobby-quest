@@ -7,11 +7,21 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 class CommunityTableViewController: UITableViewController {
     let fbHelper = FirebaseHelper()
     var hobbies = [Hobby]()
     var hobbyTranser = String()
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        }catch let err{
+            print(err.localizedDescription)
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

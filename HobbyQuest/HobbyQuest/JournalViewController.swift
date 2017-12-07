@@ -76,9 +76,17 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-     // MARK: - New entry functions
-     */
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        do{
+            try Auth.auth().signOut()
+            print("Successfully Signed Out")
+            self.performSegue(withIdentifier: "unwindToViewController1", sender: self)
+        }catch let err{
+            print(err.localizedDescription)
+            
+        }
+    }
+    
     
     @IBAction func addEntry(_ sender: Any) {
         guard let userID = Auth.auth().currentUser?.uid else{

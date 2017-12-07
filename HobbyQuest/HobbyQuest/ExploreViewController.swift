@@ -158,7 +158,7 @@ class ExploreViewController: UITableViewController{
             let categoryPath = uniqueId!+"/userChoice/category"
             let costPath = uniqueId!+"/userChoice/cost"
             let timePath = uniqueId!+"/userChoice/time"
-            
+            //no hobbies given currently. FIX PLS
             self.category = (snapshot.childSnapshot(forPath: categoryPath).value! as? String)!
             self.cost = (snapshot.childSnapshot(forPath: costPath).value! as? String)!
             self.time = (snapshot.childSnapshot(forPath: timePath).value! as? String)!
