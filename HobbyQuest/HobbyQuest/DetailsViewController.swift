@@ -28,8 +28,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //self.tabBarController?.tabBar.isHidden = true
-//        self.navigationController?.popViewController(animated: true)
+        downLoadImageFromFirebase(url: url)
         self.title = hobbyIn
         descriptions.text = descriptionIn
         
@@ -50,7 +49,7 @@ class DetailsViewController: UIViewController {
             let downloadUrl = URL(string:url)
             URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
                 if error != nil{
-                    print(error)
+                    print(error.debugDescription)
                 }
                 DispatchQueue.main.async {
                     self.hobbyImage.image = UIImage(data:data!)
