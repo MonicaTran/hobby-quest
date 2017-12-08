@@ -28,6 +28,7 @@ class Hobby {
     let time:String
     let description:String
     let postImage:String
+    let wikiHowLink:String
 
     init(snap: DataSnapshot) {
         key = snap.key
@@ -39,6 +40,8 @@ class Hobby {
         hobbyName = value?["hobbyName"] as? String ?? ""
         time = value?["time"] as? String ?? ""
         postImage = value?["postImage"] as? String ?? ""
+        wikiHowLink = value?["wikiHowLink"] as? String ?? ""
+
     }
     init() {
         description = ""
@@ -48,5 +51,6 @@ class Hobby {
         hobbyName = ""
         time = ""
         postImage = ""
+        wikiHowLink = ""
     }
 }

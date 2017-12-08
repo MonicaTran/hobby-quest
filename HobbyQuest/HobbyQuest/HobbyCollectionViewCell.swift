@@ -10,5 +10,8 @@ import UIKit
 
 class HobbyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var hobbyImageView: UIImageView!
+    @IBOutlet weak var hobbyNameLabel: UILabel!
+    @IBOutlet weak var hobbyCategoryLabel: UILabel!
+    @IBOutlet weak var hobbyCostLabel: UILabel!
     
 }

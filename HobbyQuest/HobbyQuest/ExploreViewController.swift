@@ -192,6 +192,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
             let hobbyWithCostAndCat = self.hobbies.filter{$0.cost == self.cost && $0.category == self.category}
             //filtering array for 2 categories: category, time:
             let hobbyWithCatAndTime = self.hobbies.filter{$0.category == self.category && $0.time == self.time}
+            let hobbyWithCat = self.hobbies.filter{$0.category == self.category}
             
             var newHobbies = [Hobby]()
             for item in hobbyWithAll {
@@ -201,6 +202,9 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                 newHobbies.append(item)
             }
             for item in hobbyWithCatAndTime {
+                newHobbies.append(item)
+            }
+            for item in hobbyWithCat {
                 newHobbies.append(item)
             }
             var hobbyName = [String]()
@@ -224,13 +228,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                     i+=1
                 }
             }
-            print("# of hobbies \(self.hobbies.count)")
-            for hobby in self.hobbies{
-                print(hobby.postImage)
-                self.downLoadImageFromFirebase(url: hobby.postImage)
-            }
-            self.collectionView.reloadData()
-            print("# of images: \(self.images.count)")
+
             DispatchQueue.main.async { self.tableView.reloadData()
                 
             }
@@ -282,13 +280,13 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return finalHobbies.count
+        return hobbies.count
     }
     
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hobbyCell", for: indexPath) as! ExploreCell
-        let hobby = finalHobbies[indexPath.row]
+        let hobby = hobbies[indexPath.row]
         cell.hobbyLabel.text = hobby.hobbyName.capitalizeFirstLetter()
         let catAndTime = "\(hobby.category) | Time: \(hobby.time) | Cost: \(hobby.cost)"
         cell.catAndTimeLabel.text = catAndTime
@@ -315,7 +313,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedHobby = finalHobbies[indexPath.row]
+        selectedHobby = hobbies[indexPath.row]
         performSegue(withIdentifier: "exploreToDetail", sender: self)
     }
     
@@ -333,6 +331,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
             dvc.descriptionIn = selectedHobby.description
             dvc.timeIn = selectedHobby.time
             dvc.url = selectedHobby.postImage
+            dvc.wikiLink = selectedHobby.wikiHowLink
         }
     }
     
@@ -347,52 +346,48 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("# of image from collection view init \(images.count)")
-        return hobbies.count
+        return finalHobbies.count
     }
     
     //Populating views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
 
-        let downloadUrl = URL(string:hobbies[indexPath.row].postImage)
+        cell.hobbyImageView.layer.cornerRadius = 8.0
+        cell.hobbyImageView.clipsToBounds = true
+        let downloadUrl = URL(string:finalHobbies[indexPath.row].postImage)
         URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
             if error != nil{
                 return
             }
             DispatchQueue.main.async {
-                print(UIImage(data:data!))
                 cell.hobbyImageView.image = UIImage(data:data!)
-                print("inside download func : \(self.images.count)")
             }
         }).resume()
-
-            return cell
+        cell.hobbyNameLabel.text = finalHobbies[indexPath.row].hobbyName
+        cell.hobbyCategoryLabel.text = finalHobbies[indexPath.row].category.capitalizeFirstLetter()
+        cell.hobbyCostLabel.text = convertCostToDollarSigns(cost:finalHobbies[indexPath.row].cost)
+        return cell
 //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
 //        cell.hobbyImageView.image = tempImage[indexPath.row]
 //        return cell
     }
     
     
-    func downLoadImageFromFirebase(url:String){
-        if url == "" {
-            print("Empty URL")
+    func convertCostToDollarSigns(cost:String) -> String{
+        if cost == "low"{
+            return "$"
+        }
+        else if cost == "med"{
+            return "$$"
+        }
+        else if cost == "high"{
+            return "$$$"
         }
         else{
-            let downloadUrl = URL(string:url)
-            URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
-                if error != nil{
-                    return
-                }
-                DispatchQueue.main.async {
-                    print(UIImage(data:data!))
-                    self.images.append(UIImage(data:data!))
-                    print("inside download func : \(self.images.count)")
-                }
-            }).resume()
+            return ""
         }
-        self.collectionView.reloadData()
-        
     }
     
     

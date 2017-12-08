@@ -24,6 +24,7 @@ class DetailsViewController: UIViewController {
     var timeIn = ""
     var descriptionIn = ""
     var url = ""
+    var wikiLink = ""
   
     override func viewDidLoad() {
         
@@ -64,6 +65,11 @@ class DetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didTapWikiLink(_ sender: Any) {
+        if wikiLink != ""{
+            UIApplication.shared.open(URL(string: wikiLink)!, options: [:], completionHandler: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation
