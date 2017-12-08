@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -175,8 +176,30 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         //cell.textLabel?.text = entry.hobby + " : " + entry.description + " : " + entry.duration
         //cell.textLabel?.numberOfLines = 0
         //cell.textLabel?.lineBreakMode = .byWordWrapping
+        print("duration: \(entry.duration)")
+        var hours = 0
+        var remainingMinutes = 0
+        
+        if let originalDuration = Double(entry.duration)
+        {
+            let finalDuration = Int(originalDuration)
+            print("converted to int")
+            let minutes = finalDuration/60
+            remainingMinutes = minutes%60
+            hours = finalDuration/3600
+            print(hours)
+            print(remainingMinutes)
+
+        }
+        
+//
+//        print(originalDuration!)
+//        print(seconds)
+//        print(minutes)
+//        print(hours)
+
         let detailsLabel = cell.viewWithTag(1) as? UILabel
-        detailsLabel?.text = entry.hobby + " | " + entry.duration
+        detailsLabel?.text = "\(entry.hobby) | \(hours) hours and \(remainingMinutes) minutes"
         let descLabel = cell.viewWithTag(2) as? UILabel
         descLabel?.text = entry.description
         

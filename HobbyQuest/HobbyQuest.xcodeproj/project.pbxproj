@@ -34,6 +34,7 @@
 		CE096F701FD88B6000E82FB8 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE096F6F1FD88B6000E82FB8 /* ChangePassViewController.swift */; };
 		CE349E6A1FBE308D0048160C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE349E691FBE308D0048160C /* ProfileViewController.swift */; };
 		CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */; };
+		CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */; };
 		CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */; };
 		CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA769B1FA13147007171D1 /* LoginViewController.swift */; };
 		CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECACE641FAA3DC400FB061F /* ExploreCell.swift */; };
@@ -100,6 +101,7 @@
 		CE096F6F1FD88B6000E82FB8 /* ChangePassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassViewController.swift; sourceTree = "<group>"; };
 		CE349E691FBE308D0048160C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		CECA769B1FA13147007171D1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CECACE641FAA3DC400FB061F /* ExploreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCell.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 				036E1DCA1F90786300681044 /* QuizViewController.swift */,
 				CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */,
+				CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */,
 				CECACE641FAA3DC400FB061F /* ExploreCell.swift */,
 				CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */,
 				03A667E61F9852080095EE0F /* JournalEntry.swift */,
@@ -544,6 +547,7 @@
 				47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */,
 				47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */,
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
+				CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */,
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
 				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
 				CE096F701FD88B6000E82FB8 /* ChangePassViewController.swift in Sources */,

@@ -20,8 +20,10 @@ extension String{
 
 
 
-class ExploreViewController: UITableViewController{
+class ExploreViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate  {
+    @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var tableView: UITableView!
     var savedHobbies = [String:String]() //used to update buttons based on previously saved hobbies.
     var selectedHobby = Hobby()
     var answers = [String]()
@@ -34,6 +36,8 @@ class ExploreViewController: UITableViewController{
     var time:String = ""
     var dupFreeHobbies = [String]()
     var finalHobbies = [Hobby]()
+    var images = [UIImage?]()
+    var tempImage:UIImage?
     
     func addAlert(message:String){
         let alert = UIAlertController(title: "Hobby Added!", message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -178,6 +182,7 @@ class ExploreViewController: UITableViewController{
         self.retrieveUserAnswers()
         fillSavedHobbies()
         
+        
         fbHelper.getDataAsArray(ref: hobbiesRef, typeOf: hobbies, completion: { array in
             self.hobbies = array
             
@@ -219,8 +224,16 @@ class ExploreViewController: UITableViewController{
                     i+=1
                 }
             }
-            
-            DispatchQueue.main.async { self.tableView.reloadData() }
+            print("# of hobbies \(self.hobbies.count)")
+            for hobby in self.hobbies{
+                print(hobby.postImage)
+                self.downLoadImageFromFirebase(url: hobby.postImage)
+            }
+            self.collectionView.reloadData()
+            print("# of images: \(self.images.count)")
+            DispatchQueue.main.async { self.tableView.reloadData()
+                
+            }
         })
         //fills up savedHobbies dictionary.
         //Okay I'm stuck here. Because it is asynchronous, the code doesn't work the way I expected it to. It should fill up the savedHobbies dictionary, then update the table to have buttons depending on which ones alraedy have been saved.
@@ -243,9 +256,11 @@ class ExploreViewController: UITableViewController{
                         let value = item.value as! String
                         self.savedHobbies[item.key] = value
                     }
-                    print(self.self.savedHobbies)
+                    
                 }
             }
+
+            self.collectionView.reloadData()
             _ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.dispatchingQueue), userInfo: nil, repeats: false)
         }
         
@@ -256,20 +271,22 @@ class ExploreViewController: UITableViewController{
     }
     
     @objc func dispatchingQueue(){
-        DispatchQueue.main.async { self.tableView.reloadData() }
+        DispatchQueue.main.async { self.tableView.reloadData()
+            self.collectionView.reloadData()
+        }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return finalHobbies.count
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "hobbyCell", for: indexPath) as! ExploreCell
         let hobby = finalHobbies[indexPath.row]
         cell.hobbyLabel.text = hobby.hobbyName.capitalizeFirstLetter()
@@ -296,13 +313,13 @@ class ExploreViewController: UITableViewController{
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedHobby = finalHobbies[indexPath.row]
         performSegue(withIdentifier: "exploreToDetail", sender: self)
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
     }
     
@@ -329,7 +346,54 @@ class ExploreViewController: UITableViewController{
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("# of image from collection view init \(images.count)")
+        return hobbies.count
+    }
     
+    //Populating views
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
+
+        let downloadUrl = URL(string:hobbies[indexPath.row].postImage)
+        URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
+            if error != nil{
+                return
+            }
+            DispatchQueue.main.async {
+                print(UIImage(data:data!))
+                cell.hobbyImageView.image = UIImage(data:data!)
+                print("inside download func : \(self.images.count)")
+            }
+        }).resume()
+
+            return cell
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
+//        cell.hobbyImageView.image = tempImage[indexPath.row]
+//        return cell
+    }
+    
+    
+    func downLoadImageFromFirebase(url:String){
+        if url == "" {
+            print("Empty URL")
+        }
+        else{
+            let downloadUrl = URL(string:url)
+            URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
+                if error != nil{
+                    return
+                }
+                DispatchQueue.main.async {
+                    print(UIImage(data:data!))
+                    self.images.append(UIImage(data:data!))
+                    print("inside download func : \(self.images.count)")
+                }
+            }).resume()
+        }
+        self.collectionView.reloadData()
+        
+    }
     
     
 }
