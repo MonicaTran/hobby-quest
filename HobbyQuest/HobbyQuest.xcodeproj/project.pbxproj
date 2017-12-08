@@ -36,6 +36,7 @@
 		CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */; };
 		CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */; };
 		CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */; };
+		CEC1AE621FDB34D900974BE0 /* TableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC1AE611FDB34D900974BE0 /* TableViewCell1.swift */; };
 		CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA769B1FA13147007171D1 /* LoginViewController.swift */; };
 		CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECACE641FAA3DC400FB061F /* ExploreCell.swift */; };
 		D9CB5C416BE16519FF20426B /* Pods_HobbyQuest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91B932CD5446BA4C49FE2E81 /* Pods_HobbyQuest.framework */; };
@@ -103,6 +104,7 @@
 		CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		CEC1AE611FDB34D900974BE0 /* TableViewCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell1.swift; sourceTree = "<group>"; };
 		CECA769B1FA13147007171D1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CECACE641FAA3DC400FB061F /* ExploreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,8 +172,8 @@
 				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 				036E1DCA1F90786300681044 /* QuizViewController.swift */,
 				CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */,
-				CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */,
 				CECACE641FAA3DC400FB061F /* ExploreCell.swift */,
+				CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */,
 				CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */,
 				03A667E61F9852080095EE0F /* JournalEntry.swift */,
 				03A667E41F984CB30095EE0F /* JournalViewController.swift */,
@@ -189,6 +191,7 @@
 				47464BEF1FBAF21900680B0D /* SuggestedPlacesViewController.swift */,
 				CE349E691FBE308D0048160C /* ProfileViewController.swift */,
 				CE096F6F1FD88B6000E82FB8 /* ChangePassViewController.swift */,
+				CEC1AE611FDB34D900974BE0 /* TableViewCell1.swift */,
 			);
 			path = HobbyQuest;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				47F686741FB59CF200F96000 /* DetailSubThreadViewController.swift in Sources */,
 				CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */,
 				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
+				CEC1AE621FDB34D900974BE0 /* TableViewCell1.swift in Sources */,
 				47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */,
 				CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */,
 				47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */,

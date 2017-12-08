@@ -13,5 +13,7 @@ class HobbyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var hobbyNameLabel: UILabel!
     @IBOutlet weak var hobbyCategoryLabel: UILabel!
     @IBOutlet weak var hobbyCostLabel: UILabel!
+    @IBOutlet weak var button: UIButton!
+    
     
 }

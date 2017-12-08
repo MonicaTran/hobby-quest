@@ -67,7 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func createUser(){
-        Auth.auth().createUser(withEmail: emailText.text!, password: passwordText.text!, completion: { (user, err) in
+        Auth.auth().createUser(withEmail: emailText.text!.lowercased(), password: passwordText.text!, completion: { (user, err) in
             if user != nil{
                 self.addUserToDatabase()
                 self.performSegue(withIdentifier: "loginToQuiz", sender: self)
@@ -95,8 +95,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().signIn(withEmail: emailText.text!, password: passwordText.text!, completion: { (user, err) in
             if user != nil{
                 print("Successful Login!")
+                let lowerEmail = self.emailText.text?.lowercased()
                 let ref = Database.database().reference().child("Users")
-                let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: self.emailText.text!)
+                let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: lowerEmail)
                 query.observeSingleEvent(of: .value) { (snapshot) in
                     let object = ((snapshot.value as AnyObject).allKeys)!
                     let uniqueId = object[0] as? String

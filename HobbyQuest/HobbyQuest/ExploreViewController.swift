@@ -51,8 +51,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         self.present(alert, animated: true, completion: nil)
     }
     
-    
-    @objc func addHobby(sender: UIButton) {
+    @objc func addFinalHobby(sender: UIButton) {
         let button = sender
         let index = sender.tag
         if (button.imageView?.image == #imageLiteral(resourceName: "add1")) {
@@ -123,6 +122,78 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
             
             button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
         }
+    }
+    @objc func addHobby(sender: UIButton) {
+        let button = sender
+        let index = sender.tag
+        if (button.imageView?.image == #imageLiteral(resourceName: "add1")) {
+            addAlert(message: "\(hobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
+            guard let userID = Auth.auth().currentUser?.uid else{return}
+            let ref = Database.database().reference().child("savedHobbies")
+            ref.observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.hasChild(userID) {
+                    let timeStamp = self.fbHelper.getTimestamp()
+                    let key = String(timeStamp)
+                    let hobby = self.dupFreeHobbies[index]
+                    let entry = [key:hobby]
+                    
+                    ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                        var hobbyExists = false
+                        for child in snapshot.children {
+                            let item = child as! DataSnapshot
+                            let value = item.value as! String
+                            if value == hobby {
+                                hobbyExists = true
+                            }
+                        }
+                        if !hobbyExists {
+                            ref.child(userID).updateChildValues(entry)
+                            
+                        }
+                    }
+                }
+                else {
+                    let timeStamp = self.fbHelper.getTimestamp()
+                    let key = String(timeStamp)
+                    let hobby = self.dupFreeHobbies[index]
+                    let entry = [key:hobby]
+                    ref.child(userID).setValue(entry)
+                }
+            }
+            button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+        }
+        else {
+            
+            deleteAlert(message: "\(hobbies[index].hobbyName.capitalizeFirstLetter()) has been deleted from your class.")
+            guard let userID = Auth.auth().currentUser?.uid else{return}
+            let ref = Database.database().reference().child("savedHobbies")
+            ref.observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.hasChild(userID) {
+                    let hobby = self.hobbies[index].hobbyName
+                    var dictionary = [String:String]()
+                    var hobbyKey:String?
+                    ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
+                        var hobbyExists = false
+                        for child in snapshot.children {
+                            
+                            let item = child as! DataSnapshot
+                            let value = item.value as! String
+                            dictionary[item.key] = value
+                            if value == hobby {
+                                hobbyKey = item.key
+                                hobbyExists = true
+                            }
+                        }
+                        if hobbyExists {
+                            ref.child(userID).child(hobbyKey!).removeValue()
+                        }
+                    }
+                }
+                
+            }
+            
+            button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+        }
         
         //TODO: Add delete function here when button is switched to delete1 image
         //Make delete button appear at start if the hobby has already been added.
@@ -154,7 +225,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     func retrieveUserAnswers() {
         
         let ref = Database.database().reference().child("Users")
-        let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: self.email)
+        let query = ref.queryOrdered(byChild: "email").queryEqual(toValue: self.email.lowercased())
         query.observeSingleEvent(of: .value) { (snapshot) in
             let object = ((snapshot.value as AnyObject).allKeys)!
             let uniqueId = object[0] as? String
@@ -295,17 +366,17 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         //cell.button.layer.cornerRadius = 5
         //cell.button.layer.borderWidth = 1
         //cell.button.layer.borderColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1).cgColor
-        cell.button.tag = indexPath.row
-        cell.button.addTarget(self, action: #selector(self.addHobby), for: UIControlEvents.touchUpInside)
         
+        //THIS PART IS BROKEN CURRENTLY I don't know how to fix it.
         for item in savedHobbies {
-            print("Hobby: " + item.value)
-            if hobby.hobbyName == item.value {
-                print("Adding delete button")
+            if item.value == hobby.hobbyName {
+                print("Adding delete button on \(hobby.hobbyName) on cell \(indexPath.row)")
+                //change button image
                 cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
-                
             }
         }
+        cell.button.tag = indexPath.row
+        cell.button.addTarget(self, action: #selector(self.addHobby), for: UIControlEvents.touchUpInside)
         
         
         return cell
@@ -349,7 +420,11 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         return finalHobbies.count
     }
     
-    //Populating views
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedHobby = finalHobbies[indexPath.row]
+        performSegue(withIdentifier: "exploreToDetail", sender: self)
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
@@ -368,10 +443,18 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.hobbyNameLabel.text = finalHobbies[indexPath.row].hobbyName
         cell.hobbyCategoryLabel.text = finalHobbies[indexPath.row].category.capitalizeFirstLetter()
         cell.hobbyCostLabel.text = convertCostToDollarSigns(cost:finalHobbies[indexPath.row].cost)
+        
+        
+        for item in savedHobbies {
+            if finalHobbies[indexPath.row].hobbyName == item.value {
+                cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+                
+            }
+        }
+        cell.button.tag = indexPath.row
+        cell.button.addTarget(self, action: #selector(self.addFinalHobby), for: UIControlEvents.touchUpInside)
         return cell
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
-//        cell.hobbyImageView.image = tempImage[indexPath.row]
-//        return cell
+
     }
     
     
