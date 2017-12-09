@@ -40,6 +40,10 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        greetingLabel.layer.cornerRadius = 20.0
+        descriptionLabel.layer.cornerRadius = 20.0
+        durationLabel.layer.cornerRadius = 20.0
+        
         descriptionLabel.isHidden = true
         durationLabel.isHidden = true
         durationField.isHidden = true

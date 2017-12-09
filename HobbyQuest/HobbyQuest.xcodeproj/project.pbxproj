@@ -20,6 +20,7 @@
 		036E1DF91F90792200681044 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 036E1DF81F90792200681044 /* GoogleService-Info.plist */; };
 		0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */; };
 		0378EB061FDC181F0023DAE0 /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB051FDC181F0023DAE0 /* SectionLabel.swift */; };
+		0378EB0B1FDC443E0023DAE0 /* SpeechBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */; };
 		03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */; };
 		03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E41F984CB30095EE0F /* JournalViewController.swift */; };
 		03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E61F9852080095EE0F /* JournalEntry.swift */; };
@@ -82,6 +83,7 @@
 		036E1DF81F90792200681044 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0378EB051FDC181F0023DAE0 /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
+		0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBubble.swift; sourceTree = "<group>"; };
 		03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewController.swift; sourceTree = "<group>"; };
 		03A667E41F984CB30095EE0F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		03A667E61F9852080095EE0F /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
+				0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */,
 				0378EB051FDC181F0023DAE0 /* SectionLabel.swift */,
 			);
 			path = UserInterface;
@@ -570,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */,
+				0378EB0B1FDC443E0023DAE0 /* SpeechBubble.swift in Sources */,
 				47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */,
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
 				0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */,

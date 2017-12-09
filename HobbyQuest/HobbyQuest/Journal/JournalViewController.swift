@@ -237,13 +237,14 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        print(seconds)
 //        print(minutes)
 //        print(hours)
-        let dateLabel = cell.viewWithTag(0) as? UILabel
-        dateLabel?.text = self.fbHelper.getReadableTimestamp(from: String(describing: entry.key))
+        
         print(self.fbHelper.getReadableTimestamp(from: String(describing: entry.key)))
         let detailsLabel = cell.viewWithTag(1) as? UILabel
         detailsLabel?.text = "\(entry.hobby) | \(hours) hours and \(remainingMinutes) minutes"
         let descLabel = cell.viewWithTag(2) as? UILabel
         descLabel?.text = entry.description
+        let dateLabel = cell.viewWithTag(3) as? UILabel
+        dateLabel?.text = self.fbHelper.getReadableTimestamp(from: String(describing: entry.key))
         
         return cell
     }

@@ -63,7 +63,7 @@ class FirebaseHelper: NSObject {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.short
-        var convertedDate = dateFormatter.string(from: myNSDate)
+        let convertedDate = dateFormatter.string(from: myNSDate)
         
         return convertedDate
     }
