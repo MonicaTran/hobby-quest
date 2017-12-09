@@ -18,6 +18,8 @@
 		036E1DDE1F90786400681044 /* HobbyQuestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DDD1F90786400681044 /* HobbyQuestTests.swift */; };
 		036E1DE91F90786400681044 /* HobbyQuestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036E1DE81F90786400681044 /* HobbyQuestUITests.swift */; };
 		036E1DF91F90792200681044 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 036E1DF81F90792200681044 /* GoogleService-Info.plist */; };
+		0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */; };
+		0378EB061FDC181F0023DAE0 /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB051FDC181F0023DAE0 /* SectionLabel.swift */; };
 		03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */; };
 		03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E41F984CB30095EE0F /* JournalViewController.swift */; };
 		03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E61F9852080095EE0F /* JournalEntry.swift */; };
@@ -78,6 +80,8 @@
 		036E1DE81F90786400681044 /* HobbyQuestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyQuestUITests.swift; sourceTree = "<group>"; };
 		036E1DEA1F90786400681044 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		036E1DF81F90792200681044 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
+		0378EB051FDC181F0023DAE0 /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
 		03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewController.swift; sourceTree = "<group>"; };
 		03A667E41F984CB30095EE0F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		03A667E61F9852080095EE0F /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
@@ -168,6 +172,9 @@
 				036E1DCF1F90786300681044 /* Assets.xcassets */,
 				036E1DD11F90786300681044 /* LaunchScreen.storyboard */,
 				036E1DD41F90786300681044 /* Info.plist */,
+				0378EB081FDC199A0023DAE0 /* Helpers */,
+				0378EB071FDC182F0023DAE0 /* UserInterface */,
+				0378EB091FDC19A90023DAE0 /* Journal */,
 				033F0C951F908F1C0071CAED /* Hobby.swift */,
 				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 				036E1DCA1F90786300681044 /* QuizViewController.swift */,
@@ -175,13 +182,6 @@
 				CECACE641FAA3DC400FB061F /* ExploreCell.swift */,
 				CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */,
 				CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */,
-				03A667E61F9852080095EE0F /* JournalEntry.swift */,
-				03A667E41F984CB30095EE0F /* JournalViewController.swift */,
-				03A667E81F9875E90095EE0F /* EntryViewController.swift */,
-				035CCC021FA850CE0022A9F0 /* HappyTestViewController.swift */,
-				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
-				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
-				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
 				47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */,
 				47F686711FB5906100F96000 /* SubThreadTableViewController.swift */,
 				47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */,
@@ -212,6 +212,36 @@
 				036E1DEA1F90786400681044 /* Info.plist */,
 			);
 			path = HobbyQuestUITests;
+			sourceTree = "<group>";
+		};
+		0378EB071FDC182F0023DAE0 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
+				0378EB051FDC181F0023DAE0 /* SectionLabel.swift */,
+			);
+			path = UserInterface;
+			sourceTree = "<group>";
+		};
+		0378EB081FDC199A0023DAE0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				033F0C931F908E100071CAED /* FirebaseHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0378EB091FDC19A90023DAE0 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				03A667E61F9852080095EE0F /* JournalEntry.swift */,
+				03A667E41F984CB30095EE0F /* JournalViewController.swift */,
+				0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */,
+				03A667E81F9875E90095EE0F /* EntryViewController.swift */,
+				035CCC021FA850CE0022A9F0 /* HappyTestViewController.swift */,
+				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
+			);
+			path = Journal;
 			sourceTree = "<group>";
 		};
 		380CF30DCA76429489FADB54 /* Pods */ = {
@@ -498,24 +528,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/CDYelpFusionKit/CDYelpFusionKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CDYelpFusionKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -550,7 +572,9 @@
 				47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */,
 				47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */,
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
+				0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */,
 				CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */,
+				0378EB061FDC181F0023DAE0 /* SectionLabel.swift in Sources */,
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
 				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
 				CE096F701FD88B6000E82FB8 /* ChangePassViewController.swift in Sources */,

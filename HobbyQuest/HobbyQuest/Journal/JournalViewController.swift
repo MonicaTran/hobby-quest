@@ -10,8 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-    
+class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -34,6 +33,21 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.reloadData()
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "statCell", for: indexPath) as! StatisticsCollectionViewCell
+        
+        cell.layer.cornerRadius = 8.0
+        cell.clipsToBounds = true
+        cell.statDesc.text = "Journal Entries"
+        cell.statValue.text = String(self.journalEntries.count)
+        
+        return cell
+    }
+    
     
     
     let fbHelper = FirebaseHelper()
@@ -44,30 +58,27 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     var hobbyPickerData = [String]()
     var selectedHobby = ""
     
+    @IBOutlet weak var statsCollection: UICollectionView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var totalEntriesLabel: UILabel!
-    @IBOutlet var hobbyFilterPicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //let uid = "1"
         //temp uid for testing
-        hobbyFilterPicker.delegate = self
-        hobbyFilterPicker.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        totalEntriesLabel.text = String(journalEntries.count)
-        guard let userID = Auth.auth().currentUser?.uid else{
-            hobbyFilterPicker.isHidden = true
+        guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
+        print(userID)
         userJournalRef = journalsRef.child(userID)
         fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
             self.journalEntries = array
+            print(array)
             self.allJournalEntries = array
-            self.totalEntriesLabel.text = String(self.journalEntries.count)
             self.tableView.reloadData()
+            self.statsCollection.reloadData()
             self.getAvailableHobbies(arr: self.journalEntries)
         })
     }
@@ -106,6 +117,39 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
             //    self.showAlertSelectHobby(from:array)
             //})
         }
+    }
+    
+    @IBOutlet weak var currentFilterChoice: UILabel!
+    @IBAction func filterJournalEntries(_ sender: Any) {
+        let alertController = UIAlertController(title: "Select Hobby", message: "Select the hobby you would like to filter your journal entries by.", preferredStyle: .actionSheet)
+        if hobbyPickerData.count <= 1 {
+            alertController.message = "You have no hobbies saved to your journal. Visit the Explore tab to browse and add hobbies."
+        }
+        else {
+            for hobby in hobbyPickerData {
+                let okAction = UIAlertAction(title: hobby, style: UIAlertActionStyle.default) {
+                    UIAlertAction in
+                    let selected = hobby
+                    self.journalEntries = self.allJournalEntries
+                    if selected != "All Hobbies" {
+                        self.journalEntries = self.journalEntries.filter { $0.hobby == selected }
+                        self.currentFilterChoice.text = "Filtered by " + hobby
+                    } else {
+                        self.currentFilterChoice.text = " "
+                    }
+                    self.tableView.reloadData()
+                }
+                alertController.addAction(okAction)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
+            UIAlertAction in
+            NSLog("Cancelled")
+        }
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func showAlertSelectHobby(from: [String]) {
@@ -159,7 +203,6 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         temp = Array(Set(temp))
         result.append(contentsOf: temp)
         hobbyPickerData = result
-        hobbyFilterPicker.reloadAllComponents()
     }
     
 /*
@@ -183,12 +226,9 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let originalDuration = Double(entry.duration)
         {
             let finalDuration = Int(originalDuration)
-            print("converted to int")
             let minutes = finalDuration/60
             remainingMinutes = minutes%60
             hours = finalDuration/3600
-            print(hours)
-            print(remainingMinutes)
 
         }
         
@@ -197,7 +237,9 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        print(seconds)
 //        print(minutes)
 //        print(hours)
-
+        let dateLabel = cell.viewWithTag(0) as? UILabel
+        dateLabel?.text = self.fbHelper.getReadableTimestamp(from: String(describing: entry.key))
+        print(self.fbHelper.getReadableTimestamp(from: String(describing: entry.key)))
         let detailsLabel = cell.viewWithTag(1) as? UILabel
         detailsLabel?.text = "\(entry.hobby) | \(hours) hours and \(remainingMinutes) minutes"
         let descLabel = cell.viewWithTag(2) as? UILabel

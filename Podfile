@@ -13,7 +13,6 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Storage'
 pod 'SwiftyJSON'
-pod 'CDYelpFusionKit', '1.2.0'
 
 
   target 'HobbyQuestTests' do

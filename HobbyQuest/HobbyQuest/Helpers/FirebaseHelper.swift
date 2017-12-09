@@ -51,8 +51,21 @@ class FirebaseHelper: NSObject {
     }
     
     func getTimestamp() -> Int {
-        let ts = Int(floor(NSDate.timeIntervalSinceReferenceDate*1000))
+        let ts = Int(NSDate().timeIntervalSince1970)
         return ts
+    }
+    
+    func getReadableTimestamp(from: String) -> String {
+        let timestamp = Double(from)
+        
+        // create NSDate from Double (NSTimeInterval)
+        let myNSDate = Date(timeIntervalSince1970: timestamp!)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        var convertedDate = dateFormatter.string(from: myNSDate)
+        
+        return convertedDate
     }
     
 }
