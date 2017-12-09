@@ -24,15 +24,17 @@ class SpeechBubble: UILabel {
     func initializeLabel() {
         
         //self.textAlignment = .left
+        self.layer.cornerRadius = 20.0
+        self.clipsToBounds = true
         self.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         self.textColor = UIColor.darkText
         self.layer.shadowOffset = CGSize(width: -3.0, height: 1)
         self.layer.shadowOpacity = 0.2
         self.layer.shadowRadius = 6
-        self.layer.cornerRadius = 20.0
-        
-        self.textInsets.left = 20
-        self.textInsets.right = 20
+        self.textInsets.bottom = 5
+        self.textInsets.top = 5
+        self.textInsets.left = 10
+        self.textInsets.right = 10
     }
     
     var textInsets = UIEdgeInsets.zero {
