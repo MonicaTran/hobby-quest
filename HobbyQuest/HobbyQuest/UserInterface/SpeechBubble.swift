@@ -24,7 +24,7 @@ class SpeechBubble: UILabel {
     func initializeLabel() {
         
         //self.textAlignment = .left
-        self.layer.cornerRadius = 20.0
+        self.layer.cornerRadius = 15.0
         self.clipsToBounds = true
         self.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         self.textColor = UIColor.darkText

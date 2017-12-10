@@ -90,14 +90,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
         userEmail = (Auth.auth().currentUser?.email)!
         
-        if Auth.auth().currentUser?.displayName == nil{
+        emailLabel.text = userEmail
+        welcomeLabel.text = "Hi " + userDisplayName + "!"
+        guard let userDisplayName = Auth.auth().currentUser?.displayName else {
             displayNameAlert()
+            return
         }
-        let userDisplayName = Auth.auth().currentUser?.displayName
+        //let userDisplayName = Auth.auth().currentUser?.displayName
 
         displayLabel.text = userDisplayName
-        emailLabel.text = userEmail
-        welcomeLabel.text = "Hi " + userDisplayName! + "!"
     }
     
     @IBAction func selectPictureButton(_ sender: Any) {

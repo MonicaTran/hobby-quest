@@ -249,6 +249,8 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populatedLabel()
+        
+        self.setGradientBackground()
 
         
         self.previousButton.isHidden = true

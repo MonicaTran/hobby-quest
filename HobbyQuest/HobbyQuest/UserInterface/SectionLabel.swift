@@ -24,8 +24,9 @@ class SectionLabel: UILabel {
     func initializeLabel() {
         
         //self.textAlignment = .left
+        let color = UIColor(red: 90.0/255.0, green: 171.0/255.0, blue: 141.0/255.0, alpha: 1)
         self.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        self.textColor = UIColor.darkText
+        self.textColor = color
         
     }
     

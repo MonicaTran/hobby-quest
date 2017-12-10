@@ -142,6 +142,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.passwordText.delegate = self
+        
+        self.setGradientBackground()
+//        let layer = CAGradientLayer()
+//        layer.frame = self.view.frame
+//        layer.locations = [0.0,0.35]
+//        layer.colors = [UIColor.green.cgColor, UIColor.white.cgColor]
+//        view.layer.insertSublayer(layer, at: 0)
 
         
         // Do any additional setup after loading the view.

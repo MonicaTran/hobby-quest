@@ -25,6 +25,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var durationField: UIDatePicker!
     
+    @IBOutlet weak var submitButton: UIButton!
     @IBAction func submitDuration(_ sender: Any) {
         let d = String(self.durationField.countDownDuration)
         self.delegate.saveNewEntry(desc: self.desc, hobby: self.hobby, duration: d)
@@ -40,9 +41,15 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        greetingLabel.clipsToBounds = true
+        descriptionLabel.clipsToBounds = true
+        durationLabel.clipsToBounds = true
+        submitButton.clipsToBounds = true
+        
         greetingLabel.layer.cornerRadius = 20.0
         descriptionLabel.layer.cornerRadius = 20.0
         durationLabel.layer.cornerRadius = 20.0
+        submitButton.layer.cornerRadius = 8.0
         
         descriptionLabel.isHidden = true
         durationLabel.isHidden = true

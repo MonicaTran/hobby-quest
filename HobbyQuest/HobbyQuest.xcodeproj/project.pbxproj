@@ -21,6 +21,7 @@
 		0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */; };
 		0378EB061FDC181F0023DAE0 /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB051FDC181F0023DAE0 /* SectionLabel.swift */; };
 		0378EB0B1FDC443E0023DAE0 /* SpeechBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */; };
+		0378EB0D1FDCFB5C0023DAE0 /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB0C1FDCFB5C0023DAE0 /* GradientLayer.swift */; };
 		03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */; };
 		03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E41F984CB30095EE0F /* JournalViewController.swift */; };
 		03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E61F9852080095EE0F /* JournalEntry.swift */; };
@@ -84,6 +85,7 @@
 		0378EB031FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0378EB051FDC181F0023DAE0 /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
 		0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBubble.swift; sourceTree = "<group>"; };
+		0378EB0C1FDCFB5C0023DAE0 /* GradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
 		03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewController.swift; sourceTree = "<group>"; };
 		03A667E41F984CB30095EE0F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		03A667E61F9852080095EE0F /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		0378EB071FDC182F0023DAE0 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				0378EB0C1FDCFB5C0023DAE0 /* GradientLayer.swift */,
 				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
 				0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */,
 				0378EB051FDC181F0023DAE0 /* SectionLabel.swift */,
@@ -579,6 +582,7 @@
 				0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */,
 				CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */,
 				0378EB061FDC181F0023DAE0 /* SectionLabel.swift in Sources */,
+				0378EB0D1FDCFB5C0023DAE0 /* GradientLayer.swift in Sources */,
 				036E1DCB1F90786300681044 /* QuizViewController.swift in Sources */,
 				03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */,
 				CE096F701FD88B6000E82FB8 /* ChangePassViewController.swift in Sources */,
