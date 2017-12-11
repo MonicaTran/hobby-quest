@@ -31,29 +31,29 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var emailButtonOutlet: UIButton!
     @IBOutlet weak var mantraButtonOutlet: UIButton!
     
-    
     var ref: DatabaseReference?
     var userID = ""
     var userEmail = ""
     var userDisplayName = ""
+    var userMantra = ""
     var image = UIImage()
     var picker = UIImagePickerController()
     var imageURL = ""
     var editToggle = 0
     
-    var listOfMantras = ["random",
-                         "mantras",
-                         "here",
-                         "1",
-                         "2",
-                         "3",
-                         "4",
-                         "5",
-                         "6",
-                         "7",
-                         "8",
-                         "9",
-                         "10"]
+    var listOfMantras = ["Anxiety is contagious. And so is calm.",
+                         "Expect nothing and appreciate everything.",
+                         "Create a life you can be proud of",
+                         "Don’t say maybe if you want to say no",
+                         "Don’t say maybe if you want to say no",
+                         "Everyday is a second chance.",
+                         "Die with memories not dreams",
+                         "Choose purpose over perfect",
+                         "Be someone who makes you happy",
+                         "Find a way or make one",
+                         "Feel the fear and do it anyway",
+                         "Life doesn’t get easier you just get stronger",
+                         "Find yourself and be that"]
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
         
@@ -103,8 +103,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         //self.view.addSubview(profileImage)
         makeImageCircular(image: profileImage)
         userID = (Auth.auth().currentUser?.uid)!
-        getProfileImageURL()
         
+        getUserMantra()
+        getProfileImageURL()
 
         userEmail = (Auth.auth().currentUser?.email)!
         
@@ -114,17 +115,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             return
         }
         welcomeLabel.text = "Hi " + userDisplayName + "!"
-
-        //let userDisplayName = Auth.auth().currentUser?.displayName
-
         displayLabel.text = userDisplayName
     }
     
     @IBAction func selectPictureButton(_ sender: Any) {
         self.selectPicture()
     }
-    
-
     
     func makeImageCircular(image: UIImageView){
         image.layer.borderWidth = 3
@@ -133,8 +129,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
     }
+    
     func displayEmailAlert(){
-        //1. Create the alert controller.
         let alert = UIAlertController(title: "Change Email", message: "Enter a new valid email address", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.text = self.userEmail
@@ -151,7 +147,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         print("Email has been updated.")
                     }
                 })
-                
             }))
             self.present(alert, animated: true, completion: nil)
         }
@@ -191,6 +186,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    
     func displayMantraAlert(){
         let alert = UIAlertController(title: "Change Mantra", message: "Enter a personal mantra or select a random one!", preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -199,7 +195,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 
                 if textField.text != nil{
-                    self.mantraLabel.text = textField.text!
+                    self.userMantra = textField.text!
+                    self.updateMantraToDatabase(mantra:self.userMantra)
                     print("Mantra has been updated!")
                 }
                 else{
@@ -212,13 +209,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             alert.addAction(UIAlertAction(title: "Random Mantra", style: .default, handler : { [weak alert] (_) in
                 let randomIndex = Int(arc4random_uniform(UInt32(self.listOfMantras.count)))
                 self.mantraLabel.text = self.listOfMantras[randomIndex]
-                
+                self.userMantra = self.mantraLabel.text!
+                self.updateMantraToDatabase(mantra:self.userMantra)
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler :nil))
 
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    
     
     func getProfileImageURL(){
         let ref = Database.database().reference().child("Users")
@@ -232,6 +232,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+
+    
+    
+    func getUserMantra(){
+        let mantraRef = Database.database().reference().child("Users")
+        let query = mantraRef.queryOrdered(byChild: "UserID").queryEqual(toValue: self.userID)
+        query.observe(.value) { (snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                guard let mantraFromDB = child.childSnapshot(forPath: "mantra").value as? String? else{
+                    self.userMantra = ""
+                    self.mantraLabel.text = self.userMantra
+                    return
+                }
+                print("Printing mantra from DB")
+                self.userMantra = mantraFromDB!
+                self.mantraLabel.text = self.userMantra
+                print(mantraFromDB!)
+            }
+        }
+    }
+        
     func downLoadImageFromFirebase(url:String){
         if url == "" {
         }
@@ -247,6 +268,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }).resume()
         }
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -311,10 +333,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         uploadImage()
         dismiss(animated: true, completion: nil)
     }
+        
     @IBAction func toChangePassword(_ sender: Any) {
         performSegue(withIdentifier: "profileToChange", sender: self)
     }
-    
+        
     func addDisplayToDatabase(){
         print("Adding Display Name to Database")
         
@@ -328,6 +351,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             let path = uniqueId!
             newRef.child(path).updateChildValues(value)
         }
+    }
+    func updateMantraToDatabase(mantra:String){
+        print("Adding Mantra to Database")
+            let value = ["mantra": mantra]
+            let newRef = Database.database().reference().child("Users")
+            let query = newRef.queryOrdered(byChild: "UserID").queryEqual(toValue: self.userID)
+            query.observeSingleEvent(of: .value) { (snapshot) in
+                let object = ((snapshot.value as AnyObject).allKeys)!
+                let uniqueId = object[0] as? String
+                //let userChoiceID = object4[0] as? String
+                let path = uniqueId!
+                newRef.child(path).updateChildValues(value)
+            }
+
     }
 }
 
