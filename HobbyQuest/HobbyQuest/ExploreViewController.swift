@@ -134,7 +134,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                 if snapshot.hasChild(userID) {
                     let timeStamp = self.fbHelper.getTimestamp()
                     let key = String(timeStamp)
-                    let hobby = self.dupFreeHobbies[index]
+                    let hobby = self.hobbies[index].hobbyName
                     let entry = [key:hobby]
                     
                     ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
@@ -155,7 +155,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                 else {
                     let timeStamp = self.fbHelper.getTimestamp()
                     let key = String(timeStamp)
-                    let hobby = self.dupFreeHobbies[index]
+                    let hobby = self.hobbies[index].hobbyName
                     let entry = [key:hobby]
                     ref.child(userID).setValue(entry)
                 }
@@ -300,8 +300,8 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                 }
             }
 
-            DispatchQueue.main.async { self.tableView.reloadData()
-                
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         })
         //fills up savedHobbies dictionary.
@@ -346,7 +346,6 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
      func numberOfSections(in tableView: UITableView) -> Int {
-        
         return 1
     }
     
@@ -371,8 +370,13 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         for item in savedHobbies {
             if item.value == hobby.hobbyName {
                 print("Adding delete button on \(hobby.hobbyName) on cell \(indexPath.row)")
+                print(cell.hobbyLabel.text)
                 //change button image
                 cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+            }
+            else {
+                print(cell.hobbyLabel.text! + " is not saved")
+                print(indexPath.row)
             }
         }
         cell.button.tag = indexPath.row

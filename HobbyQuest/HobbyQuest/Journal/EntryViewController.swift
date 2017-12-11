@@ -24,6 +24,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var durationField: UIDatePicker!
+    @IBOutlet weak var littledude: UIImageView!
     
     @IBOutlet weak var submitButton: UIButton!
     @IBAction func submitDuration(_ sender: Any) {
@@ -54,6 +55,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         descriptionLabel.isHidden = true
         durationLabel.isHidden = true
         durationField.isHidden = true
+        littledude.isHidden = true
         self.view.viewWithTag(1)?.isHidden = true
         
         greetingLabel.text = "Hi there! How is " + hobby + " going?"
@@ -84,6 +86,7 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.durationLabel.isHidden = false
+            self.littledude.isHidden = false
             self.durationLabel.text = "Sounds fun! How long did you spend on this activity?"
         }
         DispatchQueue.main.asyncAfter(deadline: when+1) {
