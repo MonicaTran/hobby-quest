@@ -220,13 +220,13 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         return transition
     }
     
-    func saveNewEntry(desc: String, hobby: String, duration: String) {
-        let entry = ["description":desc,"duration":duration,"hobby":hobby]
+    func saveNewEntry(desc: String, hobby: String, duration: String, rating: String) {
+        let entry = ["description":desc,"duration":duration,"hobby":hobby,"rating":rating]
         let timeStamp = fbHelper.getTimestamp()
         let key = String(timeStamp)
         userJournalRef.child(key).setValue(entry)
         
-        let newEntry = JournalEntry(k:timeStamp,de:desc,du:duration,h:hobby)
+        let newEntry = JournalEntry(k:timeStamp,de:desc,du:duration,h:hobby,r:rating)
         journalEntries.append(newEntry)
     }
     
@@ -279,7 +279,15 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         descLabel?.text = entry.description
         let dateLabel = cell.viewWithTag(3) as? UILabel
         dateLabel?.text = self.fbHelper.getReadableTimestamp(from: String(describing: entry.key))
-        
+        let ratingLabel = cell.viewWithTag(4) as? CosmosView
+        let rating = Double(entry.rating)
+        if rating == nil {
+            ratingLabel?.isHidden = true
+        }
+        else {
+            ratingLabel?.isHidden = false
+            ratingLabel?.rating = rating!
+        }
         return cell
     }
     

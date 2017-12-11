@@ -14,6 +14,7 @@ class JournalEntry {
     let description:String
     let duration:String
     let hobby:String
+    let rating:String
     
     init(snap: DataSnapshot) {
         key = snap.key
@@ -22,11 +23,13 @@ class JournalEntry {
         description = value?["description"] as? String ?? ""
         duration = value?["duration"] as? String ?? ""
         hobby = value?["hobby"] as? String ?? ""
+        rating = value?["rating"] as? String ?? ""
     }
-    init(k:Any,de:String,du:String,h:String) {
+    init(k:Any,de:String,du:String,h:String,r:String) {
         key = k
         description = de
         duration = du
         hobby = h
+        rating = r
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EntryViewControllerDelegate {
-    func saveNewEntry(desc:String,hobby:String,duration:String)
+    func saveNewEntry(desc:String,hobby:String,duration:String,rating:String)
 }
 
 class EntryViewController: UIViewController, UITextFieldDelegate {
@@ -25,11 +25,33 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var durationLabel: UILabel!
     @IBOutlet var durationField: UIDatePicker!
     @IBOutlet weak var littledude: UIImageView!
+    @IBOutlet weak var ratingLabel: SpeechBubble!
+    @IBOutlet weak var ratingField: CosmosView!
     
     @IBOutlet weak var submitButton: UIButton!
     @IBAction func submitDuration(_ sender: Any) {
+        
+        durationField.isHidden = true
+        submitButton.isHidden = true
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.ratingLabel.isHidden = false
+            self.ratingLabel.text = "How would you rate it?"
+        }
+        DispatchQueue.main.asyncAfter(deadline: when+1) {
+            self.ratingField.isHidden = false
+            let animation = AnimationType.from(direction: .bottom, offset: 30.0)
+            self.ratingField.animate(animations: [animation])
+            self.finishButton.isHidden = false
+        }
+        
+    }
+    @IBOutlet weak var finishButton: PMSuperButton!
+    @IBAction func finishEntry(_ sender: Any) {
         let d = String(self.durationField.countDownDuration)
-        self.delegate.saveNewEntry(desc: self.desc, hobby: self.hobby, duration: d)
+        let r = String(self.ratingField.rating)
+        self.delegate.saveNewEntry(desc: self.desc, hobby: self.hobby, duration: d, rating: r)
         //self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
         //performSegue(withIdentifier: "entryToJournal", sender: self)
@@ -47,15 +69,18 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         durationLabel.clipsToBounds = true
         submitButton.clipsToBounds = true
         
-        greetingLabel.layer.cornerRadius = 20.0
-        descriptionLabel.layer.cornerRadius = 20.0
-        durationLabel.layer.cornerRadius = 20.0
+        greetingLabel.layer.cornerRadius = 15.0
+        descriptionLabel.layer.cornerRadius = 15.0
+        durationLabel.layer.cornerRadius = 15.0
         submitButton.layer.cornerRadius = 8.0
         
         descriptionLabel.isHidden = true
         durationLabel.isHidden = true
         durationField.isHidden = true
         littledude.isHidden = true
+        ratingLabel.isHidden = true
+        ratingField.isHidden = true
+        finishButton.isHidden = true
         self.view.viewWithTag(1)?.isHidden = true
         
         greetingLabel.text = "Hi there! How is " + hobby + " going?"
@@ -71,8 +96,9 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "entryToJournal") {
+            let r = String(self.ratingField.rating)
             let d = String(self.durationField.countDownDuration)
-            self.delegate.saveNewEntry(desc: self.desc, hobby: self.hobby, duration: d)
+            self.delegate.saveNewEntry(desc: self.desc, hobby: self.hobby, duration: d, rating: r)
         }
     }
     
