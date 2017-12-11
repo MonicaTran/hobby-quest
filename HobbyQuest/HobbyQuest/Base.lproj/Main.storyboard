@@ -98,7 +98,7 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="2C5-2s-UmK"/>
                                             <constraint firstAttribute="height" constant="44" id="d2O-mQ-9Yv"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <state key="normal" title="SUBMIT">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -245,16 +245,19 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qac-fE-x22">
                                 <rect key="frame" x="50" y="248" width="275" height="152"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iO-ga-RyK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iO-ga-RyK" customClass="PMSuperButton" customModule="HobbyQuest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
-                                        <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="YxZ-hm-0iy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Button">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -265,15 +268,15 @@
                                             <action selector="input1:" destination="n1v-qn-tFe" eventType="touchUpInside" id="rSg-Os-LlG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xcr-3a-Ktf">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xcr-3a-Ktf" customClass="PMSuperButton" customModule="HobbyQuest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="54" width="275" height="44"/>
-                                        <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="mTU-z1-h5n"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Button">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -284,19 +287,23 @@
                                             <action selector="input2:" destination="n1v-qn-tFe" eventType="touchUpInside" id="6b2-El-MCQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNs-KC-ZnY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNs-KC-ZnY" customClass="PMSuperButton" customModule="HobbyQuest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="275" height="44"/>
-                                        <color key="backgroundColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="hbk-Pt-FDb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Button">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="ripple" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                                                <color key="value" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -314,7 +321,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="6Lh-Nm-Jxf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="SUBMIT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -454,7 +461,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qdk-7D-fmy">
-                                <rect key="frame" x="0.0" y="383" width="375" height="284"/>
+                                <rect key="frame" x="0.0" y="378" width="375" height="289"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -485,8 +492,8 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" tag="-5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="art" translatesAutoresizingMaskIntoConstraints="NO" id="2e2-Bi-BPR" userLabel="Icon">
-                                                    <rect key="frame" x="15" y="23" width="24" height="24"/>
+                                                <imageView userInteractionEnabled="NO" tag="-5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="art" translatesAutoresizingMaskIntoConstraints="NO" id="2e2-Bi-BPR" userLabel="Icon">
+                                                    <rect key="frame" x="16" y="23" width="24" height="24"/>
                                                     <accessibility key="accessibilityConfiguration" identifier="icon" label="icon"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="motionIdentifier" value="icon"/>
@@ -502,6 +509,7 @@
                                                 <constraint firstItem="sm4-vh-c93" firstAttribute="top" secondItem="jEb-2x-QUl" secondAttribute="topMargin" constant="12" id="H0f-Tx-NZ9"/>
                                                 <constraint firstItem="2te-Fw-436" firstAttribute="leading" relation="lessThanOrEqual" secondItem="sm4-vh-c93" secondAttribute="trailing" constant="252" id="HNY-pQ-Gf7"/>
                                                 <constraint firstItem="z7I-nm-xLJ" firstAttribute="leading" secondItem="sm4-vh-c93" secondAttribute="leading" id="Mvs-5G-ZGC"/>
+                                                <constraint firstItem="sm4-vh-c93" firstAttribute="leading" secondItem="2e2-Bi-BPR" secondAttribute="trailing" constant="10" id="Q1X-XW-Crx"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="2te-Fw-436" secondAttribute="bottom" constant="32.5" id="X97-7w-hFU"/>
                                                 <constraint firstItem="2e2-Bi-BPR" firstAttribute="top" secondItem="sm4-vh-c93" secondAttribute="top" id="Zzb-md-W2d"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="2te-Fw-436" secondAttribute="trailing" constant="16" id="dUU-Yg-S9O"/>
@@ -557,7 +565,7 @@
                                 </connections>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fgV-Eo-5sH">
-                                <rect key="frame" x="0.0" y="108.5" width="375" height="255"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="255"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="255" id="2Ov-G2-1Ks"/>
@@ -631,8 +639,8 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECOMMENDED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEA-Sg-vwW" customClass="SectionLabel" customModule="HobbyQuest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="375" height="19.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -642,9 +650,9 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BROWSE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCI-Xy-Szu" customClass="SectionLabel" customModule="HobbyQuest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="363.5" width="375" height="19.5"/>
+                                <rect key="frame" x="0.0" y="361" width="375" height="17"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -1498,8 +1506,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OVERVIEW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3d8-0u-odL" customClass="SectionLabel" customModule="HobbyQuest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="375" height="22.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="20.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1510,12 +1518,12 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvq-Rh-Hxa" customClass="PMSuperButton" customModule="HobbyQuest" customModuleProvider="target">
-                                <rect key="frame" x="18" y="564" width="339" height="44"/>
+                                <rect key="frame" x="18" y="613" width="339" height="44"/>
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ATi-Pr-AaQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="tintColor" red="0.0" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="ADD ENTRY">
@@ -1535,7 +1543,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MVV-Jq-ZAW">
-                                <rect key="frame" x="0.0" y="106" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="150"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1593,8 +1601,8 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAST ENTRIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGj-vj-lEB" customClass="SectionLabel" customModule="HobbyQuest" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="256" width="375" height="22.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                <rect key="frame" x="0.0" y="210" width="375" height="20.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1615,7 +1623,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x11-Q3-bE6">
-                                <rect key="frame" x="0.0" y="318.5" width="375" height="237.5"/>
+                                <rect key="frame" x="0.0" y="270.5" width="375" height="334.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="HB3-KN-6yf">
@@ -1657,7 +1665,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XEy-iV-Qew" customClass="PMSuperButton" customModule="HobbyQuest" customModuleProvider="target">
-                                <rect key="frame" x="10" y="283.5" width="70" height="30"/>
+                                <rect key="frame" x="10" y="235.5" width="70" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="to8-Y7-m2G"/>
                                     <constraint firstAttribute="height" constant="30" id="w8e-bE-HUK"/>
@@ -1808,7 +1816,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="3c1-ma-B0L"/>
                                     <constraint firstAttribute="height" constant="44" id="oCp-4E-9t5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" title="SUBMIT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2089,8 +2097,9 @@
         <image name="profile-icon-9--1-" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ywd-BI-Y24"/>
-        <segue reference="Iq7-o1-wX2"/>
+        <segue reference="EP5-rk-M4X"/>
+        <segue reference="ukB-1a-xqN"/>
+        <segue reference="XRh-Kl-XfU"/>
         <segue reference="UUp-DV-oec"/>
     </inferredMetricsTieBreakers>
 </document>
