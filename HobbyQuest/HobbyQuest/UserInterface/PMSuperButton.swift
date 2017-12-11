@@ -12,11 +12,11 @@ import UIKit
 open class PMSuperButton: UIButton {
     
     //MARK: - General Appearance
-    @IBInspectable open var borderColor: UIColor = UIColor.clear{
-        didSet{
-            self.layer.borderColor = borderColor.cgColor
-        }
-    }
+//    @IBInspectable open var borderColor:UIColor = UIColor.white {
+//        didSet{
+//            self.layer.borderColor = borderColor.cgColor
+//        }
+//    }
     @IBInspectable open var borderWidth: CGFloat = 0{
         didSet{
             self.layer.borderWidth = borderWidth
@@ -30,11 +30,11 @@ open class PMSuperButton: UIButton {
             }
         }
     }
-    @IBInspectable open var shadowColor: UIColor = UIColor.clear{
-        didSet{
-            self.layer.shadowColor = shadowColor.cgColor
-        }
-    }
+//    @IBInspectable open var shadowColor:UIColor = UIColor.clear{
+//        didSet{
+//            self.layer.shadowColor = shadowColor.cgColor
+//        }
+//    }
     @IBInspectable open var shadowOpacity: Float = 0{
         didSet{
             self.layer.shadowOpacity = shadowOpacity

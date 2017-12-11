@@ -91,6 +91,8 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
         }
         DispatchQueue.main.asyncAfter(deadline: when+1) {
             self.durationField.isHidden = false
+            let animation = AnimationType.from(direction: .bottom, offset: 30.0)
+            self.durationField.animate(animations: [animation])
             self.view.viewWithTag(1)?.isHidden = false
         }
         

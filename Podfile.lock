@@ -44,6 +44,13 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
   - GTMSessionFetcher/Core (1.1.12)
   - leveldb-library (1.18.3)
+  - Material (2.11.0):
+    - Material/Core (= 2.11.0)
+  - Material/Core (2.11.0):
+    - Motion (~> 1.2.0)
+  - Motion (1.2.1):
+    - Motion/Core (= 1.2.1)
+  - Motion/Core (1.2.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -56,6 +63,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - Material (~> 2.0)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -69,9 +77,11 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
+  Material: 937d955a177c771bc81d9932b218297be496da04
+  Motion: a6ead5b0c20780836c1703e3431b1a90e2ae593b
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 5a33481efc90c7b2fbe5d8a6ba282bdbaf44aa48
+PODFILE CHECKSUM: 841f2017e80773feff6eb0ad7aa947dca9ca364b
 
 COCOAPODS: 1.3.1

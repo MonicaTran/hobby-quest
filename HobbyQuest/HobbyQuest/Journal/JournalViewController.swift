@@ -70,20 +70,19 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         //temp uid for testing
         
         statsCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: String(describing: UICollectionViewCell.self))
-    statsCollection.setCollectionViewLayout(centeredCollectionViewFlowLayout, animated: true)
+        statsCollection.setCollectionViewLayout(centeredCollectionViewFlowLayout, animated: true)
         statsCollection.showsVerticalScrollIndicator = false
         statsCollection.showsHorizontalScrollIndicator = false
         
+        centeredCollectionViewFlowLayout.invalidateLayout()
         centeredCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 110)
         centeredCollectionViewFlowLayout.minimumLineSpacing = 20
-        centeredCollectionViewFlowLayout.scrollToPage(index: 1, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        centeredCollectionViewFlowLayout.scrollToPage(index: 1, animated: true)
-        let animation = AnimationType.from(direction: .right, offset: 30.0)
+        let animation = AnimationType.from(direction: .left, offset: 30.0)
         tableView.animate(animations: [animation])
-        statsCollection.animate(animations: [animation])
+        centeredCollectionViewFlowLayout.scrollToPage(index: 2, animated: false)
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }

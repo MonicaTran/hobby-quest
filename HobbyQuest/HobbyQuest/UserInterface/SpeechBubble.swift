@@ -230,3 +230,4 @@ private extension BubbleTransition {
         return CGRect(origin: CGPoint.zero, size: size)
     }
 }
+

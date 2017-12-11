@@ -8,6 +8,7 @@
 import FirebaseDatabase
 import FirebaseAuth
 import UIKit
+import Material
 
 extension String{
     func capitalizeFirstLetter()-> String{
@@ -55,7 +56,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     @objc func addFinalHobby(sender: UIButton) {
         let button = sender
         let index = sender.tag
-        if (button.imageView?.image == #imageLiteral(resourceName: "add1")) {
+        if (button.imageView?.image == #imageLiteral(resourceName: "heart2")) {
             addAlert(message: "\(finalHobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
             guard let userID = Auth.auth().currentUser?.uid else{return}
             let ref = Database.database().reference().child("savedHobbies")
@@ -91,7 +92,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                     self.fillSavedHobbies()
                 }
             }
-            button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+            button.setImage(UIImage(named: "heart"), for: UIControlState.normal)
         }
         else {
             
@@ -125,13 +126,13 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                 
             }
             
-            button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+            button.setImage(UIImage(named: "heart2"), for: UIControlState.normal)
         }
     }
     @objc func addHobby(sender: UIButton) {
         let button = sender
         let index = sender.tag
-        if (button.imageView?.image == #imageLiteral(resourceName: "add1")) {
+        if (button.imageView?.image == #imageLiteral(resourceName: "heart2")) {
             addAlert(message: "\(hobbies[index].hobbyName.capitalizeFirstLetter()) has been added to your hobby list.")
             guard let userID = Auth.auth().currentUser?.uid else{return}
             let ref = Database.database().reference().child("savedHobbies")
@@ -166,7 +167,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                     self.fillSavedHobbies()
                 }
             }
-            button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+            button.setImage(UIImage(named: "heart"), for: UIControlState.normal)
         }
         else {
             
@@ -199,7 +200,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                 
             }
             
-            button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+            button.setImage(UIImage(named: "heart2"), for: UIControlState.normal)
         }
         
         //TODO: Add delete function here when button is switched to delete1 image
@@ -393,11 +394,15 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         if savedHobbiesNames.contains(cell.hobbyLabel.text!) {
             print("Adding delete button on \(hobby.hobbyName) on cell \(indexPath.row)")
             print("and \(cell.hobbyLabel.text!)")
-            cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+            cell.button.setImage(UIImage(named: "heart"), for: UIControlState.normal)
         }
         else {
-            cell.button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+            cell.button.setImage(UIImage(named: "heart2"), for: UIControlState.normal)
         }
+        
+        let icon = cell.viewWithTag(-5) as! UIImageView
+        icon.image = UIImage(named: hobby.category)
+        
         
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: #selector(self.addHobby), for: UIControlEvents.touchUpInside)
@@ -449,6 +454,23 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         selectedHobby = finalHobbies[indexPath.row]
         performSegue(withIdentifier: "exploreToDetail", sender: self)
     }
+    
+    func convertCostToDollarSigns(cost:String) -> String{
+        if cost == "low"{
+            return "$"
+        }
+        else if cost == "med"{
+            return "$$"
+        }
+        else if cost == "high"{
+            return "$$$"
+        }
+        else{
+            return ""
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! HobbyCollectionViewCell
@@ -469,11 +491,11 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.hobbyCostLabel.text = convertCostToDollarSigns(cost:finalHobbies[indexPath.row].cost)
         
         
-        for item in savedHobbies {
-            if finalHobbies[indexPath.row].hobbyName == item.value {
-                cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
-                
-            }
+        if savedHobbiesNames.contains(cell.hobbyNameLabel.text!) {
+            cell.button.setImage(UIImage(named: "heart"), for: UIControlState.normal)
+        }
+        else {
+            cell.button.setImage(UIImage(named: "heart2"), for: UIControlState.normal)
         }
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: #selector(self.addFinalHobby), for: UIControlEvents.touchUpInside)
@@ -481,22 +503,5 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
-    
-    func convertCostToDollarSigns(cost:String) -> String{
-        if cost == "low"{
-            return "$"
-        }
-        else if cost == "med"{
-            return "$$"
-        }
-        else if cost == "high"{
-            return "$$$"
-        }
-        else{
-            return ""
-        }
-    }
-    
-    
-}
 
+}
