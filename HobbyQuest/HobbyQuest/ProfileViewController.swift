@@ -41,6 +41,20 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var imageURL = ""
     var editToggle = 0
     
+    var listOfMantras = ["random",
+                         "mantras",
+                         "here",
+                         "1",
+                         "2",
+                         "3",
+                         "4",
+                         "5",
+                         "6",
+                         "7",
+                         "8",
+                         "9",
+                         "10"]
+    
     @IBAction func logout(_ sender: UIBarButtonItem) {
         
         do{
@@ -71,10 +85,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func editDisplayButton(_ sender: UIButton) {
+        displayNameAlert()
     }
     @IBAction func editEmailButton(_ sender: Any) {
+        displayEmailAlert()
     }
     @IBAction func editMantraButton(_ sender: Any) {
+        displayMantraAlert()
     }
     
     
@@ -92,11 +109,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         userEmail = (Auth.auth().currentUser?.email)!
         
         emailLabel.text = userEmail
-        welcomeLabel.text = "Hi " + userDisplayName + "!"
         guard let userDisplayName = Auth.auth().currentUser?.displayName else {
             displayNameAlert()
             return
         }
+        welcomeLabel.text = "Hi " + userDisplayName + "!"
+
         //let userDisplayName = Auth.auth().currentUser?.displayName
 
         displayLabel.text = userDisplayName
@@ -115,12 +133,35 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         image.layer.cornerRadius = image.frame.height/2
         image.clipsToBounds = true
     }
-    
+    func displayEmailAlert(){
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "Change Email", message: "Enter a new valid email address", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = self.userEmail
+            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler :nil))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                
+                Auth.auth().currentUser?.updateEmail(to: textField.text!, completion: { (err) in
+                    if err != nil{
+                        self.alertForSubmit(message:(err?.localizedDescription)!)
+                        print("Unsuccessful change.")
+                    }
+                    else{
+                        self.emailLabel.text = textField.text!
+                        print("Email has been updated.")
+                    }
+                })
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+        
     func displayNameAlert(){
         //1. Create the alert controller.
-        let alert = UIAlertController(title: "Display Name", message: "Create a new display name using at least 5 characters", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Display Name", message: "Enter a display name using at least 5 characters", preferredStyle: .alert)
         alert.addTextField { (textField) in
-            textField.text = "Enter Display Name"
+            textField.text = ""
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 
                 guard let textFieldSize = textField.text?.count else {self.displayNameAlert()
@@ -136,12 +177,45 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                             print("Unsuccessful change.")
                         }
                         else{
+                            self.userDisplayName = textField.text!
                             self.displayLabel.text = self.userDisplayName
+                            self.welcomeLabel.text = "Hi, \(self.userDisplayName)!"
+                            self.addDisplayToDatabase()
                             print("Profile Name has been updated.")
                         }
                     })
                 }
             }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler :nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func displayMantraAlert(){
+        let alert = UIAlertController(title: "Change Mantra", message: "Enter a personal mantra or select a random one!", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = self.mantraLabel.text
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                
+                if textField.text != nil{
+                    self.mantraLabel.text = textField.text!
+                    print("Mantra has been updated!")
+                }
+                else{
+                    self.alertForSubmit(message:"Invalid input!")
+                    self.displayMantraAlert()
+                }
+
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Random Mantra", style: .default, handler : { [weak alert] (_) in
+                let randomIndex = Int(arc4random_uniform(UInt32(self.listOfMantras.count)))
+                self.mantraLabel.text = self.listOfMantras[randomIndex]
+                
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler :nil))
+
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -206,6 +280,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    func alertForSubmit(message:String){
+        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func selectPicture() {
         let alert = UIAlertController(title: "Change Profile Image", message: "Select source", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: {_ in
@@ -233,6 +313,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     @IBAction func toChangePassword(_ sender: Any) {
         performSegue(withIdentifier: "profileToChange", sender: self)
+    }
+    
+    func addDisplayToDatabase(){
+        print("Adding Display Name to Database")
+        
+        let value = ["displayName": self.userDisplayName]
+        let newRef = Database.database().reference().child("Users")
+        let query = newRef.queryOrdered(byChild: "UserID").queryEqual(toValue: self.userID)
+        query.observeSingleEvent(of: .value) { (snapshot) in
+            let object = ((snapshot.value as AnyObject).allKeys)!
+            let uniqueId = object[0] as? String
+            //let userChoiceID = object4[0] as? String
+            let path = uniqueId!
+            newRef.child(path).updateChildValues(value)
+        }
     }
 }
 

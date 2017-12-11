@@ -80,10 +80,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 else{
                     print("Unsuccessful Sign up :(")
-                    self.isLoading = false
-                    self.authButton.hideLoader()
-                    self.authButton.setTitleColor(.white, for: .normal)
+
                 }
+                self.isLoading = false
+                self.authButton.hideLoader()
+                self.authButton.setTitleColor(.white, for: .normal)
             }
         })
     }
