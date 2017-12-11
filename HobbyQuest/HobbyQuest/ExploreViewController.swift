@@ -38,6 +38,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
     var finalHobbies = [Hobby]()
     var images = [UIImage?]()
     var tempImage:UIImage?
+    var savedHobbiesNames = [String]()
     
     func addAlert(message:String){
         let alert = UIAlertController(title: "Hobby Added!", message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -78,6 +79,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                             ref.child(userID).updateChildValues(entry)
                             
                         }
+                        self.fillSavedHobbies()
                     }
                 }
                 else {
@@ -86,6 +88,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                     let hobby = self.dupFreeHobbies[index]
                     let entry = [key:hobby]
                     ref.child(userID).setValue(entry)
+                    self.fillSavedHobbies()
                 }
             }
             button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
@@ -118,6 +121,8 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
                 }
                 
+                self.fillSavedHobbies()
+                
             }
             
             button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
@@ -148,7 +153,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                         }
                         if !hobbyExists {
                             ref.child(userID).updateChildValues(entry)
-                            
+                            self.fillSavedHobbies()
                         }
                     }
                 }
@@ -158,6 +163,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                     let hobby = self.hobbies[index].hobbyName
                     let entry = [key:hobby]
                     ref.child(userID).setValue(entry)
+                    self.fillSavedHobbies()
                 }
             }
             button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
@@ -186,6 +192,7 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
                         }
                         if hobbyExists {
                             ref.child(userID).child(hobbyKey!).removeValue()
+                            self.fillSavedHobbies()
                         }
                     }
                 }
@@ -319,11 +326,12 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
             if snapshot.hasChild(userID) {
                 print("Filling up saved hobbies")
                 ref.child(userID).observeSingleEvent(of: .value) { (snapshot) in
-                    
+                    self.savedHobbiesNames = [String]()
                     for child in snapshot.children {
                         let item = child as! DataSnapshot
                         let value = item.value as! String
                         self.savedHobbies[item.key] = value
+                        self.savedHobbiesNames.append(value)
                     }
                     
                 }
@@ -367,18 +375,30 @@ class ExploreViewController: UIViewController, UITableViewDataSource, UITableVie
         //cell.button.layer.borderColor = UIColor(red: 0/255, green: 153/255, blue: 51/255, alpha: 1).cgColor
         
         //THIS PART IS BROKEN CURRENTLY I don't know how to fix it.
-        for item in savedHobbies {
-            if item.value == hobby.hobbyName {
-                print("Adding delete button on \(hobby.hobbyName) on cell \(indexPath.row)")
-                print(cell.hobbyLabel.text)
-                //change button image
-                cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
-            }
-            else {
-                print(cell.hobbyLabel.text! + " is not saved")
-                print(indexPath.row)
-            }
+//        for item in savedHobbies {
+//            if item.value == hobby.hobbyName {
+//                print(indexPath.section)
+//                print("Adding delete button on \(hobby.hobbyName) on cell \(indexPath.row)")
+//                print(cell.hobbyLabel.text)
+//                //change button image
+//                cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
+//            }
+//            else {
+//                cell.button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+//                print(cell.hobbyLabel.text! + " is not saved")
+//                print(indexPath.row)
+//            }
+//        }
+        
+        if savedHobbiesNames.contains(cell.hobbyLabel.text!) {
+            print("Adding delete button on \(hobby.hobbyName) on cell \(indexPath.row)")
+            print("and \(cell.hobbyLabel.text!)")
+            cell.button.setImage(UIImage(named: "delete1"), for: UIControlState.normal)
         }
+        else {
+            cell.button.setImage(UIImage(named: "add1"), for: UIControlState.normal)
+        }
+        
         cell.button.tag = indexPath.row
         cell.button.addTarget(self, action: #selector(self.addHobby), for: UIControlEvents.touchUpInside)
         
