@@ -21,3 +21,21 @@ extension UIViewController {
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
+
+extension UIView {
+    func setGradientBackground() {
+        self.layer.backgroundColor = UIColor.clear.cgColor
+        let colorTop = UIColor(red: 90.0/255.0, green: 171.0/255.0, blue: 141.0/255.0, alpha: 1).cgColor
+        let colorBottom = UIColor(red: 90.0/255.0, green: 171.0/255.0, blue: 141.0/255.0, alpha: 0.5).cgColor
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+        gradientLayer.locations = [0.0, 0.5]
+        gradientLayer.frame = self.bounds
+        
+        self.layer.insertSublayer(gradientLayer, at: 0)
+        //self.layer.addSublayer(gradientLayer)
+    }
+}

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIViewControllerTransitioningDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -57,6 +57,9 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     var allJournalEntries = [JournalEntry]()
     var hobbyPickerData = [String]()
     var selectedHobby = ""
+    let layout = VegaScrollFlowLayout()
+    let centeredCollectionViewFlowLayout = CenteredCollectionViewFlowLayout()
+
     
     @IBOutlet weak var statsCollection: UICollectionView!
     @IBOutlet var tableView: UITableView!
@@ -65,9 +68,22 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         //let uid = "1"
         //temp uid for testing
+        
+        statsCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: String(describing: UICollectionViewCell.self))
+    statsCollection.setCollectionViewLayout(centeredCollectionViewFlowLayout, animated: true)
+        statsCollection.showsVerticalScrollIndicator = false
+        statsCollection.showsHorizontalScrollIndicator = false
+        
+        centeredCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 110)
+        centeredCollectionViewFlowLayout.minimumLineSpacing = 20
+        centeredCollectionViewFlowLayout.scrollToPage(index: 1, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        centeredCollectionViewFlowLayout.scrollToPage(index: 1, animated: true)
+        let animation = AnimationType.from(direction: .right, offset: 30.0)
+        tableView.animate(animations: [animation])
+        statsCollection.animate(animations: [animation])
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
@@ -100,6 +116,7 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
+    @IBOutlet weak var addEntryButton: UIButton!
     @IBAction func addEntry(_ sender: Any) {
         guard let userID = Auth.auth().currentUser?.uid else{
             return
@@ -177,13 +194,31 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.present(alertController, animated: true, completion: nil)
     }
     
+    let transition = BubbleTransition()
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "journalToEntry")
         {
             let dvc = segue.destination as? EntryViewController
+            dvc?.transitioningDelegate = self
+            dvc?.modalPresentationStyle = .custom
             dvc?.hobby = self.selectedHobby
             dvc?.delegate = self
         }
+    }
+    
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = addEntryButton.center
+        transition.bubbleColor = addEntryButton.backgroundColor!
+        return transition
+    }
+    
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = addEntryButton.center
+        transition.bubbleColor = addEntryButton.backgroundColor!
+        return transition
     }
     
     func saveNewEntry(desc: String, hobby: String, duration: String) {

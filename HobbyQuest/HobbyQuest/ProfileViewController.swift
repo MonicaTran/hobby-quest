@@ -80,13 +80,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setGradientBackground()
         
         picker.delegate = self
         //self.view.addSubview(profileImage)
         makeImageCircular(image: profileImage)
         userID = (Auth.auth().currentUser?.uid)!
         getProfileImageURL()
+        
 
         userEmail = (Auth.auth().currentUser?.email)!
         

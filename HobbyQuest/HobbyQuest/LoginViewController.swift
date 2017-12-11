@@ -20,7 +20,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailText: UITextField!
     var email = ""
     var firstTimeArray: [Bool] = []
-    @IBOutlet var authButton: UIButton!
+    @IBOutlet var authButton: PMSuperButton!
+    var isLoading = false
     
     @IBAction func authStateChanged(_ sender: Any) {
 //        switch segmentControl.selectedSegmentIndex
@@ -79,6 +80,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 else{
                     print("Unsuccessful Sign up :(")
+                    self.isLoading = false
+                    self.authButton.hideLoader()
+                    self.authButton.setTitleColor(.white, for: .normal)
                 }
             }
         })
@@ -120,6 +124,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }else{self.alertForSubmit(message: error)}
                 }
                 else{print("Unsuccessful Login :(")}
+                self.isLoading = false
+                self.authButton.hideLoader()
+                self.authButton.setTitleColor(.white, for: .normal)
             }
         })
     }
@@ -152,10 +159,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         
         // Do any additional setup after loading the view.
+        
+        authButton.touchUpInside {
+            self.isLoading = true
+            self.authButton.showLoader()
+            self.authButton.setTitleColor(.clear, for: .normal)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        self.isLoading = true
+        self.authButton.hideLoader()
+        self.authButton.setTitleColor(.white, for: .normal)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -22,6 +22,18 @@
 		0378EB061FDC181F0023DAE0 /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB051FDC181F0023DAE0 /* SectionLabel.swift */; };
 		0378EB0B1FDC443E0023DAE0 /* SpeechBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */; };
 		0378EB0D1FDCFB5C0023DAE0 /* GradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB0C1FDCFB5C0023DAE0 /* GradientLayer.swift */; };
+		0378EB1C1FDE1F2C0023DAE0 /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB1B1FDE1F2C0023DAE0 /* YoshikoTextField.swift */; };
+		0378EB1F1FDE1FC40023DAE0 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB1E1FDE1FC30023DAE0 /* TextFieldEffects.swift */; };
+		0378EB211FDE23E30023DAE0 /* PMSuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB201FDE23E30023DAE0 /* PMSuperButton.swift */; };
+		0378EB2E1FDE3BA50023DAE0 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 0378EB251FDE3BA40023DAE0 /* .gitkeep */; };
+		0378EB2F1FDE3BA50023DAE0 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB261FDE3BA40023DAE0 /* Animatable.swift */; };
+		0378EB301FDE3BA50023DAE0 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB271FDE3BA40023DAE0 /* Animation.swift */; };
+		0378EB311FDE3BA50023DAE0 /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB281FDE3BA40023DAE0 /* AnimationType.swift */; };
+		0378EB321FDE3BA50023DAE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB291FDE3BA40023DAE0 /* Constants.swift */; };
+		0378EB331FDE3BA50023DAE0 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB2A1FDE3BA40023DAE0 /* Direction.swift */; };
+		0378EB341FDE3BA50023DAE0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB2B1FDE3BA40023DAE0 /* Utilities.swift */; };
+		0378EB351FDE3BA50023DAE0 /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB2C1FDE3BA40023DAE0 /* ViewAnimator.swift */; };
+		0378EB361FDE3BA50023DAE0 /* ViewAnimatorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378EB2D1FDE3BA40023DAE0 /* ViewAnimatorConfig.swift */; };
 		03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */; };
 		03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E41F984CB30095EE0F /* JournalViewController.swift */; };
 		03A667E71F9852080095EE0F /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A667E61F9852080095EE0F /* JournalEntry.swift */; };
@@ -86,6 +98,19 @@
 		0378EB051FDC181F0023DAE0 /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
 		0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechBubble.swift; sourceTree = "<group>"; };
 		0378EB0C1FDCFB5C0023DAE0 /* GradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLayer.swift; sourceTree = "<group>"; };
+		0378EB1B1FDE1F2C0023DAE0 /* YoshikoTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoshikoTextField.swift; sourceTree = "<group>"; };
+		0378EB1D1FDE1FC30023DAE0 /* TextFieldEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldEffects.h; sourceTree = "<group>"; };
+		0378EB1E1FDE1FC30023DAE0 /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldEffects.swift; sourceTree = "<group>"; };
+		0378EB201FDE23E30023DAE0 /* PMSuperButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PMSuperButton.swift; sourceTree = "<group>"; };
+		0378EB251FDE3BA40023DAE0 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		0378EB261FDE3BA40023DAE0 /* Animatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
+		0378EB271FDE3BA40023DAE0 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		0378EB281FDE3BA40023DAE0 /* AnimationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
+		0378EB291FDE3BA40023DAE0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0378EB2A1FDE3BA40023DAE0 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		0378EB2B1FDE3BA40023DAE0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		0378EB2C1FDE3BA40023DAE0 /* ViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAnimator.swift; sourceTree = "<group>"; };
+		0378EB2D1FDE3BA40023DAE0 /* ViewAnimatorConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAnimatorConfig.swift; sourceTree = "<group>"; };
 		03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTableViewController.swift; sourceTree = "<group>"; };
 		03A667E41F984CB30095EE0F /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		03A667E61F9852080095EE0F /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
@@ -221,6 +246,11 @@
 		0378EB071FDC182F0023DAE0 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
+				0378EB241FDE3BA40023DAE0 /* ViewAnimator */,
+				0378EB201FDE23E30023DAE0 /* PMSuperButton.swift */,
+				0378EB1D1FDE1FC30023DAE0 /* TextFieldEffects.h */,
+				0378EB1E1FDE1FC30023DAE0 /* TextFieldEffects.swift */,
+				0378EB1B1FDE1F2C0023DAE0 /* YoshikoTextField.swift */,
 				0378EB0C1FDCFB5C0023DAE0 /* GradientLayer.swift */,
 				03A667EA1F987D320095EE0F /* KeyboardLayoutConstraint.swift */,
 				0378EB0A1FDC443D0023DAE0 /* SpeechBubble.swift */,
@@ -248,6 +278,22 @@
 				03A667E21F984B0E0095EE0F /* JournalTableViewController.swift */,
 			);
 			path = Journal;
+			sourceTree = "<group>";
+		};
+		0378EB241FDE3BA40023DAE0 /* ViewAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				0378EB251FDE3BA40023DAE0 /* .gitkeep */,
+				0378EB261FDE3BA40023DAE0 /* Animatable.swift */,
+				0378EB271FDE3BA40023DAE0 /* Animation.swift */,
+				0378EB281FDE3BA40023DAE0 /* AnimationType.swift */,
+				0378EB291FDE3BA40023DAE0 /* Constants.swift */,
+				0378EB2A1FDE3BA40023DAE0 /* Direction.swift */,
+				0378EB2B1FDE3BA40023DAE0 /* Utilities.swift */,
+				0378EB2C1FDE3BA40023DAE0 /* ViewAnimator.swift */,
+				0378EB2D1FDE3BA40023DAE0 /* ViewAnimatorConfig.swift */,
+			);
+			path = ViewAnimator;
 			sourceTree = "<group>";
 		};
 		380CF30DCA76429489FADB54 /* Pods */ = {
@@ -391,6 +437,7 @@
 			files = (
 				036E1DD31F90786300681044 /* LaunchScreen.storyboard in Resources */,
 				036E1DF91F90792200681044 /* GoogleService-Info.plist in Resources */,
+				0378EB2E1FDE3BA50023DAE0 /* .gitkeep in Resources */,
 				036E1DD01F90786300681044 /* Assets.xcassets in Resources */,
 				036E1DCE1F90786300681044 /* Main.storyboard in Resources */,
 			);
@@ -578,6 +625,7 @@
 				47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */,
 				0378EB0B1FDC443E0023DAE0 /* SpeechBubble.swift in Sources */,
 				47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */,
+				0378EB311FDE3BA50023DAE0 /* AnimationType.swift in Sources */,
 				033F0C961F908F1C0071CAED /* Hobby.swift in Sources */,
 				0378EB041FDBF7A20023DAE0 /* StatisticsCollectionViewCell.swift in Sources */,
 				CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */,
@@ -591,19 +639,29 @@
 				03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */,
 				036E1DC91F90786300681044 /* AppDelegate.swift in Sources */,
 				03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */,
+				0378EB1C1FDE1F2C0023DAE0 /* YoshikoTextField.swift in Sources */,
 				03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */,
 				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
 				CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */,
+				0378EB301FDE3BA50023DAE0 /* Animation.swift in Sources */,
 				47C4DD851FBC3DAD004B47E7 /* SuggestedPlacesViewController.swift in Sources */,
 				035CCC031FA850CE0022A9F0 /* HappyTestViewController.swift in Sources */,
+				0378EB211FDE23E30023DAE0 /* PMSuperButton.swift in Sources */,
 				47F686741FB59CF200F96000 /* DetailSubThreadViewController.swift in Sources */,
 				CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */,
+				0378EB1F1FDE1FC40023DAE0 /* TextFieldEffects.swift in Sources */,
 				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
 				CEC1AE621FDB34D900974BE0 /* TableViewCell1.swift in Sources */,
+				0378EB2F1FDE3BA50023DAE0 /* Animatable.swift in Sources */,
+				0378EB361FDE3BA50023DAE0 /* ViewAnimatorConfig.swift in Sources */,
 				47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */,
+				0378EB341FDE3BA50023DAE0 /* Utilities.swift in Sources */,
 				CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */,
 				47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */,
+				0378EB331FDE3BA50023DAE0 /* Direction.swift in Sources */,
 				47B1C9B01FB977D600C8EAD3 /* CommentViewController.swift in Sources */,
+				0378EB321FDE3BA50023DAE0 /* Constants.swift in Sources */,
+				0378EB351FDE3BA50023DAE0 /* ViewAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
