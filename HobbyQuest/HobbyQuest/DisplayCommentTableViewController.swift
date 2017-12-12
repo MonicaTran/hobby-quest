@@ -17,6 +17,8 @@ class DisplayCommentTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
 
 
         // Uncomment the following line to preserve selection between presentations
@@ -45,6 +47,7 @@ class DisplayCommentTableViewController: UITableViewController {
         var arrayUserId = [String]()
         var commentFromUser = [String]()
         var arrayImage = [String]()
+        var names = [String]()
         let ref = Database.database().reference().child("Comment")
         let query = ref.queryOrdered(byChild: "post_title").queryEqual(toValue: self.post)
         query.observe(.value) { (snapshot) in
@@ -52,12 +55,14 @@ class DisplayCommentTableViewController: UITableViewController {
                 arrayUserId.append((child.childSnapshot(forPath: "userId").value as? String)!)
                 arrayImage.append((child.childSnapshot(forPath: "profileImage").value as?String)!)
                 commentFromUser.append((child.childSnapshot(forPath: "comment").value as? String)!)
+                names.append((child.childSnapshot(forPath: "userName").value as? String)!)
             }
         self.comment = commentFromUser
         self.imageProfile = arrayImage
+        self.userName = names
         commentFromUser.removeAll()
         arrayImage.removeAll()
-        
+        names.removeAll()
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -66,9 +71,10 @@ class DisplayCommentTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "displayComment",for:indexPath)
-       
+        let userNameLabel = cell.viewWithTag(3) as! UILabel
         let commentLabel = cell.viewWithTag(1) as! UILabel
         commentLabel.text = self.comment[indexPath.row]
+        userNameLabel.text = self.userName[indexPath.row]
         let imageDisplay = cell.viewWithTag(2) as! UIImageView
         let url = self.imageProfile[indexPath.row]
         if url == ""{

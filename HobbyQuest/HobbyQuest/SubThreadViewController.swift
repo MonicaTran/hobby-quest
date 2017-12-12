@@ -15,13 +15,13 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
     var post = [String]()
    
     var postImage = [String]()
-    var userName = [String]()
+    var userNames = [String]()
     var postStatus = [String]()
     var subThreadsHobby = String()
     var post_title = String()
     var titlePost = [String]()
     var likes = [Int]()
-
+    
     let imageCacheForPost = NSCache<AnyObject, AnyObject>()
 
     var count = Int()
@@ -31,73 +31,10 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return post.count
     }
-    @objc func handleLike(sender: UIButton){
-        let index = sender.tag
-        guard let userID = Auth.auth().currentUser?.uid else{
-            return
-        }
-        count = likes[index]
-        let ref = Database.database().reference().child("Users")
-        let query = ref.queryOrdered(byChild: "UserID").queryEqual(toValue: userID)
-        query.observeSingleEvent(of: .value) { (snapshot) in
-            let object = ((snapshot.value as AnyObject).allKeys)!
-
-
-            let uniqueId = object[0] as? String
-            let path = uniqueId! + "/" + self.titlePost[index] + "/" + "flagCheck"
-            let pathCheck = uniqueId! + "/" + self.titlePost[index]
-            if snapshot.hasChild(pathCheck){
-
-                self.selected = (snapshot.childSnapshot(forPath: path).value as? Bool)!
-                if(self.selected == false){
-                    self.count+=1
-                    self.likes[index] = self.count
-                    self.selected = true
-                    self.uploadLikeToFirebase(int: index)
-                    self.uploadUserFlagCheckToFirebase(int: index)
-
-                }
-                else{
-                    print("Dislike")
-                    self.count-=1
-                    self.likes[index] = self.count
-                    self.selected = false
-                    self.uploadLikeToFirebase(int: index)
-                    self.uploadUserFlagCheckToFirebase(int: index)
-
-                }
-
-                print("hahahahahah\(self.selected)")
-
-
-            }
-            else{
-                self.selected = false
-                //if(self.selected == false){
-                    self.count+=1
-                    self.likes[index] = self.count
-                    self.selected = true
-                    self.uploadLikeToFirebase(int: index)
-                    self.uploadUserFlagCheckToFirebase(int: index)
-//
-//                }
-//                else{
-//                    print("Dislike")
-//                    self.count-=1
-//                    self.selected = false
-//                    self.uploadLikeToFirebase(int: index)
-//                    self.uploadUserFlagCheckToFirebase(int: index)
-//
-//                }
-
-                print("aaa\(self.selected)")
-            }
-        
-            self.collectionView.reloadData()
-            
-        }
-        
-        
+   
+    override func viewDidAppear(_ animated: Bool) {
+       loadSubThreadForEachHobby()
+        super.viewDidAppear(true)
     }
     @objc func handleComment(){
         performSegue(withIdentifier: "subToComment", sender: self)
@@ -106,21 +43,31 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"threadInfo" , for: indexPath) as! ThreadInfoCollectionViewCell
         cell.statusLabel.text = post[indexPath.row]
         
-        cell.likeButton.setTitle("Likes \(likes[indexPath.row])", for: .normal)
+   
         
         
         
         
-        
+        cell.userName.text = userNames[indexPath.row]
         cell.commentButton.setTitle("Comment", for: .normal)
         
-        cell.likeButton.tag = indexPath.row
-        print(indexPath.row)
+       
         
-        cell.likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
+        
+        
         cell.commentButton.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         let urlForPostImage = self.postImage[indexPath.row]
         if urlForPostImage == ""{
+            let defaultURL = URL(string:"https://firebasestorage.googleapis.com/v0/b/hobbyquest-ee18d.appspot.com/o/newspaper.png?alt=media&token=cf9645e6-2c06-44ab-86e5-1906fc87b5b2")
+            URLSession.shared.dataTask(with: defaultURL!, completionHandler: { (data, response, error) in
+                if error != nil{
+                    return
+                }
+                DispatchQueue.main.async {
+                    cell.postImage.image = UIImage(data:data!)
+                }
+                
+            }).resume()
             
         }
         else{
@@ -144,57 +91,9 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
         
         return cell
     }
-    func uploadUserFlagCheckToFirebase(int: Int){
-        guard let userID = Auth.auth().currentUser?.uid else{
-            return
-        }
-        let userValue = ["flagCheck":selected,"userId":userID] as [String: Any]
-        let ref = Database.database().reference()
-        let ref1 = Database.database().reference().child("Users")
-        let query = ref1.queryOrdered(byChild: "UserID").queryEqual(toValue: userID)
-        query.observeSingleEvent(of: .value) { (snapshot) in
-            let object = ((snapshot.value as AnyObject).allKeys)!
-            let uniqueId = object[0] as? String
-            let path = "Users/"+uniqueId!+"/"+self.titlePost[int]
-            ref.child(path).updateChildValues(userValue)
-        }
-        
-    }
+
     
-    func retrieveFlagCheck(int: Int){
-        guard let userID = Auth.auth().currentUser?.uid else{
-            return
-        }
-        
-        let ref = Database.database().reference().child("Users")
-        let query = ref.queryOrdered(byChild: "UserID").queryEqual(toValue: userID)
-        query.observe(.value) { (snapshot) in
-            let object = ((snapshot.value as AnyObject).allKeys)!
-            
-            
-            let uniqueId = object[0] as? String
-            let path = uniqueId! + "/" + self.titlePost[int] + "/" + "flagCheck"
-            let pathCheck = uniqueId! + "/" + self.titlePost[int]
-            if snapshot.hasChild(pathCheck){
-                
-                DispatchQueue.main.async {
-                    self.selected = (snapshot.childSnapshot(forPath: path).value as? Bool)!
-                }
-                
-                
-                
-            }
-            else{
-                self.selected = false
-                
-            }
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-            
-            
-        }
-    }
+ 
     
     //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     //        return CGSize(width: view.frame.width, height: 150)
@@ -203,6 +102,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         loadSubThreadForEachHobby()
+     
         
     }
     
@@ -223,44 +123,63 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
         
     }
     
-    
-    func loadSubThreadForEachHobby(){
-        var array = [String]()
-        //        var arrayProfileImage = [String]()
-        var imagePost = [String]()
-
+    func getLikefromFireBase(){
         var likes = [Int]()
-        var titlePost = [String]()
         let subThreadRef = Database.database().reference().child("Subthread")
         let query = subThreadRef.queryOrdered(byChild: "threadForHobby").queryEqual(toValue: subThreadsHobby)
-        query.observe(.value, with: {(snapshot) in
+        query.observeSingleEvent(of: .value) { (snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot] {
-                let value: String = (child.childSnapshot(forPath: "status").value as? String)!;
-                let postImage: String = (child.childSnapshot(forPath: "postImage").value as? String)!
-
                 if child.hasChild("Likes"){
                     self.count = (child.childSnapshot(forPath: "Likes").value as? Int)!
                 }
                 else{
                     self.count = 0
                 }
+                likes.append(self.count)
+                
+            }
+            self.likes = likes
+            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+            }
+            likes.removeAll()
+        }
+
+    
+    }
+    func loadSubThreadForEachHobby(){
+        var array = [String]()
+        //        var arrayProfileImage = [String]()
+        var imagePost = [String]()
+        var names = [String]()
+    
+        var titlePost = [String]()
+        let subThreadRef = Database.database().reference().child("Subthread")
+        let query = subThreadRef.queryOrdered(byChild: "threadForHobby").queryEqual(toValue: subThreadsHobby)
+        query.observeSingleEvent(of: .value) { (snapshot) in
+            
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                let value: String = (child.childSnapshot(forPath: "status").value as? String)!;
+                let postImage: String = (child.childSnapshot(forPath: "postImage").value as? String)!
+                let name : String = (child.childSnapshot(forPath: "userName").value as? String)!
+                
                 
                 let title: String =  (child.childSnapshot(forPath: "post_title").value as? String)!
                 
-                likes.append(self.count)
+                
                 array.append(value)
                 imagePost.append(postImage)
-    
+                names.append(name)
                 titlePost.append(title)
                 
                 
                 
             }
             
-            self.likes = likes
+            
             self.post = array
             self.postImage = imagePost
-   
+            self.userNames = names
             self.titlePost = titlePost
             self.collectionView.reloadData()
             
@@ -269,12 +188,8 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
             array.removeAll()
             titlePost.removeAll()
             imagePost.removeAll()
-   
-            likes.removeAll()
-            
-            
-            
-        })
+            names.removeAll()
+        }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        post_title = titlePost[indexPath.row]

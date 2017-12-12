@@ -11,7 +11,7 @@ import UIKit
 class ThreadInfoCollectionViewCell: UICollectionViewCell {
  
 
-    @IBOutlet weak var likeButton: UIButton!
+  
     
     @IBOutlet weak var userName: UILabel!
     

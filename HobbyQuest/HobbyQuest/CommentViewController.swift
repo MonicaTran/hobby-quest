@@ -17,7 +17,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var retrieve_comment: UITextField!
     
     @IBAction func sendMessage(_ sender: Any) {
-        
+        view.endEditing(true)
         upLoadMessage()
         self.retrieve_comment.text = ""
     }
@@ -30,6 +30,7 @@ class CommentViewController: UIViewController {
         checkforUserImage()
         
         print(self.retrieve_comment.text!)
+        self.view.sendSubview(toBack: displayComment)
         // Do any additional setup after loading the view.
     }
 
@@ -62,9 +63,12 @@ class CommentViewController: UIViewController {
         guard let userID = Auth.auth().currentUser?.uid else{
             return
         }
+        guard let userName = Auth.auth().currentUser?.displayName else{
+                return
+        }
         let timeStamp = Int(NSDate().timeIntervalSinceNow)
         let ref = Database.database().reference().child("Comment")
-            let value = ["userId":userID, "comment": self.retrieve_comment.text!,"post_title":self.post_title,"timeStamp": timeStamp,"profileImage":self.profileImage] as [String : Any]
+            let value = ["userId":userID, "comment": self.retrieve_comment.text!,"post_title":self.post_title,"timeStamp": timeStamp,"profileImage":self.profileImage,"userName":userName] as [String : Any]
             ref.childByAutoId().updateChildValues(value)
             
         }

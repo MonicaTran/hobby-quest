@@ -67,6 +67,8 @@ class CommunityTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "communityHobbies",for:indexPath)
         cell.textLabel?.text = hobbies[indexPath.item].hobbyName
+        cell.imageView?.image = UIImage(named: hobbies[indexPath.item].category)
+        cell.textLabel?.font = UIFont(name: "Avenir Next", size: 20)
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

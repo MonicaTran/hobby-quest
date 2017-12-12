@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
+
 class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var picker = UIImagePickerController()
     var image = UIImage()
@@ -98,8 +99,11 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
     guard let userID = Auth.auth().currentUser?.uid else{
             return
     }
+        guard let userName = Auth.auth().currentUser?.displayName else{
+            return
+        }
         if self.useImage == false {
-            let value = ["postImage": "","status":self.textVIew.text!,"threadForHobby":self.hobbyName,"post_title": self.post_name.text!,"userID":userID]
+            let value = ["postImage": "","status":self.textVIew.text!,"threadForHobby":self.hobbyName,"post_title": self.post_name.text!,"userID":userID,"userName":userName]
             self.registerPostToUser(value: value)
             
         }
@@ -113,7 +117,7 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
                     return
                 }
                 if let postImage = metadata?.downloadURL()?.absoluteString{
-                    let value = ["postImage": postImage,"status": self.textVIew.text!,"threadForHobby": self.hobbyName,"post_title": self.post_name.text!,"userID":userID]
+                    let value = ["postImage": postImage,"status": self.textVIew.text!,"threadForHobby": self.hobbyName,"post_title": self.post_name.text!,"userID":userID,"userName":userName]
                     self.registerPostToUser(value: value)
                         }
                     }
@@ -123,12 +127,8 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         }
     }
 
-//    func createPostThreadFirebase(){
-//        let subThreadRef = Database.database().reference()
-//        let value = ["post_name": post_name.text!,"hobby":self.hobbyName]
-//        let path = "Subthread"
-//        subThreadRef.child(path).childByAutoId().updateChildValues(value)
-//    }
+
+    
     
     private func registerPostToUser(value:[String:Any]){
         let ref = Database.database().reference().child("Subthread")

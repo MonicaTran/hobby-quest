@@ -228,14 +228,14 @@ class QuizViewController: UIViewController {
                 break
             case 1:
                 self.questionNumber.text = "2."
-                self.question.text = "What "
+                self.question.text = "What interests you the most?"
                 self.title_button1.setTitle("sports", for: .normal)
                 self.title_button2.setTitle("art", for: .normal)
                 self.title_button3.setTitle("collecting", for: .normal)
                 break
             case 2:
-                self.questionNumber.text = "3/3"
-                self.question.text = "Time?"
+                self.questionNumber.text = "3."
+                self.question.text = "How much time are you willing to spend on hobbies?"
                 self.title_button1.setTitle("days", for: .normal)
                 self.title_button2.setTitle("hours", for: .normal)
                 self.title_button3.setTitle("minutes", for: .normal)

@@ -12,6 +12,11 @@ import FirebaseAuth
 
 class JournalViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EntryViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIViewControllerTransitioningDelegate {
     
+    var mostInt:Int = 0
+    var highInt:Int = 0
+    var mostLabel:String = ""
+    var highLabel:String = ""
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -42,8 +47,17 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.layer.cornerRadius = 8.0
         cell.clipsToBounds = true
-        cell.statDesc.text = "Journal Entries"
-        cell.statValue.text = String(self.journalEntries.count)
+        if indexPath.row == 0 {
+            cell.statDesc.text = "Total Journal Entries"
+            cell.statValue.text = String(self.journalEntries.count)
+        } else if indexPath.row == 1 {
+            cell.statDesc.text = "Highest Rated Hobby: " + highLabel
+            cell.statValue.text = String(highInt)
+        } else if indexPath.row == 2 {
+            cell.statDesc.text = "Most Journal Entries: " + mostLabel
+            cell.statValue.text = String(mostInt)
+        }
+        
         
         return cell
     }
@@ -77,8 +91,8 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         statsCollection.showsHorizontalScrollIndicator = false
         
         centeredCollectionViewFlowLayout.invalidateLayout()
-        centeredCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 110)
-        centeredCollectionViewFlowLayout.minimumLineSpacing = 20
+        centeredCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 200)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,13 +102,13 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        print(userID)
         userJournalRef = journalsRef.child(userID)
         fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
             self.allJournalEntries = array
             self.tableView.reloadData()
             self.statsCollection.reloadData()
             self.getAvailableHobbies(arr: self.journalEntries)
+            self.getOverviewStats()
         })
     }
     
@@ -107,13 +121,28 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         for entry in allJournalEntries {
             let rating = Int(entry.rating)
             mostEntries[entry.hobby] = (mostEntries[entry.hobby] ?? 0) + 1
-            highestRated[entry.hobby] = highestRated[entry.hobby]! + rating!
+            if rating != nil {
+                highestRated[entry.hobby] = highestRated[entry.hobby]! + rating!
+            }
         }
         var averageRatings = [String:Int]()
+        
+        
         for rate in highestRated {
-            averageRatings[rate.key] = rate.value/mostEntries[rate.key]
+            averageRatings[rate.key] = rate.value/mostEntries[rate.key]!
+            if averageRatings[rate.key]! > highInt
+            {
+                highLabel = rate.key
+            }
         }
         
+        for entry in mostEntries {
+            if entry.value > mostInt && entry.value > 0 {
+                mostLabel = entry.key
+            }
+        }
+        
+        statsCollection.reloadData()
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {
