@@ -51,9 +51,15 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.statDesc.text = "Total Journal Entries"
             cell.statValue.text = String(self.journalEntries.count)
         } else if indexPath.row == 1 {
+            if self.highLabel == "" {
+                self.highLabel = "None"
+            }
             cell.statDesc.text = "Highest Rated Hobby: " + highLabel
             cell.statValue.text = String(highInt)
         } else if indexPath.row == 2 {
+            if self.mostLabel == "" {
+                self.mostLabel = "None"
+            }
             cell.statDesc.text = "Most Journal Entries: " + mostLabel
             cell.statValue.text = String(mostInt)
         }
@@ -105,10 +111,17 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         userJournalRef = journalsRef.child(userID)
         fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
             self.allJournalEntries = array
+            self.journalEntries = array
             self.tableView.reloadData()
             self.statsCollection.reloadData()
             self.getAvailableHobbies(arr: self.journalEntries)
             self.getOverviewStats()
+        })
+        fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
+            self.allJournalEntries = array
+            self.journalEntries = array
+            self.tableView.reloadData()
+            self.getAvailableHobbies(arr: self.journalEntries)
         })
     }
     
@@ -132,13 +145,17 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
             averageRatings[rate.key] = rate.value/mostEntries[rate.key]!
             if averageRatings[rate.key]! > highInt
             {
+                highInt = rate.value
                 highLabel = rate.key
+                print(highLabel)
             }
         }
         
         for entry in mostEntries {
             if entry.value > mostInt && entry.value > 0 {
+                mostInt = entry.value
                 mostLabel = entry.key
+                print(mostLabel)
             }
         }
         
