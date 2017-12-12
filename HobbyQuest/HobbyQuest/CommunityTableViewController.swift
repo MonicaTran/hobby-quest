@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 class CommunityTableViewController: UITableViewController {
     let fbHelper = FirebaseHelper()
     var hobbies = [Hobby]()
@@ -25,6 +26,11 @@ class CommunityTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        if Auth.auth().currentUser?.displayName == nil{
+            print("NO USERNAME")
+            displayNameAlert()
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -130,5 +136,47 @@ class CommunityTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    func displayNameAlert(){
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "Display Name", message: "Enter a display name using at least 5 characters", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                
+                guard let textFieldSize = textField.text?.count else {self.displayNameAlert()
+                    return}
+                if textFieldSize < 5{
+                    self.displayNameAlert()
+                }
+                else{
+                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                    changeRequest?.displayName = textField.text
+                    changeRequest?.commitChanges(completion: { (err) in
+                        if err != nil{
+                            print("Unsuccessful change.")
+                        }
+                        else{
+                            self.addDisplayToDatabase()
+                            print("Profile Name has been updated.")
+                        }
+                    })
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    func addDisplayToDatabase(){
+        print("Adding Display Name to Database")
+        
+        let value = ["displayName": Auth.auth().currentUser?.displayName]
+        let newRef = Database.database().reference().child("Users")
+        let query = newRef.queryOrdered(byChild: "UserID").queryEqual(toValue: Auth.auth().currentUser?.uid)
+        query.observeSingleEvent(of: .value) { (snapshot) in
+            let object = ((snapshot.value as AnyObject).allKeys)!
+            let uniqueId = object[0] as? String
+            //let userChoiceID = object4[0] as? String
+            let path = uniqueId!
+            newRef.child(path).updateChildValues(value)
+        }
+    }
 }

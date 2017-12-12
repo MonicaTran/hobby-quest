@@ -30,8 +30,9 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         }
         else{
         uploadImageToFirebase()
-        createPostThreadFirebase()
-        performSegue(withIdentifier: "setupToSub", sender: self)}
+//        createPostThreadFirebase()
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
     var hobbyName = String()
     @IBOutlet weak var post_name: UITextField!
@@ -122,27 +123,27 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         }
     }
 
-    func createPostThreadFirebase(){
-        let subThreadRef = Database.database().reference()
-        let value = ["post_name": post_name.text!,"hobby":self.hobbyName]
-        let path = "Subthread"
-        subThreadRef.child(path).childByAutoId().updateChildValues(value)
-    }
+//    func createPostThreadFirebase(){
+//        let subThreadRef = Database.database().reference()
+//        let value = ["post_name": post_name.text!,"hobby":self.hobbyName]
+//        let path = "Subthread"
+//        subThreadRef.child(path).childByAutoId().updateChildValues(value)
+//    }
     
     private func registerPostToUser(value:[String:Any]){
-        let ref = Database.database().reference().child("PostInfo")
+        let ref = Database.database().reference().child("Subthread")
         ref.childByAutoId().updateChildValues(value)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
         
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "setupToSub"{
-            let setupTransfer = segue.destination as!  SubThreadViewController
-            setupTransfer.subThreadsHobby = self.hobbyName
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "setupToSub"{
+//            let setupTransfer = segue.destination as!  SubThreadViewController
+//            setupTransfer.subThreadsHobby = self.hobbyName
+//        }
+//    }
     /*
     // MARK: - Navigation
 

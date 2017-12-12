@@ -59,6 +59,8 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     var selectedHobby = ""
     let layout = VegaScrollFlowLayout()
     let centeredCollectionViewFlowLayout = CenteredCollectionViewFlowLayout()
+    var highestRated = [String:Int]()
+    var mostEntries = [String:Int]()
 
     
     @IBOutlet weak var statsCollection: UICollectionView!
@@ -89,8 +91,6 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
         print(userID)
         userJournalRef = journalsRef.child(userID)
         fbHelper.getDataAsArray(ref: userJournalRef, typeOf: journalEntries, completion: { array in
-            self.journalEntries = array
-            print(array)
             self.allJournalEntries = array
             self.tableView.reloadData()
             self.statsCollection.reloadData()
@@ -101,6 +101,19 @@ class JournalViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getOverviewStats() {
+        for entry in allJournalEntries {
+            let rating = Int(entry.rating)
+            mostEntries[entry.hobby] = (mostEntries[entry.hobby] ?? 0) + 1
+            highestRated[entry.hobby] = highestRated[entry.hobby]! + rating!
+        }
+        var averageRatings = [String:Int]()
+        for rate in highestRated {
+            averageRatings[rate.key] = rate.value/mostEntries[rate.key]
+        }
+        
     }
     
     @IBAction func logout(_ sender: UIBarButtonItem) {

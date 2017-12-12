@@ -181,7 +181,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     })
                 }
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler :nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
