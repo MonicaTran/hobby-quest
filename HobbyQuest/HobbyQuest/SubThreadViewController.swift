@@ -13,7 +13,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @IBOutlet weak var collectionView: UICollectionView!
     var post = [String]()
-    var imageProfile = [String]()
+   
     var postImage = [String]()
     var userName = [String]()
     var postStatus = [String]()
@@ -21,9 +21,9 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
     var post_title = String()
     var titlePost = [String]()
     var likes = [Int]()
-    var flagCheck = [Bool]()
+
     let imageCacheForPost = NSCache<AnyObject, AnyObject>()
-    let imageCacheForProfile = NSCache<AnyObject, AnyObject>()
+
     var count = Int()
     var selected = Bool()
     
@@ -139,26 +139,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
             }).resume()
             
         }
-        let urlForProfileImage = self.imageProfile[indexPath.row]
-        if urlForProfileImage == ""{
-            cell.profileImage.image = #imageLiteral(resourceName: "profile")
-        }
-        else{
-            if let cacheImage = self.imageCacheForProfile.object(forKey: urlForProfileImage as AnyObject){
-                cell.profileImage.image = cacheImage as? UIImage
-            }
-            let downloadUrl = URL(string:urlForProfileImage)
-            URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
-                if error != nil{
-                    return
-                }
-                DispatchQueue.main.async {
-                    cell.profileImage.image = UIImage(data:data!)
-                }
-                
-            }).resume()
-            
-        }
+
         
         
         return cell
@@ -247,7 +228,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
         var array = [String]()
         //        var arrayProfileImage = [String]()
         var imagePost = [String]()
-        var profileImage = [String]()
+
         var likes = [Int]()
         var titlePost = [String]()
         let subThreadRef = Database.database().reference().child("Subthread")
@@ -256,7 +237,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
             for child in snapshot.children.allObjects as! [DataSnapshot] {
                 let value: String = (child.childSnapshot(forPath: "status").value as? String)!;
                 let postImage: String = (child.childSnapshot(forPath: "postImage").value as? String)!
-                let profile: String = (child.childSnapshot(forPath: "profileImage").value as? String)!
+
                 if child.hasChild("Likes"){
                     self.count = (child.childSnapshot(forPath: "Likes").value as? Int)!
                 }
@@ -269,7 +250,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
                 likes.append(self.count)
                 array.append(value)
                 imagePost.append(postImage)
-                profileImage.append(profile)
+    
                 titlePost.append(title)
                 
                 
@@ -279,7 +260,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
             self.likes = likes
             self.post = array
             self.postImage = imagePost
-            self.imageProfile = profileImage
+   
             self.titlePost = titlePost
             self.collectionView.reloadData()
             
@@ -288,7 +269,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
             array.removeAll()
             titlePost.removeAll()
             imagePost.removeAll()
-            profileImage.removeAll()
+   
             likes.removeAll()
             
             

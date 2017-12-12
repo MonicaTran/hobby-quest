@@ -31,7 +31,7 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         else{
         uploadImageToFirebase()
         createPostThreadFirebase()
-        performSegue(withIdentifier: "setupToDetail", sender: self)}
+        performSegue(withIdentifier: "setupToSub", sender: self)}
     }
     var hobbyName = String()
     @IBOutlet weak var post_name: UITextField!
@@ -138,9 +138,9 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "setupToDetail"{
-            let setupTransfer = segue.destination as! DetailSubThreadViewController
-            setupTransfer.retrieve_title = self.post_name.text!
+        if segue.identifier == "setupToSub"{
+            let setupTransfer = segue.destination as!  SubThreadViewController
+            setupTransfer.subThreadsHobby = self.hobbyName
         }
     }
     /*

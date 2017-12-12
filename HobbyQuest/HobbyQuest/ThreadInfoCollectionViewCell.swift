@@ -17,7 +17,7 @@ class ThreadInfoCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var commentButton: UIButton!
-    @IBOutlet weak var profileImage: UIImageView!
+ 
     
     @IBOutlet weak var statusLabel: UILabel!
     
