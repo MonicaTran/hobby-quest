@@ -46,19 +46,24 @@ class QuizViewController: UIViewController {
         self.nextDisabled.isHidden = false
         totalQuestion -= 1
         populatedLabel()
+        title_button1.setTitleColor(green, for: .normal)
+        title_button2.setTitleColor(green, for: .normal)
+        title_button3.setTitleColor(green, for: .normal)
         setupPreviousButton()
     }
     
     @IBOutlet weak var previousButton: UIButton!
     
     @IBAction func input1(_ sender: Any) {
-        title_button1.backgroundColor = UIColor(red: 90.0/255.0, green: 171.0/255.0, blue: 141.0/255.0, alpha: 1)
-        title_button1.setTitleColor(UIColor.white, for: .normal)
+        
+
         title_button2.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         title_button2.setTitleColor(green, for: .normal)
         title_button3.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         title_button3.setTitleColor(green, for: .normal)
-       
+        title_button1.backgroundColor = UIColor(red: 90.0/255.0, green: 171.0/255.0, blue: 141.0/255.0, alpha: 1)
+        title_button1.setTitleColor(UIColor.white, for: .normal)
+        
         if title_button1.titleLabel?.text! == "high" {
             title_button2.isSelected = false
             title_button3.isSelected = false
@@ -148,11 +153,14 @@ class QuizViewController: UIViewController {
         self.previousButton.isHidden = false
         totalQuestion += 1
         populatedLabel()
+        title_button1.setTitleColor(green, for: .normal)
+        title_button2.setTitleColor(green, for: .normal)
+        title_button3.setTitleColor(green, for: .normal)
         setupNextQuestionButton()
     }
     func alertForSubmit(){
         let alert = UIAlertController(title: "Error", message: "You haven't answered all of the questions", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -212,15 +220,15 @@ class QuizViewController: UIViewController {
     func populatedLabel(){
             switch(totalQuestion){
             case 0:
-                self.questionNumber.text = "1/3"
-                self.question.text = "Cost?"
+                self.questionNumber.text = "1."
+                self.question.text = "What is your budget for hobbies?"
                 self.title_button1.setTitle("high", for: .normal)
                 self.title_button2.setTitle("med", for: .normal)
                 self.title_button3.setTitle("low", for: .normal)
                 break
             case 1:
-                self.questionNumber.text = "2/3"
-                self.question.text = "Category?"
+                self.questionNumber.text = "2."
+                self.question.text = "What "
                 self.title_button1.setTitle("sports", for: .normal)
                 self.title_button2.setTitle("art", for: .normal)
                 self.title_button3.setTitle("collecting", for: .normal)

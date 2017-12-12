@@ -70,7 +70,7 @@ class CommunityTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "communityToSub"{
-            let subThread = segue.destination as!  SubThreadTableViewController
+            let subThread = segue.destination as!  SubThreadViewController
             subThread.subThreadsHobby = self.hobbyTranser
         }
         

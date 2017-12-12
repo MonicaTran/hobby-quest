@@ -43,13 +43,14 @@
 		47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */; };
 		47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */; };
 		47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */; };
-		47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F686711FB5906100F96000 /* SubThreadTableViewController.swift */; };
 		47F686741FB59CF200F96000 /* DetailSubThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */; };
 		AE4CC9587C8AAF0E4A0A7F1D /* Pods_HobbyQuestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */; };
 		CE096F701FD88B6000E82FB8 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE096F6F1FD88B6000E82FB8 /* ChangePassViewController.swift */; };
 		CE349E6A1FBE308D0048160C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE349E691FBE308D0048160C /* ProfileViewController.swift */; };
 		CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */; };
 		CE61CC341FDA007400ED456C /* HobbyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */; };
+		CE856BA71FDF4184007C8F05 /* SubThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE856BA51FDF4183007C8F05 /* SubThreadViewController.swift */; };
+		CE856BA81FDF4184007C8F05 /* ThreadInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE856BA61FDF4184007C8F05 /* ThreadInfoCollectionViewCell.swift */; };
 		CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */; };
 		CEC1AE621FDB34D900974BE0 /* TableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC1AE611FDB34D900974BE0 /* TableViewCell1.swift */; };
 		CECA769C1FA13147007171D1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA769B1FA13147007171D1 /* LoginViewController.swift */; };
@@ -120,7 +121,6 @@
 		47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCommentTableViewController.swift; sourceTree = "<group>"; };
 		47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupDetailViewController.swift; sourceTree = "<group>"; };
 		47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
-		47F686711FB5906100F96000 /* SubThreadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubThreadTableViewController.swift; sourceTree = "<group>"; };
 		47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSubThreadViewController.swift; sourceTree = "<group>"; };
 		621ECD049DD7C10B6B12BE12 /* Pods-HobbyQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.release.xcconfig"; sourceTree = "<group>"; };
 		8186131706F1BFCA875D65BE /* Pods-HobbyQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +134,8 @@
 		CE349E691FBE308D0048160C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE856BA51FDF4183007C8F05 /* SubThreadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubThreadViewController.swift; sourceTree = "<group>"; };
+		CE856BA61FDF4184007C8F05 /* ThreadInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		CEC1AE611FDB34D900974BE0 /* TableViewCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell1.swift; sourceTree = "<group>"; };
 		CECA769B1FA13147007171D1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,8 @@
 				0378EB071FDC182F0023DAE0 /* UserInterface */,
 				0378EB091FDC19A90023DAE0 /* Journal */,
 				033F0C951F908F1C0071CAED /* Hobby.swift */,
+				CE856BA61FDF4184007C8F05 /* ThreadInfoCollectionViewCell.swift */,
+				CE856BA51FDF4183007C8F05 /* SubThreadViewController.swift */,
 				CECA769B1FA13147007171D1 /* LoginViewController.swift */,
 				036E1DCA1F90786300681044 /* QuizViewController.swift */,
 				CE499BB21FA0FB7700A939D6 /* ExploreViewController.swift */,
@@ -210,7 +214,6 @@
 				CE61CC331FDA007400ED456C /* HobbyCollectionViewCell.swift */,
 				CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */,
 				47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */,
-				47F686711FB5906100F96000 /* SubThreadTableViewController.swift */,
 				47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */,
 				47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */,
 				47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */,
@@ -638,8 +641,10 @@
 				CE499BB31FA0FB7700A939D6 /* ExploreViewController.swift in Sources */,
 				CE349E6A1FBE308D0048160C /* ProfileViewController.swift in Sources */,
 				03A667EB1F987D320095EE0F /* KeyboardLayoutConstraint.swift in Sources */,
+				CE856BA81FDF4184007C8F05 /* ThreadInfoCollectionViewCell.swift in Sources */,
 				036E1DC91F90786300681044 /* AppDelegate.swift in Sources */,
 				03A667E91F9875E90095EE0F /* EntryViewController.swift in Sources */,
+				CE856BA71FDF4184007C8F05 /* SubThreadViewController.swift in Sources */,
 				0378EB1C1FDE1F2C0023DAE0 /* YoshikoTextField.swift in Sources */,
 				03A667E31F984B0E0095EE0F /* JournalTableViewController.swift in Sources */,
 				033F0C941F908E100071CAED /* FirebaseHelper.swift in Sources */,
@@ -654,7 +659,6 @@
 				CEC1AE621FDB34D900974BE0 /* TableViewCell1.swift in Sources */,
 				0378EB2F1FDE3BA50023DAE0 /* Animatable.swift in Sources */,
 				0378EB361FDE3BA50023DAE0 /* ViewAnimatorConfig.swift in Sources */,
-				47F686721FB5906100F96000 /* SubThreadTableViewController.swift in Sources */,
 				0378EB341FDE3BA50023DAE0 /* Utilities.swift in Sources */,
 				CECACE651FAA3DC400FB061F /* ExploreCell.swift in Sources */,
 				47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */,

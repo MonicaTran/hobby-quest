@@ -11,7 +11,10 @@ import Firebase
 class DisplayCommentTableViewController: UITableViewController {
     var userName = [String]()
     var comment = [String]()
+    var imageProfile = [String]()
     var post = String()
+    let imageCache = NSCache<AnyObject, AnyObject>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,19 +40,24 @@ class DisplayCommentTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
+
     func retrieveComment(){
         var arrayUserId = [String]()
         var commentFromUser = [String]()
+        var arrayImage = [String]()
         let ref = Database.database().reference().child("Comment")
         let query = ref.queryOrdered(byChild: "post_title").queryEqual(toValue: self.post)
         query.observe(.value) { (snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 arrayUserId.append((child.childSnapshot(forPath: "userId").value as? String)!)
-                
+                arrayImage.append((child.childSnapshot(forPath: "profileImage").value as?String)!)
                 commentFromUser.append((child.childSnapshot(forPath: "comment").value as? String)!)
             }
         self.comment = commentFromUser
+        self.imageProfile = arrayImage
         commentFromUser.removeAll()
+        arrayImage.removeAll()
+        
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -58,7 +66,34 @@ class DisplayCommentTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "displayComment",for:indexPath)
-        cell.textLabel?.text = self.comment[indexPath.item]
+       
+        let commentLabel = cell.viewWithTag(1) as! UILabel
+        commentLabel.text = self.comment[indexPath.row]
+        let imageDisplay = cell.viewWithTag(2) as! UIImageView
+        let url = self.imageProfile[indexPath.row]
+        if url == ""{
+            imageDisplay.image = #imageLiteral(resourceName: "profile")
+            
+        }
+        else{
+            if let cacheImage = self.imageCache.object(forKey: url as AnyObject){
+                imageDisplay.image = cacheImage as? UIImage
+            }
+        let downloadUrl = URL(string:url)
+        URLSession.shared.dataTask(with: downloadUrl!, completionHandler: { (data, response, error) in
+            if error != nil{
+                return
+            }
+            DispatchQueue.main.async {
+                imageDisplay.image = UIImage(data:data!)
+            }
+            
+        }).resume()
+            
+        }
+        
+        
+        
         return cell
 
     }

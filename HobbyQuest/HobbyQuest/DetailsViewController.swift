@@ -29,6 +29,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        self.setGradientBackground()
         downLoadImageFromFirebase(url: url)
         self.title = hobbyIn
         descriptions.text = descriptionIn
