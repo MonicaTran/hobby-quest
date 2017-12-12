@@ -28,7 +28,7 @@ class CommentViewController: UIViewController {
         super.viewDidLoad()
     self.sendMessage.setTitle("Send", for: .normal)
         checkforUserImage()
-        
+        self.hideKeyboardWhenTappedAround()
         print(self.retrieve_comment.text!)
         self.view.sendSubview(toBack: displayComment)
         // Do any additional setup after loading the view.

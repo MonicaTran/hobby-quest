@@ -123,30 +123,7 @@ class SubThreadViewController: UIViewController, UICollectionViewDataSource, UIC
         
     }
     
-    func getLikefromFireBase(){
-        var likes = [Int]()
-        let subThreadRef = Database.database().reference().child("Subthread")
-        let query = subThreadRef.queryOrdered(byChild: "threadForHobby").queryEqual(toValue: subThreadsHobby)
-        query.observeSingleEvent(of: .value) { (snapshot) in
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
-                if child.hasChild("Likes"){
-                    self.count = (child.childSnapshot(forPath: "Likes").value as? Int)!
-                }
-                else{
-                    self.count = 0
-                }
-                likes.append(self.count)
-                
-            }
-            self.likes = likes
-            self.collectionView.reloadData()
-            DispatchQueue.main.async {
-            }
-            likes.removeAll()
-        }
 
-    
-    }
     func loadSubThreadForEachHobby(){
         var array = [String]()
         //        var arrayProfileImage = [String]()

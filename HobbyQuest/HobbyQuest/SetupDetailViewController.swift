@@ -10,7 +10,17 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
-
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var picker = UIImagePickerController()
     var image = UIImage()
@@ -48,6 +58,8 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         textVIew.backgroundColor = UIColor(red: 153/255, green: 204/255, blue: 153/255, alpha: 1)
         finishSetupOutlet.setTitle("Finish", for:.normal)
        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gallery"), style: .done, target: self, action: #selector(openGallery))
+        self.hideKeyboardWhenTappedAround()
+
         // Do any additional setup after loading the view.
     }
     
@@ -55,6 +67,7 @@ class SetupDetailViewController: UIViewController,UIImagePickerControllerDelegat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     @objc func openGallery(){
         self.picker.allowsEditing = true
         let alert = UIAlertController(title: "Action", message: "Select source", preferredStyle: .actionSheet)

@@ -43,7 +43,6 @@
 		47B1C9B21FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */; };
 		47D71F6B1FB6499500B0B2D1 /* SetupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */; };
 		47F686701FB5850500F96000 /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */; };
-		47F686741FB59CF200F96000 /* DetailSubThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */; };
 		AE4CC9587C8AAF0E4A0A7F1D /* Pods_HobbyQuestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9FD45AA5B3BC2279084B2 /* Pods_HobbyQuestUITests.framework */; };
 		CE096F701FD88B6000E82FB8 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE096F6F1FD88B6000E82FB8 /* ChangePassViewController.swift */; };
 		CE349E6A1FBE308D0048160C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE349E691FBE308D0048160C /* ProfileViewController.swift */; };
@@ -121,7 +120,6 @@
 		47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCommentTableViewController.swift; sourceTree = "<group>"; };
 		47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupDetailViewController.swift; sourceTree = "<group>"; };
 		47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
-		47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSubThreadViewController.swift; sourceTree = "<group>"; };
 		621ECD049DD7C10B6B12BE12 /* Pods-HobbyQuest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.release.xcconfig"; sourceTree = "<group>"; };
 		8186131706F1BFCA875D65BE /* Pods-HobbyQuest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuest.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuest/Pods-HobbyQuest.debug.xcconfig"; sourceTree = "<group>"; };
 		874DFBEDD27AB4A6ACFF196E /* Pods-HobbyQuestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HobbyQuestUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-HobbyQuestUITests/Pods-HobbyQuestUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				CE9AE8661FAA876400A08BBA /* DetailsViewController.swift */,
 				47F6866F1FB5850500F96000 /* CommunityTableViewController.swift */,
 				47D71F6A1FB6499500B0B2D1 /* SetupDetailViewController.swift */,
-				47F686731FB59CF100F96000 /* DetailSubThreadViewController.swift */,
 				47B1C9AF1FB977D600C8EAD3 /* CommentViewController.swift */,
 				47B1C9B11FB977FB00C8EAD3 /* DisplayCommentTableViewController.swift */,
 				CE349E691FBE308D0048160C /* ProfileViewController.swift */,
@@ -652,7 +649,6 @@
 				0378EB301FDE3BA50023DAE0 /* Animation.swift in Sources */,
 				035CCC031FA850CE0022A9F0 /* HappyTestViewController.swift in Sources */,
 				0378EB211FDE23E30023DAE0 /* PMSuperButton.swift in Sources */,
-				47F686741FB59CF200F96000 /* DetailSubThreadViewController.swift in Sources */,
 				CE9AE8671FAA876400A08BBA /* DetailsViewController.swift in Sources */,
 				0378EB1F1FDE1FC40023DAE0 /* TextFieldEffects.swift in Sources */,
 				03A667E51F984CB30095EE0F /* JournalViewController.swift in Sources */,
